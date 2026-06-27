@@ -1,0 +1,86 @@
+{
+  "skill_name": "md-to-html",
+  "evals": [
+    {
+      "id": 0,
+      "eval_name": "eval-relative-path",
+      "prompt": "Convert resources/sample-doc.md to HTML",
+      "expected_output": "A complete HTML file named sample-doc.html saved to the output folder, with all markdown elements correctly converted and a valid HTML structure.",
+      "files": [],
+      "assertions": [
+        {"id": "has-doctype", "description": "File starts with <!DOCTYPE html>"},
+        {"id": "has-meta-charset", "description": "Contains <meta charset=\"UTF-8\">"},
+        {"id": "title-from-h1", "description": "<title>Payment Gateway API</title> present"},
+        {"id": "h1-converted", "description": "<h1>Payment Gateway API</h1> exists"},
+        {"id": "h2-converted", "description": "At least one <h2> tag exists"},
+        {"id": "h3-converted", "description": "At least one <h3> tag exists"},
+        {"id": "bold-converted", "description": "<strong> tag exists"},
+        {"id": "fenced-code-block", "description": "<pre><code> block exists"},
+        {"id": "table-structure", "description": "<table>, <thead>, <tbody>, <th>, <td> all present"},
+        {"id": "bullet-list", "description": "<ul> and <li> tags exist"},
+        {"id": "numbered-list", "description": "<ol> and <li> tags exist"},
+        {"id": "blockquote-converted", "description": "<blockquote> tag exists"},
+        {"id": "hr-converted", "description": "<hr> tag exists"},
+        {"id": "image-converted", "description": "<img src= with placeholder URL present"},
+        {"id": "links-converted", "description": "<a href= tags exist"},
+        {"id": "no-css", "description": "No <style> tag or style= attribute present"},
+        {"id": "output-filename", "description": "File saved as sample-doc.html"},
+        {"id": "body-tag", "description": "<body> tag exists"}
+      ]
+    },
+    {
+      "id": 1,
+      "eval_name": "eval-filename-only",
+      "prompt": "Convert sample-doc.md to HTML",
+      "expected_output": "Same as eval-relative-path. Skill should resolve the filename to resources/sample-doc.md.",
+      "files": [],
+      "assertions": [
+        {"id": "has-doctype", "description": "File starts with <!DOCTYPE html>"},
+        {"id": "has-meta-charset", "description": "Contains <meta charset=\"UTF-8\">"},
+        {"id": "title-from-h1", "description": "<title>Payment Gateway API</title> present"},
+        {"id": "h1-converted", "description": "<h1>Payment Gateway API</h1> exists"},
+        {"id": "h2-converted", "description": "At least one <h2> tag exists"},
+        {"id": "h3-converted", "description": "At least one <h3> tag exists"},
+        {"id": "bold-converted", "description": "<strong> tag exists"},
+        {"id": "fenced-code-block", "description": "<pre><code> block exists"},
+        {"id": "table-structure", "description": "<table>, <thead>, <tbody>, <th>, <td> all present"},
+        {"id": "bullet-list", "description": "<ul> and <li> tags exist"},
+        {"id": "numbered-list", "description": "<ol> and <li> tags exist"},
+        {"id": "blockquote-converted", "description": "<blockquote> tag exists"},
+        {"id": "hr-converted", "description": "<hr> tag exists"},
+        {"id": "image-converted", "description": "<img src= with placeholder URL present"},
+        {"id": "links-converted", "description": "<a href= tags exist"},
+        {"id": "no-css", "description": "No <style> tag or style= attribute present"},
+        {"id": "output-filename", "description": "File saved as sample-doc.html"},
+        {"id": "body-tag", "description": "<body> tag exists"}
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "eval-absolute-path",
+      "prompt": "Convert C:\\Users\\HP\\Doc-Intelligence\\TWTAI-DocIntelligence-DraftGen\\resources\\sample-doc.md to HTML",
+      "expected_output": "Same as eval-relative-path. Skill should handle absolute path correctly.",
+      "files": [],
+      "assertions": [
+        {"id": "has-doctype", "description": "File starts with <!DOCTYPE html>"},
+        {"id": "has-meta-charset", "description": "Contains <meta charset=\"UTF-8\">"},
+        {"id": "title-from-h1", "description": "<title>Payment Gateway API</title> present"},
+        {"id": "h1-converted", "description": "<h1>Payment Gateway API</h1> exists"},
+        {"id": "h2-converted", "description": "At least one <h2> tag exists"},
+        {"id": "h3-converted", "description": "At least one <h3> tag exists"},
+        {"id": "bold-converted", "description": "<strong> tag exists"},
+        {"id": "fenced-code-block", "description": "<pre><code> block exists"},
+        {"id": "table-structure", "description": "<table>, <thead>, <tbody>, <th>, <td> all present"},
+        {"id": "bullet-list", "description": "<ul> and <li> tags exist"},
+        {"id": "numbered-list", "description": "<ol> and <li> tags exist"},
+        {"id": "blockquote-converted", "description": "<blockquote> tag exists"},
+        {"id": "hr-converted", "description": "<hr> tag exists"},
+        {"id": "image-converted", "description": "<img src= with placeholder URL present"},
+        {"id": "links-converted", "description": "<a href= tags exist"},
+        {"id": "no-css", "description": "No <style> tag or style= attribute present"},
+        {"id": "output-filename", "description": "File saved as sample-doc.html"},
+        {"id": "body-tag", "description": "<body> tag exists"}
+      ]
+    }
+  ]
+}

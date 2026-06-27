@@ -1,0 +1,97 @@
+{
+  "eval_name": "eval-relative-path",
+  "config": "without_skill",
+  "pass_rate": 1.0,
+  "expectations": [
+    {
+      "text": "has-doctype",
+      "passed": true,
+      "evidence": "Found <!DOCTYPE html>"
+    },
+    {
+      "text": "has-meta-charset",
+      "passed": true,
+      "evidence": "Found meta charset UTF-8"
+    },
+    {
+      "text": "title-from-h1",
+      "passed": true,
+      "evidence": "Correct title tag"
+    },
+    {
+      "text": "h1-converted",
+      "passed": true,
+      "evidence": "h1 found"
+    },
+    {
+      "text": "h2-converted",
+      "passed": true,
+      "evidence": "h2 tags present"
+    },
+    {
+      "text": "h3-converted",
+      "passed": true,
+      "evidence": "h3 tags present"
+    },
+    {
+      "text": "bold-converted",
+      "passed": true,
+      "evidence": "<strong> present"
+    },
+    {
+      "text": "fenced-code-block",
+      "passed": true,
+      "evidence": "<pre><code> present"
+    },
+    {
+      "text": "table-structure",
+      "passed": true,
+      "evidence": "Full table structure present"
+    },
+    {
+      "text": "bullet-list",
+      "passed": true,
+      "evidence": "<ul> and <li> present"
+    },
+    {
+      "text": "numbered-list",
+      "passed": true,
+      "evidence": "<ol> and <li> present"
+    },
+    {
+      "text": "blockquote-converted",
+      "passed": true,
+      "evidence": "<blockquote> present"
+    },
+    {
+      "text": "hr-converted",
+      "passed": true,
+      "evidence": "<hr> present"
+    },
+    {
+      "text": "image-converted",
+      "passed": true,
+      "evidence": "img tag with correct src"
+    },
+    {
+      "text": "links-converted",
+      "passed": true,
+      "evidence": "<a href= present"
+    },
+    {
+      "text": "no-css",
+      "passed": true,
+      "evidence": "No CSS found"
+    },
+    {
+      "text": "output-filename",
+      "passed": true,
+      "evidence": "Checked by file path"
+    },
+    {
+      "text": "body-tag",
+      "passed": true,
+      "evidence": "<body> present"
+    }
+  ]
+}

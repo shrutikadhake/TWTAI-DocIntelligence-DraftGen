@@ -1,0 +1,713 @@
+{
+  "metadata": {
+    "skill_name": "md-to-html",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-26T06:51:55Z",
+    "evals_run": [
+      0,
+      1,
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 18,
+        "failed": 0,
+        "total": 18,
+        "time_seconds": 192.9,
+        "tokens": 38115,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "has-doctype",
+          "passed": true,
+          "evidence": "Found <!DOCTYPE html>"
+        },
+        {
+          "text": "has-meta-charset",
+          "passed": true,
+          "evidence": "Found meta charset UTF-8"
+        },
+        {
+          "text": "title-from-h1",
+          "passed": true,
+          "evidence": "Correct title tag"
+        },
+        {
+          "text": "h1-converted",
+          "passed": true,
+          "evidence": "h1 found"
+        },
+        {
+          "text": "h2-converted",
+          "passed": true,
+          "evidence": "h2 tags present"
+        },
+        {
+          "text": "h3-converted",
+          "passed": true,
+          "evidence": "h3 tags present"
+        },
+        {
+          "text": "bold-converted",
+          "passed": true,
+          "evidence": "<strong> present"
+        },
+        {
+          "text": "fenced-code-block",
+          "passed": true,
+          "evidence": "<pre><code> present"
+        },
+        {
+          "text": "table-structure",
+          "passed": true,
+          "evidence": "Full table structure present"
+        },
+        {
+          "text": "bullet-list",
+          "passed": true,
+          "evidence": "<ul> and <li> present"
+        },
+        {
+          "text": "numbered-list",
+          "passed": true,
+          "evidence": "<ol> and <li> present"
+        },
+        {
+          "text": "blockquote-converted",
+          "passed": true,
+          "evidence": "<blockquote> present"
+        },
+        {
+          "text": "hr-converted",
+          "passed": true,
+          "evidence": "<hr> present"
+        },
+        {
+          "text": "image-converted",
+          "passed": true,
+          "evidence": "img tag with correct src"
+        },
+        {
+          "text": "links-converted",
+          "passed": true,
+          "evidence": "<a href= present"
+        },
+        {
+          "text": "no-css",
+          "passed": true,
+          "evidence": "No CSS found"
+        },
+        {
+          "text": "output-filename",
+          "passed": true,
+          "evidence": "Checked by file path"
+        },
+        {
+          "text": "body-tag",
+          "passed": true,
+          "evidence": "<body> present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 18,
+        "failed": 0,
+        "total": 18,
+        "time_seconds": 206.1,
+        "tokens": 40877,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "has-doctype",
+          "passed": true,
+          "evidence": "Found <!DOCTYPE html>"
+        },
+        {
+          "text": "has-meta-charset",
+          "passed": true,
+          "evidence": "Found meta charset UTF-8"
+        },
+        {
+          "text": "title-from-h1",
+          "passed": true,
+          "evidence": "Correct title tag"
+        },
+        {
+          "text": "h1-converted",
+          "passed": true,
+          "evidence": "h1 found"
+        },
+        {
+          "text": "h2-converted",
+          "passed": true,
+          "evidence": "h2 tags present"
+        },
+        {
+          "text": "h3-converted",
+          "passed": true,
+          "evidence": "h3 tags present"
+        },
+        {
+          "text": "bold-converted",
+          "passed": true,
+          "evidence": "<strong> present"
+        },
+        {
+          "text": "fenced-code-block",
+          "passed": true,
+          "evidence": "<pre><code> present"
+        },
+        {
+          "text": "table-structure",
+          "passed": true,
+          "evidence": "Full table structure present"
+        },
+        {
+          "text": "bullet-list",
+          "passed": true,
+          "evidence": "<ul> and <li> present"
+        },
+        {
+          "text": "numbered-list",
+          "passed": true,
+          "evidence": "<ol> and <li> present"
+        },
+        {
+          "text": "blockquote-converted",
+          "passed": true,
+          "evidence": "<blockquote> present"
+        },
+        {
+          "text": "hr-converted",
+          "passed": true,
+          "evidence": "<hr> present"
+        },
+        {
+          "text": "image-converted",
+          "passed": true,
+          "evidence": "img tag with correct src"
+        },
+        {
+          "text": "links-converted",
+          "passed": true,
+          "evidence": "<a href= present"
+        },
+        {
+          "text": "no-css",
+          "passed": true,
+          "evidence": "No CSS found"
+        },
+        {
+          "text": "output-filename",
+          "passed": true,
+          "evidence": "Checked by file path"
+        },
+        {
+          "text": "body-tag",
+          "passed": true,
+          "evidence": "<body> present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 18,
+        "failed": 0,
+        "total": 18,
+        "time_seconds": 274.6,
+        "tokens": 46027,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "has-doctype",
+          "passed": true,
+          "evidence": "Found <!DOCTYPE html>"
+        },
+        {
+          "text": "has-meta-charset",
+          "passed": true,
+          "evidence": "Found meta charset UTF-8"
+        },
+        {
+          "text": "title-from-h1",
+          "passed": true,
+          "evidence": "Correct title tag"
+        },
+        {
+          "text": "h1-converted",
+          "passed": true,
+          "evidence": "h1 found"
+        },
+        {
+          "text": "h2-converted",
+          "passed": true,
+          "evidence": "h2 tags present"
+        },
+        {
+          "text": "h3-converted",
+          "passed": true,
+          "evidence": "h3 tags present"
+        },
+        {
+          "text": "bold-converted",
+          "passed": true,
+          "evidence": "<strong> present"
+        },
+        {
+          "text": "fenced-code-block",
+          "passed": true,
+          "evidence": "<pre><code> present"
+        },
+        {
+          "text": "table-structure",
+          "passed": true,
+          "evidence": "Full table structure present"
+        },
+        {
+          "text": "bullet-list",
+          "passed": true,
+          "evidence": "<ul> and <li> present"
+        },
+        {
+          "text": "numbered-list",
+          "passed": true,
+          "evidence": "<ol> and <li> present"
+        },
+        {
+          "text": "blockquote-converted",
+          "passed": true,
+          "evidence": "<blockquote> present"
+        },
+        {
+          "text": "hr-converted",
+          "passed": true,
+          "evidence": "<hr> present"
+        },
+        {
+          "text": "image-converted",
+          "passed": true,
+          "evidence": "img tag with correct src"
+        },
+        {
+          "text": "links-converted",
+          "passed": true,
+          "evidence": "<a href= present"
+        },
+        {
+          "text": "no-css",
+          "passed": true,
+          "evidence": "No CSS found"
+        },
+        {
+          "text": "output-filename",
+          "passed": true,
+          "evidence": "Checked by file path"
+        },
+        {
+          "text": "body-tag",
+          "passed": true,
+          "evidence": "<body> present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.9444,
+        "passed": 17,
+        "failed": 1,
+        "total": 18,
+        "time_seconds": 117.2,
+        "tokens": 27541,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "has-doctype",
+          "passed": true,
+          "evidence": "Found <!DOCTYPE html>"
+        },
+        {
+          "text": "has-meta-charset",
+          "passed": true,
+          "evidence": "Found meta charset UTF-8"
+        },
+        {
+          "text": "title-from-h1",
+          "passed": true,
+          "evidence": "Correct title tag"
+        },
+        {
+          "text": "h1-converted",
+          "passed": true,
+          "evidence": "h1 found"
+        },
+        {
+          "text": "h2-converted",
+          "passed": true,
+          "evidence": "h2 tags present"
+        },
+        {
+          "text": "h3-converted",
+          "passed": true,
+          "evidence": "h3 tags present"
+        },
+        {
+          "text": "bold-converted",
+          "passed": true,
+          "evidence": "<strong> present"
+        },
+        {
+          "text": "fenced-code-block",
+          "passed": true,
+          "evidence": "<pre><code> present"
+        },
+        {
+          "text": "table-structure",
+          "passed": false,
+          "evidence": "Missing: ['<thead>', '<tbody>']"
+        },
+        {
+          "text": "bullet-list",
+          "passed": true,
+          "evidence": "<ul> and <li> present"
+        },
+        {
+          "text": "numbered-list",
+          "passed": true,
+          "evidence": "<ol> and <li> present"
+        },
+        {
+          "text": "blockquote-converted",
+          "passed": true,
+          "evidence": "<blockquote> present"
+        },
+        {
+          "text": "hr-converted",
+          "passed": true,
+          "evidence": "<hr> present"
+        },
+        {
+          "text": "image-converted",
+          "passed": true,
+          "evidence": "img tag with correct src"
+        },
+        {
+          "text": "links-converted",
+          "passed": true,
+          "evidence": "<a href= present"
+        },
+        {
+          "text": "no-css",
+          "passed": true,
+          "evidence": "No CSS found"
+        },
+        {
+          "text": "output-filename",
+          "passed": true,
+          "evidence": "Checked by file path"
+        },
+        {
+          "text": "body-tag",
+          "passed": true,
+          "evidence": "<body> present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.9444,
+        "passed": 17,
+        "failed": 1,
+        "total": 18,
+        "time_seconds": 128.4,
+        "tokens": 28611,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "has-doctype",
+          "passed": true,
+          "evidence": "Found <!DOCTYPE html>"
+        },
+        {
+          "text": "has-meta-charset",
+          "passed": true,
+          "evidence": "Found meta charset UTF-8"
+        },
+        {
+          "text": "title-from-h1",
+          "passed": true,
+          "evidence": "Correct title tag"
+        },
+        {
+          "text": "h1-converted",
+          "passed": true,
+          "evidence": "h1 found"
+        },
+        {
+          "text": "h2-converted",
+          "passed": true,
+          "evidence": "h2 tags present"
+        },
+        {
+          "text": "h3-converted",
+          "passed": true,
+          "evidence": "h3 tags present"
+        },
+        {
+          "text": "bold-converted",
+          "passed": true,
+          "evidence": "<strong> present"
+        },
+        {
+          "text": "fenced-code-block",
+          "passed": true,
+          "evidence": "<pre><code> present"
+        },
+        {
+          "text": "table-structure",
+          "passed": false,
+          "evidence": "Missing: ['<thead>', '<tbody>']"
+        },
+        {
+          "text": "bullet-list",
+          "passed": true,
+          "evidence": "<ul> and <li> present"
+        },
+        {
+          "text": "numbered-list",
+          "passed": true,
+          "evidence": "<ol> and <li> present"
+        },
+        {
+          "text": "blockquote-converted",
+          "passed": true,
+          "evidence": "<blockquote> present"
+        },
+        {
+          "text": "hr-converted",
+          "passed": true,
+          "evidence": "<hr> present"
+        },
+        {
+          "text": "image-converted",
+          "passed": true,
+          "evidence": "img tag with correct src"
+        },
+        {
+          "text": "links-converted",
+          "passed": true,
+          "evidence": "<a href= present"
+        },
+        {
+          "text": "no-css",
+          "passed": true,
+          "evidence": "No CSS found"
+        },
+        {
+          "text": "output-filename",
+          "passed": true,
+          "evidence": "Checked by file path"
+        },
+        {
+          "text": "body-tag",
+          "passed": true,
+          "evidence": "<body> present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 18,
+        "failed": 0,
+        "total": 18,
+        "time_seconds": 62.2,
+        "tokens": 22536,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "has-doctype",
+          "passed": true,
+          "evidence": "Found <!DOCTYPE html>"
+        },
+        {
+          "text": "has-meta-charset",
+          "passed": true,
+          "evidence": "Found meta charset UTF-8"
+        },
+        {
+          "text": "title-from-h1",
+          "passed": true,
+          "evidence": "Correct title tag"
+        },
+        {
+          "text": "h1-converted",
+          "passed": true,
+          "evidence": "h1 found"
+        },
+        {
+          "text": "h2-converted",
+          "passed": true,
+          "evidence": "h2 tags present"
+        },
+        {
+          "text": "h3-converted",
+          "passed": true,
+          "evidence": "h3 tags present"
+        },
+        {
+          "text": "bold-converted",
+          "passed": true,
+          "evidence": "<strong> present"
+        },
+        {
+          "text": "fenced-code-block",
+          "passed": true,
+          "evidence": "<pre><code> present"
+        },
+        {
+          "text": "table-structure",
+          "passed": true,
+          "evidence": "Full table structure present"
+        },
+        {
+          "text": "bullet-list",
+          "passed": true,
+          "evidence": "<ul> and <li> present"
+        },
+        {
+          "text": "numbered-list",
+          "passed": true,
+          "evidence": "<ol> and <li> present"
+        },
+        {
+          "text": "blockquote-converted",
+          "passed": true,
+          "evidence": "<blockquote> present"
+        },
+        {
+          "text": "hr-converted",
+          "passed": true,
+          "evidence": "<hr> present"
+        },
+        {
+          "text": "image-converted",
+          "passed": true,
+          "evidence": "img tag with correct src"
+        },
+        {
+          "text": "links-converted",
+          "passed": true,
+          "evidence": "<a href= present"
+        },
+        {
+          "text": "no-css",
+          "passed": true,
+          "evidence": "No CSS found"
+        },
+        {
+          "text": "output-filename",
+          "passed": true,
+          "evidence": "Checked by file path"
+        },
+        {
+          "text": "body-tag",
+          "passed": true,
+          "evidence": "<body> present"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 224.5333,
+        "stddev": 43.8584,
+        "min": 192.9,
+        "max": 274.6
+      },
+      "tokens": {
+        "mean": 41673.0,
+        "stddev": 4015.613,
+        "min": 38115,
+        "max": 46027
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.9629,
+        "stddev": 0.0321,
+        "min": 0.9444,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 102.6,
+        "stddev": 35.4328,
+        "min": 62.2,
+        "max": 128.4
+      },
+      "tokens": {
+        "mean": 26229.3333,
+        "stddev": 3242.9552,
+        "min": 22536,
+        "max": 28611
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.04",
+      "time_seconds": "+121.9",
+      "tokens": "+15444"
+    }
+  },
+  "notes": []
+}
