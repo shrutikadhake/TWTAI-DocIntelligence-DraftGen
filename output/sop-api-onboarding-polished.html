@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Standard operating procedure: onboarding a new API user</title>
+</head>
+<body>
+
+<h1>Standard operating procedure: onboarding a new API user</h1>
+
+<h2>Purpose</h2>
+
+<p>This SOP describes the steps you should follow when onboarding a new developer to the API platform. The process ensures correct access and allows the new developer to make their first API call within one business day.</p>
+
+<h2>Scope</h2>
+
+<p>This procedure applies to all internal developers and external partners who require API access.</p>
+
+<h2>Prerequisites</h2>
+
+<p>Before you begin, make sure the following are ready:</p>
+
+<ul>
+  <li>A verified company email address for the new user</li>
+  <li>Manager approval on file</li>
+  <li>The onboarding form submitted through the HR portal</li>
+</ul>
+
+<h2>Procedure</h2>
+
+<h3>Step 1: Create the user account</h3>
+
+<p>Log in to the admin portal at <code>admin.api.company.com</code> using your admin credentials.</p>
+
+<p>Navigate to <strong>Users</strong> → <strong>Add New User</strong> and fill in the required fields:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>What to enter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Full name</td>
+      <td>The developer's legal name</td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td>Their company email address</td>
+    </tr>
+    <tr>
+      <td>Role</td>
+      <td>Select API Developer from the dropdown</td>
+    </tr>
+    <tr>
+      <td>Access level</td>
+      <td>Standard (can be upgraded later by the manager)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Click <strong>Save</strong> to create the account.</p>
+
+<h3>Step 2: Generate the API key</h3>
+
+<p>After you save the account, the system generates an API key automatically. It displays the key on screen and also sends it to the developer's email address.</p>
+
+<blockquote><strong>Note:</strong> The API key appears only once on screen. Copy it before navigating away from the page.</blockquote>
+
+<p>Copy the key and store it in the team's secure password manager under the developer's name.</p>
+
+<h3>Step 3: Send the welcome email</h3>
+
+<p>Use the welcome email template to notify the new developer. Find the template in the shared drive under <code>Templates/API-Onboarding</code>.</p>
+
+<p>Open the template and fill in these details:</p>
+
+<ol>
+  <li>Add the developer's first name at the top of the email</li>
+  <li>Paste the API key from Step 2 into the designated field</li>
+  <li>Include the link to the developer documentation</li>
+  <li>Add your name and contact details at the bottom</li>
+</ol>
+
+<p>Send the email to the developer and CC their manager.</p>
+
+<h3>Step 4: Verify access</h3>
+
+<p>After 30 minutes, confirm access. Call or message the developer and ask them to run this test request:</p>
+
+<pre><code>curl -H "Authorization: ApiKey THEIR_KEY" https://api.company.com/v1/ping</code></pre>
+
+<p>If the setup is correct, the system returns a successful response:</p>
+
+<pre><code>{ "status": "ok", "message": "Connection successful" }</code></pre>
+
+<p>If the developer receives an error, refer to the troubleshooting section below.</p>
+
+<h2>Troubleshooting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Problem</th>
+      <th>Likely cause</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>401 Unauthorized</td>
+      <td>Key not activated yet</td>
+      <td>Wait 10 minutes and try again</td>
+    </tr>
+    <tr>
+      <td>404 Not Found</td>
+      <td>Wrong base URL used by developer</td>
+      <td>Check the URL in the welcome email</td>
+    </tr>
+    <tr>
+      <td>500 Server Error</td>
+      <td>System issue</td>
+      <td>Contact the IT helpdesk</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Completion</h2>
+
+<p>Once both parties confirm access, mark the onboarding checklist as complete in the HR portal. The system stores the record automatically.</p>
+
+<hr>
+
+<p><em>This SOP was last reviewed in June 2026. The IT team updates it on a quarterly basis.</em></p>
+
+</body>
+</html>

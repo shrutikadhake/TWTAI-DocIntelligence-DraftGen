@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Standard Operating Procedure: Onboarding A New API User</title>
+</head>
+<body>
+
+<h1>Standard Operating Procedure: Onboarding A New API User</h1>
+
+<h2>Purpose</h2>
+
+<p>This SOP will describe the steps that should be followed by the IT team when a new developer needs to be onboarded to the API platform. The process will ensure that access is granted correctly and that the new user will be able to make their first API call within one business day.</p>
+
+<h2>Scope</h2>
+
+<p>This procedure applies to all internal developers and external partners who require API access.</p>
+
+<h2>Prerequisites</h2>
+
+<p>Before you begin, make sure the following are ready:</p>
+
+<ul>
+  <li>A verified company email address for the new user</li>
+  <li>Manager approval on file</li>
+  <li>The onboarding form submitted through the HR portal</li>
+</ul>
+
+<h2>Procedure</h2>
+
+<h3>Step 1: Create the user account</h3>
+
+<p>Log in to the admin portal at <code>admin.api.company.com</code> using your admin credentials.</p>
+
+<p>Navigate to <strong>Users</strong> → <strong>Add New User</strong> and fill in the required fields:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>What to enter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Full name</td>
+      <td>The developer's legal name</td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td>Their company email address</td>
+    </tr>
+    <tr>
+      <td>Role</td>
+      <td>Select API Developer from the dropdown</td>
+    </tr>
+    <tr>
+      <td>Access level</td>
+      <td>Standard (can be upgraded later by the manager)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Click <strong>Save</strong> to create the account.</p>
+
+<h3>Step 2: Generate The API Key</h3>
+
+<p>An API key will be generated automatically by the system after the account has been saved. The key will be displayed on screen and it will also be sent to the user's email address by the system.</p>
+
+<blockquote><strong>Note:</strong> The API key will only be shown once on screen. Make sure it is copied by you before navigating away from the page.</blockquote>
+
+<p>Copy the key and store it in the team's secure password manager under the developer's name.</p>
+
+<h3>Step 3: Send The Welcome Email</h3>
+
+<p>A welcome email template will be used by you to notify the new developer. The template will be found in the shared drive under <code>Templates/API-Onboarding</code>.</p>
+
+<p>Open the template and fill in these details:</p>
+
+<ol>
+  <li>The developer's first name should be added at the top of the email</li>
+  <li>The API key that was generated in Step 2 should be pasted into the designated field</li>
+  <li>The link to the developer documentation will need to be included by you</li>
+  <li>Your name and contact details should be added at the bottom</li>
+</ol>
+
+<p>Send the email to the developer and CC their manager.</p>
+
+<h3>Step 4: Verify Access</h3>
+
+<p>After 30 minutes, access will need to be confirmed by you. Call or message the developer and ask them to run this test request:</p>
+
+<pre><code>curl -H "Authorization: ApiKey THEIR_KEY" https://api.company.com/v1/ping</code></pre>
+
+<p>A successful response will be returned by the system if the setup is correct:</p>
+
+<pre><code>{ "status": "ok", "message": "Connection successful" }</code></pre>
+
+<p>If an error is received by the developer, refer to the troubleshooting section below.</p>
+
+<h2>Troubleshooting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Problem</th>
+      <th>Likely cause</th>
+      <th>What should be done</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>401 Unauthorized</td>
+      <td>Key not activated yet</td>
+      <td>Wait 10 minutes and try again</td>
+    </tr>
+    <tr>
+      <td>404 Not Found</td>
+      <td>Wrong base URL used by developer</td>
+      <td>Check the URL in the welcome email</td>
+    </tr>
+    <tr>
+      <td>500 Server Error</td>
+      <td>System issue</td>
+      <td>The IT helpdesk should be contacted by you</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Completion</h2>
+
+<p>Once access has been confirmed by both parties, the onboarding checklist should be marked as complete by you in the HR portal. The record will be stored automatically by the system.</p>
+
+<hr>
+
+<p><em>This SOP was last reviewed in June 2026. Updates will be made by the IT team on a quarterly basis.</em></p>
+
+</body>
+</html>

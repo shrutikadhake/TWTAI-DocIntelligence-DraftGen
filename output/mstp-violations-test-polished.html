@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User authentication API reference guide and documentation overview</title>
+</head>
+<body>
+
+<h1>User authentication API reference guide and documentation overview</h1>
+
+<p>Use the REST API to authenticate your requests. The system validates the token before granting you access. The server processes the request and returns a response.</p>
+
+<h2>Authentication methods and their descriptions</h2>
+
+<p>Select one of the following authentication methods before you can make API requests.</p>
+
+<h3>API key authentication method</h3>
+
+<p>After you complete registration, the system generates your API key and emails it to you. Store your API key in a secure location. Never share it with other users or third parties.</p>
+
+<p>Include the key in the header like this:</p>
+
+<pre><code>Authorization: ApiKey YOUR_KEY_HERE</code></pre>
+
+<h3>OAuth 2.0 authentication method and token management</h3>
+
+<p>Start the OAuth 2.0 flow by redirecting to the authorization endpoint. After you approve the access request, the system returns a code. Exchange the code for an access token and use it for subsequent requests.</p>
+
+<p>Follow these steps:</p>
+
+<ol>
+  <li>Open the authorization URL in a browser</li>
+  <li>Enter your credentials</li>
+  <li>Approve access</li>
+  <li>Copy the code from the redirect URL</li>
+  <li>Call the token endpoint with the code</li>
+</ol>
+
+<h2>Request parameters that need to be sent</h2>
+
+<p>The system requires the following parameters:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>client_id</td>
+      <td>String</td>
+      <td>The identifier the system uses to identify your application</td>
+    </tr>
+    <tr>
+      <td>redirect_uri</td>
+      <td>String</td>
+      <td>The URL the system uses to redirect you after authentication</td>
+    </tr>
+    <tr>
+      <td>scope</td>
+      <td>String</td>
+      <td>The permissions you request from the system</td>
+    </tr>
+    <tr>
+      <td>state</td>
+      <td>String</td>
+      <td>A random value you generate to prevent CSRF attacks</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Error codes and their meanings</h2>
+
+<p>The system returns the following errors when it encounters problems during authentication:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Message</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>401</td>
+      <td>Token not valid</td>
+      <td>Generate a new token</td>
+    </tr>
+    <tr>
+      <td>403</td>
+      <td>Resource forbidden</td>
+      <td>Check your permissions</td>
+    </tr>
+    <tr>
+      <td>429</td>
+      <td>Too many requests</td>
+      <td>Wait before retrying</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>What happens next</h2>
+
+<p>After you complete authentication, you can make API requests. Refresh your token every 24 hours by calling the refresh endpoint.</p>
+
+<p>Find additional documentation at our developer portal. Submit support tickets through the help center.</p>
+
+</body>
+</html>

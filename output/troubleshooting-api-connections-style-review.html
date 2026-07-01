@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MSTP Style Review — troubleshooting-api-connections.md</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #555; padding: 8px 12px; text-align: left; vertical-align: top; }
+    thead th { background-color: #2c2c2c; color: #fff; }
+    tbody tr:nth-child(even) { background-color: #f5f5f5; }
+    tbody tr:hover { background-color: #eaf3fb; }
+  </style>
+</head>
+<body>
+
+<h1>MSTP Style Review — troubleshooting-api-connections.md</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Rule</th>
+      <th>Location</th>
+      <th>Issue</th>
+      <th>Recommended fix</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Active voice</td>
+      <td>Error 401, Common causes, bullet 3</td>
+      <td>"Extra spaces or characters have been accidentally included in the key by you"</td>
+      <td>"You accidentally included extra spaces or characters in the key"</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Active voice</td>
+      <td>Error 403, section description</td>
+      <td>"access to the requested resource has been denied by the system"</td>
+      <td>"the system denied access to the requested resource"</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Active voice</td>
+      <td>Error 403, How to fix it, step 3</td>
+      <td>"your IP address will need to be added by your admin"</td>
+      <td>"ask your admin to add your IP address"</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Active voice</td>
+      <td>Error 403, blockquote</td>
+      <td>"is being blocked by the system"</td>
+      <td>"the system is blocking it"</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Active voice</td>
+      <td>Error 429, How to fix it, para 1</td>
+      <td>"When a 429 is received, your application should wait before retrying"</td>
+      <td>"When your application receives a 429, it should wait before retrying"</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Active voice</td>
+      <td>Error 500, What to do, step 3</td>
+      <td>"a support ticket should be submitted by you at support.api.company.com"</td>
+      <td>"submit a support ticket at support.api.company.com"</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Active voice</td>
+      <td>Error 500, ticket list, bullet 2</td>
+      <td>"The exact error response received by you"</td>
+      <td>"The exact error response you received"</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Active voice</td>
+      <td>Connection Timeouts, section intro</td>
+      <td>"the following should be checked by you"</td>
+      <td>"check the following"</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Active voice</td>
+      <td>Connection Timeouts, Contact support</td>
+      <td>"the support team should be contacted by you with the details of the affected endpoint and your server's IP address"</td>
+      <td>"contact the support team with the details of the affected endpoint and your server's IP address"</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Second person</td>
+      <td>Entire document</td>
+      <td colspan="2">No violations found — the document addresses the reader as "you" and "your" throughout</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Present tense</td>
+      <td>Error 429, How to fix it, para 2</td>
+      <td>"The server will include a Retry-After header in 429 responses"</td>
+      <td>"The server includes a Retry-After header in 429 responses"</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Present tense</td>
+      <td>Error 429, How to fix it, para 2</td>
+      <td>"This header will tell you exactly how many seconds to wait before retrying"</td>
+      <td>"This header tells you exactly how many seconds to wait before retrying"</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>Present tense</td>
+      <td>Connection Timeouts, Check your timeout settings</td>
+      <td>"Most HTTP clients will have a default timeout of 30 seconds"</td>
+      <td>"Most HTTP clients have a default timeout of 30 seconds"</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>Sentence length</td>
+      <td>Connection Timeouts, Contact support</td>
+      <td>"If connectivity tests pass but API requests still time out, the support team should be contacted by you with the details of the affected endpoint and your server's IP address." — 30 words</td>
+      <td>Split and fix: "If connectivity tests pass but API requests still time out, contact the support team. Include the details of the affected endpoint and your server's IP address."</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>Heading case</td>
+      <td>H1</td>
+      <td>"Troubleshooting Guide: API Connection Issues" — "Guide", "Connection", "Issues" unnecessarily capitalised</td>
+      <td>"Troubleshooting guide: API connection issues"</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>Heading case</td>
+      <td>H2</td>
+      <td>"Before You Begin" — "You", "Begin" unnecessarily capitalised</td>
+      <td>"Before you begin"</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>Heading case</td>
+      <td>H2</td>
+      <td>"Error 429: Too Many Requests" — "Too Many Requests" unnecessarily capitalised</td>
+      <td>"Error 429: Too many requests"</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>Heading case</td>
+      <td>H2</td>
+      <td>"Error 500: Internal Server Error" — "Internal Server Error" unnecessarily capitalised</td>
+      <td>"Error 500: Internal server error"</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>Heading case</td>
+      <td>H2</td>
+      <td>"Connection Timeouts" — "Timeouts" unnecessarily capitalised</td>
+      <td>"Connection timeouts"</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>Heading case</td>
+      <td>H2</td>
+      <td>"Still Not Working?" — "Not Working" unnecessarily capitalised</td>
+      <td>"Still not working?"</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Summary</h2>
+
+<ul>
+  <li><strong>Total issues found:</strong> 19</li>
+  <li><strong>Rules with violations:</strong> 4 of 5 — Active voice (9), Present tense (3), Sentence length (1), Heading case (6)</li>
+  <li><strong>Rules with no violations:</strong> Second person — the document already addresses the reader as "you" throughout</li>
+</ul>
+
+<h2>Requires human review</h2>
+
+<ul>
+  <li><strong>Error 401: Unauthorized and Error 403: Forbidden (heading case):</strong> "Unauthorized" and "Forbidden" are official HTTP status code names from RFC 9110. These are typically capitalised as proper terms in technical documentation. Confirm whether you want these lowercased for MSTP consistency or kept as official HTTP status labels.</li>
+  <li><strong>Error 403, How to fix it, step 3 — future tense:</strong> "your IP address will need to be added by your admin" contains a genuine future event (the admin performing an action). The passive voice should still be fixed, but the future tense ("will need") may be intentional here since it refers to a real upcoming action, not system behaviour. Suggested fix: "Ask your admin to add your IP address" uses an imperative and avoids both issues.</li>
+  <li><strong>H1 intro sentence — "This guide will help you":</strong> "will help" is technically future tense. This is a promise or description of the guide's purpose; MSTP would prefer "This guide helps you resolve…". Low priority but worth considering for full consistency.</li>
+</ul>
+
+</body>
+</html>
