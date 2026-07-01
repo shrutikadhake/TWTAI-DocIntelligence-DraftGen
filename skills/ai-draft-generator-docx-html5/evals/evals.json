@@ -1,0 +1,28 @@
+{
+  "skill_name": "ai-draft-generator-docx-html5",
+  "version": "1.0",
+  "description": "Evaluation test cases for the AI Draft Generator - Microsoft Word to HTML5 Converter skill",
+  "evals": [
+    {
+      "id": 1,
+      "name": "basic-prd-conversion",
+      "prompt": "I have a Microsoft Word Product Requirements Document with standard sections like Overview, Scope, Functional Requirements, Non-Functional Requirements, and Technical Specifications. Please convert the docx file from the resources folder (sample-prd.docx) into a well-structured HTML5 document that preserves all content, maintains the heading hierarchy, and is ready for web publishing.",
+      "expected_output": "A complete HTML5 document with proper DOCTYPE, semantic structure, heading hierarchy (h1-h6), all functional and non-functional requirements preserved in lists, technical specifications in tables, and ready for browser preview",
+      "files": ["resources/sample-prd.docx"]
+    },
+    {
+      "id": 2,
+      "name": "complex-prd-with-tables-and-lists",
+      "prompt": "Convert a detailed Product Requirements document that includes multiple tables (system requirements matrix, feature comparison table) and complex nested lists with functional specifications. The document is located in resources/detailed-prd.docx. Ensure all tables are semantically correct with proper thead/tbody, all lists maintain their nesting structure, and the HTML5 output is validation-ready.",
+      "expected_output": "HTML5 document with semantic table structure using thead/tbody/tr/th/td, properly nested ordered and unordered lists, all content from source document preserved, passing HTML5 validator with no errors",
+      "files": ["resources/detailed-prd.docx"]
+    },
+    {
+      "id": 3,
+      "name": "prd-with-special-elements",
+      "prompt": "I need to convert a Product Requirements document (resources/prd-with-notes.docx) that contains special elements like Notes, Warnings, Cautions, and Tips sections, along with code snippets, hyperlinks to external resources, and cross-references between sections. The output should use semantic HTML5 with appropriate sections for warnings/notes/cautions with CSS classes for styling.",
+      "expected_output": "HTML5 document with semantic sections for notes/warnings/cautions using appropriate class attributes, code snippets in pre/code tags, all hyperlinks preserved and functional, cross-references converted to internal anchor links, complete document hierarchy maintained",
+      "files": ["resources/prd-with-notes.docx"]
+    }
+  ]
+}
