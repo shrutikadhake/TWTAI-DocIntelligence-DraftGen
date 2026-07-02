@@ -1,0 +1,21 @@
+{
+  "title": "Bulk User Import",
+  "overview": "Allows administrators to import multiple users into the application using a CSV file.",
+  "prerequisites": [
+    "Administrator role",
+    "Valid CSV file"
+  ],
+  "steps": [
+    "Navigate to User Management.",
+    "Select Import Users.",
+    "Upload the CSV file.",
+    "Review validation results.",
+    "Click Import."
+  ],
+  "notes": [
+    "Duplicate users are skipped."
+  ],
+  "warnings": [
+    "Invalid rows are not imported."
+  ]
+}
