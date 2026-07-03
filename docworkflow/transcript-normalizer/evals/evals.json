@@ -1,0 +1,23 @@
+{
+  "skill_name": "transcript-normalizer",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Convert this VTT transcript of a dashboard demo into structured JSON for documentation. The transcript has timestamps, filler words, and conversational language that needs to be cleaned up.",
+      "expected_output": "Valid JSON with topic_title, goal, prerequisites, technical_facts, and tasks with steps. All timestamps removed, filler words eliminated, clear action-oriented steps.",
+      "files": ["test_simple_dashboard.vtt"]
+    },
+    {
+      "id": 1,
+      "prompt": "Normalize this API setup demo transcript from VTT format. The content has fragmented explanations across multiple speaker turns and some redundant information that should be consolidated.",
+      "expected_output": "Structured JSON documentation with API setup prerequisites, OAuth 2.0 concepts explained, clear step-by-step instructions for creating an application and configuring OAuth scopes. Fragmented content consolidated.",
+      "files": ["test_api_setup.vtt"]
+    },
+    {
+      "id": 2,
+      "prompt": "Convert this database migration demo transcript into structured documentation JSON. The transcript includes side conversations between speakers that aren't essential to the core content.",
+      "expected_output": "JSON with migration prerequisites (PostgreSQL version, backup requirements), clear steps for running migrations and validation. Side conversations filtered out, technical warnings preserved (security, data loss prevention).",
+      "files": ["test_database_migration.vtt"]
+    }
+  ]
+}

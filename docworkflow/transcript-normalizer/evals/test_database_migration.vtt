@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:02.000 --> 00:00:08.000
+Speaker 1: Alright, so uh, today I'm gonna walk through the database migration process.
+Speaker 2: Great, looking forward to this!
+
+00:00:08.500 --> 00:00:15.000
+Speaker 1: Yeah, so, um, before we jump in, you're gonna need some prerequisites.
+First, you need to have PostgreSQL 12 or higher installed. That's like, the main thing.
+
+00:00:15.500 --> 00:00:20.000
+Speaker 2: Do they need the development headers too?
+Speaker 1: Oh, good point, yeah. You need libpq-dev for Debian-based systems.
+Speaker 2: Right, right, makes sense.
+
+00:00:20.500 --> 00:00:26.000
+Speaker 1: You also need, uh, you're gonna need the migration tool installed.
+We have that in the tools directory. It's basically, like, a CLI that handles all the migrations.
+
+00:00:26.500 --> 00:00:33.000
+Speaker 2: Should they back up their database first?
+Speaker 1: Oh absolutely, definitely back up first. That's, um, that's critical.
+Like, you do not want to lose data. Create a backup with pg_dump.
+
+00:00:33.500 --> 00:00:40.000
+Speaker 1: Okay so the first step is, you run the migration tool. You open a terminal and type,
+you know, "migrate --check". This basically, um, checks if there are any pending migrations.
+
+00:00:40.500 --> 00:00:47.000
+It will show you like, a list of migrations that haven't been applied yet.
+At that point, you review them, make sure they look okay, and then you run "migrate --up".
+
+00:00:47.500 --> 00:00:53.000
+Speaker 2: How long does that usually take?
+Speaker 1: Uh, depends on your database size. Small databases, like, under a gig, usually take a few seconds.
+Larger ones, you know, multi-gig, could take a few minutes.
+
+00:00:53.500 --> 01:00:00.000
+Speaker 1: After the migration completes, you'll see a message saying "Migration successful".
+You should also, um, you should verify the new tables were created. You can check with psql.
+
+00:00:59.000 --> 01:00:05.000
+Speaker 2: They'll need the password to connect to the database, right?
+Speaker 1: Right, the database password. Or you can set up a .pgpass file to avoid entering it every time.
+
+00:01:05.500 --> 01:00:12.000
+Speaker 1: The key thing after migration is to run the validation script.
+That checks that all the data was migrated correctly and nothing got corrupted.
+
+00:01:12.500 --> 01:00:18.000
+You run "migrate --validate" and if everything passed, you should see a green success message.
+That's when you know the migration is, like, fully complete and safe.

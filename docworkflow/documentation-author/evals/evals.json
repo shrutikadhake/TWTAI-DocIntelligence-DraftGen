@@ -1,0 +1,23 @@
+{
+  "skill_name": "documentation-author",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Convert this structured transcript JSON into customer-facing markdown documentation. The output should be a clear, task-oriented guide that balances technical accuracy with accessibility for end users of varying skill levels.",
+      "expected_output": "Markdown documentation with title, introduction, prerequisites, procedure (with numbered steps), and expected results (including validation and troubleshooting). Written in direct, accessible language using 'You' address. Each step has clear action, details, and expected outcome.",
+      "files": ["M365CopilotDemoTranscript.json"]
+    },
+    {
+      "id": 1,
+      "prompt": "Generate documentation from this JSON that explains the procedure step-by-step to an end user who may not have prior experience with the topic. Include prerequisites, all tasks with detailed steps, and what they should expect to see when successful.",
+      "expected_output": "Well-structured markdown with prerequisites clearly listed, procedure section showing all 4 tasks with detailed steps, and expected results including validation checklist and common issues/solutions. Technical terms explained in context.",
+      "files": ["M365CopilotDemoTranscript.json"]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a user guide from the provided JSON data. Focus on making it actionable and easy to follow. Include troubleshooting guidance for potential issues a user might encounter.",
+      "expected_output": "Complete markdown documentation with troubleshooting section that anticipates issues (e.g., Copilot not responding, feature not found) and provides solutions. Introduction explains what the user will accomplish. Steps are granular and include expected outcomes.",
+      "files": ["M365CopilotDemoTranscript.json"]
+    }
+  ]
+}

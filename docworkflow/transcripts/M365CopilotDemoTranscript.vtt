@@ -1,0 +1,77 @@
+[00:00:02] Sarah Chen (Product Manager):
+Hi everyone. Um... today I want to quickly show how somebody can use Microsoft 365 Copilot Chat to learn basic HTML.
+
+[00:00:11] Sarah Chen:
+So... let's start from the Copilot home page.
+
+[00:00:16] Sarah Chen:
+Actually let me zoom in a little.
+
+[00:00:22] Sarah Chen:
+Okay. Here in the chat box, I'm just going to type:
+What is HTML?
+
+[00:00:31] M365 Copilot:
+HTML stands for HyperText Markup Language. It is the standard language used to build web pages.
+
+[00:00:42] Sarah Chen:
+Right. So if you're completely new to HTML, this is usually the first thing you would ask.
+
+[00:00:51] Michael Torres (Solutions Engineer):
+Can it provide examples too?
+
+[00:00:54] Sarah Chen:
+Yes, good question.
+
+[00:00:56] Sarah Chen:
+Let me ask:
+Show me a simple HTML example.
+
+[00:01:04] M365 Copilot:
+Here is a basic HTML page example.
+
+<html>
+<head>
+<title>My First Page</title>
+</head>
+<body>
+<h1>Hello World</h1>
+<p>This is my first webpage.</p>
+</body>
+</html>
+
+[00:01:29] Sarah Chen:
+Notice that it generated the entire page structure.
+
+[00:01:35] Sarah Chen:
+Actually... let's dig a little deeper.
+
+[00:01:39] Sarah Chen:
+Explain the h1 element.
+
+[00:01:45] M365 Copilot:
+The h1 element defines the primary heading on a web page.
+
+[00:01:54] Sarah Chen:
+Okay perfect.
+
+[00:01:56] Sarah Chen:
+One thing people often ask is what's the difference between h1 and h2.
+
+[00:02:04] Sarah Chen:
+Let me ask that now.
+
+[00:02:10] M365 Copilot:
+The h1 element represents the primary page heading. h2 elements create subsection headings.
+
+[00:02:24] Sarah Chen:
+And then once you understand those basics, you can ask Copilot to generate a complete sample web page using headings and paragraphs.
+
+[00:02:38] Michael Torres:
+Can it explain why the code works?
+
+[00:02:42] Sarah Chen:
+Yes. You can continue asking follow-up questions until you understand each element.
+
+[00:02:55] Sarah Chen:
+I think that's everything I wanted to cover today.
