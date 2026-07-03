@@ -1,0 +1,37 @@
+Feature Name: Weld Extension
+
+Overview
+
+This feature is aimed to
+- create weld body extensions
+- generate layers of quad elements on the weld extensions
+
+
+- Specification
+
+-	Should support planar welds and solid welds
+ 
+-	Should be placed under Tree Outline, right-click Mesh select Insert > Weld Extension.
+
+
+UI Requirements
+
+Scoping Method: Scope the bodies having features that need to be suppressed.
+Default Methods: Geometry Selection 
+Geometry Selection: scope the geometry bodies.
+Named Selection: scope the geometry bodies to be suppressed in the named selection.
+
+Type: type of weld extension control. 
+ Types 
+Continuous Weld:  perform continuous welding.
+Intermittent Weld:  perform discontinuous welding. Source is a read only field. 
+
+Source:  select Geometry or Mesh for weld extension. 
+     - represents where the weld faces are modeled. 
+ select Geometry, for weld faces created in CAD. 
+ select Mesh, when the weld entities are to be created during mesh generation.
+
+
+
+Limitation
+
