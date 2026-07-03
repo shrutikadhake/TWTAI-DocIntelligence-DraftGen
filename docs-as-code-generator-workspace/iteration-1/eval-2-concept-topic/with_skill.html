@@ -1,0 +1,94 @@
+<h1>Custom API Rate Limits in AppScan Enterprise</h1>
+
+<p>AppScan Enterprise provides a custom API rate limiting system that allows you to control how many requests your application can handle within a specified time window. This concept topic explains how the rate limiting feature works, how it interacts with system components, and the prerequisites for implementation.</p>
+
+<h3>What Are Custom API Rate Limits?</h3>
+
+<p>Custom API rate limits are configurable thresholds that restrict the number of API requests your system accepts within a defined time window. When a client exceeds the configured limit, the API returns a <code>429 Too Many Requests</code> response, preventing further requests until the next window begins.</p>
+
+<p>The rate limiting system protects your AppScan Enterprise deployment by preventing abuse, ensuring fair resource distribution, and maintaining system stability under high request volumes.</p>
+
+<h3>How Rate Limiting Works: The Component Interaction Flow</h3>
+
+<p>Custom rate limits involve three core components that work together in a specific sequence:</p>
+
+<ol>
+<li><strong>Global Configuration File</strong> — The system reads rate limit settings from the YAML configuration file at <code>/etc/scanner/config.yml</code>. This file contains the <code>api_settings</code> block, which controls whether custom rate limiting is enabled globally.</li>
+<li><strong>Scanner Daemon</strong> — The <code>scanner-daemon</code> process loads the configuration when it starts. The daemon does not support hot-reload, meaning configuration changes require a daemon restart using <code>sudo systemctl restart scanner-daemon</code>.</li>
+<li><strong>CLI Interface</strong> — The <code>scanner-cli</code> command-line tool applies specific rate limit values to the running daemon using the <code>config update</code> command. CLI commands are rejected if custom limits are not enabled in the global configuration file.</li>
+</ol>
+
+<h3>The Prerequisites Flow</h3>
+
+<p>Rate limiting requires a specific sequence of prerequisites before custom limits can be applied:</p>
+
+<ol>
+<li><strong>Enable custom limits in the global configuration</strong> — Open <code>/etc/scanner/config.yml</code> and set <code>custom_limits_enabled: true</code> within the <code>api_settings</code> block. If this step is skipped, the CLI command returns a <code>403 Forbidden</code> error with the message "Rate limit configuration is disabled globally."</li>
+<li><strong>Restart the daemon</strong> — After modifying the YAML file, restart the scanner daemon process so it reads the updated configuration.</li>
+<li><strong>Authenticate with admin privileges</strong> — CLI commands require authentication using a valid admin token. The token must not be expired.</li>
+</ol>
+
+<h3>Key Concepts</h3>
+
+<h3>Configuration File Structure</h3>
+
+<p>The <code>api_settings</code> block in <code>/etc/scanner/config.yml</code> contains the following elements:</p>
+
+<pre><code>api_settings:
+  timeout: 30
+  custom_limits_enabled: true
+  default_limit: 500</code></pre>
+
+<ul>
+<li><code>timeout</code> — The API request timeout in seconds.</li>
+<li><code>custom_limits_enabled</code> — Boolean flag that enables or disables the custom rate limiting feature globally. Set to <code>true</code> to allow the CLI to accept rate limit updates.</li>
+<li><code>default_limit</code> — The fallback request limit if no custom limit is specified.</li>
+</ul>
+
+<h3>CLI Command Syntax</h3>
+
+<p>Once custom limits are enabled and the daemon is restarted, you use the CLI to apply specific rate limit values:</p>
+
+<pre><code>scanner-cli config update --api-limit &lt;number&gt; --window &lt;seconds&gt;</code></pre>
+
+<ul>
+<li><code>--api-limit &lt;number&gt;</code> — The maximum number of requests allowed within the time window (e.g., 1000).</li>
+<li><code>--window &lt;seconds&gt;</code> — The duration of the time window in seconds (e.g., 60).</li>
+</ul>
+
+<p>A successful update returns <code>200 OK: Rate limits updated.</code></p>
+
+<h3>Error Responses</h3>
+
+<p>Understanding error responses helps you troubleshoot rate limiting configuration:</p>
+
+<ul>
+<li><code>403 Forbidden</code> — Indicates that custom limits are not enabled in the global configuration file. Enable <code>custom_limits_enabled: true</code> in <code>/etc/scanner/config.yml</code> and restart the daemon.</li>
+<li><code>429 Too Many Requests</code> — Indicates that the API request limit has been exceeded. The client must wait until the next rate limit window begins before sending additional requests.</li>
+</ul>
+
+<h3>Interaction Between Components</h3>
+
+<p>The three components must be coordinated for rate limiting to function:</p>
+
+<ol>
+<li>The global configuration file (YAML) acts as the gatekeeper. If <code>custom_limits_enabled</code> is false, the CLI rejects all rate limit update attempts.</li>
+<li>The scanner daemon enforces the configuration by reading it at startup. Changes to the YAML file require an explicit daemon restart; configuration does not update automatically.</li>
+<li>The CLI tool communicates rate limit values to the daemon. Once the daemon accepts the CLI command, it begins enforcing the new limits against incoming API requests.</li>
+</ol>
+
+<h3>Validation and Verification</h3>
+
+<p>After applying custom rate limits, you can verify that the configuration took effect by sending test requests to the API endpoint. When the request count exceeds the configured limit, subsequent requests receive a <code>429 Too Many Requests</code> response, confirming that the rate limit is active and enforced.</p>
+
+<!-- MISSING_ELEMENT: Expected Results section not fully documented in source log. Manual verification required for behavior when rate limit is approached (e.g., warning headers, remaining request count). -->
+
+<!-- MISSING_ELEMENT: Troubleshooting section incomplete in source log. Additional error scenarios beyond 403 Forbidden and 429 Too Many Requests should be documented. -->
+
+<!-- UNDEFINED_TERM: "YAML" is used throughout source log but not formally defined. Consider adding a definition for readers unfamiliar with YAML configuration syntax. -->
+
+<!-- UNDEFINED_TERM: "Admin token" is mentioned as a requirement but its generation, validity period, and expiration policy are not documented in source log. -->
+
+<h3>Summary</h3>
+
+<p>Custom API rate limits in AppScan Enterprise protect system resources by controlling request volume. The feature requires enabling a global setting in the YAML configuration file, restarting the daemon to load the updated configuration, and using the CLI tool to set specific limit values. Understanding the interaction between these three components—configuration file, daemon process, and CLI interface—ensures successful rate limit implementation.</p>

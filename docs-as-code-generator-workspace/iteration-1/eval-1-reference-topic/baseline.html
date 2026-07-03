@@ -1,0 +1,232 @@
+<article class="reference-topic">
+  <header>
+    <h1>API Rate Limit Configuration Reference</h1>
+    <p class="abstract">Configure custom API rate limits for the Scanner service using the command-line interface and YAML configuration.</p>
+  </header>
+
+  <section id="overview">
+    <h2>Overview</h2>
+    <p>The Scanner service allows administrators to configure custom rate limits for API requests. Rate limits are defined by two parameters: the maximum number of allowed requests and the time window in which those requests are counted.</p>
+    <p>Custom rate limits require explicit enablement in the global configuration file and a service restart before they take effect.</p>
+  </section>
+
+  <section id="prerequisites">
+    <h2>Prerequisites</h2>
+    <ul>
+      <li>Root or administrative access to the host server</li>
+      <li>Access to the Scanner service configuration file at <code>/etc/scanner/config.yml</code></li>
+      <li>Permission to restart the <code>scanner-daemon</code> service</li>
+    </ul>
+  </section>
+
+  <section id="configuration-parameters">
+    <h2>Configuration Parameters</h2>
+
+    <section id="param-api-limit">
+      <h3><code>--api-limit</code></h3>
+      <dl>
+        <dt>Description</dt>
+        <dd>Specifies the maximum number of requests allowed within the time window.</dd>
+        <dt>Type</dt>
+        <dd>Integer</dd>
+        <dt>Valid Values</dt>
+        <dd>Positive integers (e.g., 500, 1000, 5000)</dd>
+        <dt>Default Value</dt>
+        <dd><span class="missing">Not specified</span></dd>
+        <dt>Example</dt>
+        <dd><code>--api-limit 1000</code></dd>
+      </dl>
+    </section>
+
+    <section id="param-window">
+      <h3><code>--window</code></h3>
+      <dl>
+        <dt>Description</dt>
+        <dd>Specifies the time window (in seconds) for counting requests.</dd>
+        <dt>Type</dt>
+        <dd>Integer (seconds)</dd>
+        <dt>Valid Values</dt>
+        <dd>Positive integers representing seconds (e.g., 30, 60, 300)</dd>
+        <dt>Default Value</dt>
+        <dd><span class="missing">Not specified</span></dd>
+        <dt>Example</dt>
+        <dd><code>--window 60</code></dd>
+      </dl>
+    </section>
+
+  </section>
+
+  <section id="cli-command-signature">
+    <h2>CLI Command Signature</h2>
+
+    <section id="config-update-command">
+      <h3><code>scanner-cli config update</code></h3>
+      <p>Updates the API rate limit configuration.</p>
+
+      <h4>Syntax</h4>
+      <pre><code>scanner-cli config update --api-limit &lt;number&gt; --window &lt;seconds&gt;</code></pre>
+
+      <h4>Parameters</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>--api-limit</code></td>
+            <td>Integer</td>
+            <td>Yes</td>
+            <td>Maximum number of requests allowed in the time window</td>
+          </tr>
+          <tr>
+            <td><code>--window</code></td>
+            <td>Integer</td>
+            <td>Yes</td>
+            <td>Time window in seconds for counting requests</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>Example</h4>
+      <pre><code>scanner-cli config update --api-limit 1000 --window 60</code></pre>
+
+      <h4>Success Response</h4>
+      <pre><code>200 OK: Rate limits updated.</code></pre>
+
+      <h4>Error Responses</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Status Code</th>
+            <th>Message</th>
+            <th>Cause</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>403</td>
+            <td><code>Rate limit configuration is disabled globally.</code></td>
+            <td><code>custom_limits_enabled</code> is not set to <code>true</code> in the configuration file</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
+
+  </section>
+
+  <section id="yaml-configuration">
+    <h2>YAML Configuration Block Structure</h2>
+
+    <p>Rate limit settings are defined within the <code>api_settings</code> block in <code>/etc/scanner/config.yml</code>.</p>
+
+    <h3>Configuration File Location</h3>
+    <p><code>/etc/scanner/config.yml</code></p>
+
+    <h3>Configuration Block</h3>
+    <pre><code>api_settings:
+  timeout: 30
+  custom_limits_enabled: true
+  default_limit: 500</code></pre>
+
+    <h4>Block Properties</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Required</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>timeout</code></td>
+          <td>Integer (seconds)</td>
+          <td>API request timeout duration</td>
+          <td><span class="missing">Not specified</span></td>
+        </tr>
+        <tr>
+          <td><code>custom_limits_enabled</code></td>
+          <td>Boolean</td>
+          <td>Enables or disables custom rate limit configuration. Must be set to <code>true</code> for the CLI command to function.</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td><code>default_limit</code></td>
+          <td>Integer</td>
+          <td>Default rate limit when custom limits are not explicitly set</td>
+          <td><span class="missing">Not specified</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </section>
+
+  <section id="service-restart">
+    <h2>Service Restart Requirement</h2>
+
+    <p>Changes to the YAML configuration file do not take effect immediately. The Scanner daemon does not support hot-reload of configuration files.</p>
+
+    <h3>Restart Command</h3>
+    <pre><code>sudo systemctl restart scanner-daemon</code></pre>
+
+    <p>The service must be restarted after modifying the <code>/etc/scanner/config.yml</code> file for configuration changes to take effect.</p>
+
+  </section>
+
+  <section id="procedure">
+    <h2>Configuration Procedure</h2>
+
+    <ol>
+      <li>Log into the host server as root.</li>
+      <li>Open <code>/etc/scanner/config.yml</code> in a text editor.</li>
+      <li>Under <code>api_settings</code>, set <code>custom_limits_enabled: true</code> and save the file.</li>
+      <li>Restart the service using <code>sudo systemctl restart scanner-daemon</code>.</li>
+      <li>Apply the custom limits using the CLI: <code>scanner-cli config update --api-limit &lt;number&gt; --window &lt;seconds&gt;</code>.</li>
+    </ol>
+
+  </section>
+
+  <section id="limitations-and-notes">
+    <h2>Limitations and Notes</h2>
+
+    <ul>
+      <li>The <code>custom_limits_enabled</code> property must be explicitly set to <code>true</code> before any CLI-based rate limit updates will be accepted.</li>
+      <li>Configuration changes made to the YAML file do not take effect until the daemon is restarted.</li>
+      <li>Rate limit enforcement begins after the 1001st request is made within the defined window (i.e., requests 1–1000 are accepted; the 1001st request receives a <code>429 Too Many Requests</code> response).</li>
+    </ul>
+
+  </section>
+
+  <section id="missing-information">
+    <h2>Missing or Incomplete Information</h2>
+
+    <div class="alert alert-warning">
+      <h3>Parameter Definitions and Type Information</h3>
+      <ul>
+        <li><strong>Default values:</strong> The default values for <code>--api-limit</code> and <code>--window</code> parameters are not documented in the source material.</li>
+        <li><strong>Range constraints:</strong> No maximum or minimum value constraints are specified for <code>--api-limit</code> or <code>--window</code>.</li>
+        <li><strong>Configuration file properties:</strong> The purpose and default values of <code>timeout</code> and <code>default_limit</code> properties in the <code>api_settings</code> block are not fully documented.</li>
+        <li><strong>Authentication requirements:</strong> Whether an admin token or specific authentication is required for the <code>scanner-cli config update</code> command is implied but not explicitly documented.</li>
+        <li><strong>Rate limit behavior:</strong> The exact behavior when the rate limit is exceeded (besides the <code>429</code> response) is not documented (e.g., request queuing, exponential backoff, client-side retry guidance).</li>
+        <li><strong>Multiple rate limit configurations:</strong> It is unclear whether multiple rate limit configurations can coexist or be applied to different endpoints.</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <footer>
+    <p class="metadata">
+      <span class="source">Source: v10.12 Rate Limit Chat Log</span><br>
+      <span class="extracted">Extracted: 2026-07-03</span><br>
+      <span class="style-reference">Microsoft Manual of Style for Technical Publications</span>
+    </p>
+  </footer>
+
+</article>

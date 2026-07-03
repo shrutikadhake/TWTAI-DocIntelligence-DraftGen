@@ -1,0 +1,117 @@
+<h1>Rate Limit Configuration Reference</h1>
+
+<p>This reference documents the configuration parameters for custom API rate limits in the scanner daemon, including the YAML configuration structure and CLI command syntax.</p>
+
+<h3>Configuration Structure</h3>
+
+<p>Rate limit configuration is managed in the global configuration file at <code>/etc/scanner/config.yml</code>. Before applying rate limits via the CLI, you must enable custom limits in the YAML configuration.</p>
+
+<h3>YAML Configuration Block</h3>
+
+<p>The rate limit settings are located under the <code>api_settings</code> block:</p>
+
+<pre><code>api_settings:
+  timeout: 30
+  custom_limits_enabled: true
+  default_limit: 500</code></pre>
+
+<p>The <code>custom_limits_enabled</code> parameter must be set to <code>true</code> before CLI commands will be accepted.</p>
+
+<h3>Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Type</th>
+<th>Valid Values</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api-limit</code></td>
+<td>Integer</td>
+<td>Positive integer (example: 1000)</td>
+<td>Specifies the maximum number of API requests allowed within the specified time window. When this threshold is exceeded, the API returns a 429 Too Many Requests response.</td>
+</tr>
+<tr>
+<td><code>window</code></td>
+<td>Integer</td>
+<td>Positive integer representing seconds (example: 60)</td>
+<td>Specifies the time window in seconds during which the request limit applies. The limit resets after this interval.</td>
+</tr>
+<tr>
+<td><code>custom_limits_enabled</code></td>
+<td>Boolean</td>
+<td><code>true</code> or <code>false</code></td>
+<td>Enables or disables custom rate limit configuration. Must be set to <code>true</code> in the YAML file before CLI commands are accepted. Default: <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Integer</td>
+<td>Positive integer in seconds (example: 30)</td>
+<td>Specifies the API timeout value in seconds.</td>
+</tr>
+<tr>
+<td><code>default_limit</code></td>
+<td>Integer</td>
+<td>Positive integer (example: 500)</td>
+<td>Sets the default API request limit if no custom limit is configured.</td>
+</tr>
+</tbody>
+</table>
+
+<h3>CLI Command Syntax</h3>
+
+<p>Apply custom rate limits using the scanner CLI tool:</p>
+
+<pre><code>scanner-cli config update --api-limit &lt;number&gt; --window &lt;seconds&gt;</code></pre>
+
+<h3>Parameters</h3>
+
+<ul>
+<li><code>--api-limit &lt;number&gt;</code>: The maximum number of requests allowed in the specified window (integer value).</li>
+<li><code>--window &lt;seconds&gt;</code>: The time window in seconds during which the limit applies (integer value).</li>
+</ul>
+
+<h3>Example</h3>
+
+<pre><code>scanner-cli config update --api-limit 1000 --window 60</code></pre>
+
+<p>This command sets the rate limit to 1000 requests per 60-second window.</p>
+
+<h3>Service Restart Requirement</h3>
+
+<p>The scanner daemon does not reload configuration changes dynamically. After modifying the YAML configuration file, you must restart the daemon for changes to take effect:</p>
+
+<pre><code>sudo systemctl restart scanner-daemon</code></pre>
+
+<h3>Response Codes</h3>
+
+<table>
+<thead>
+<tr>
+<th>Response Code</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200 OK</code></td>
+<td>Rate limits were updated successfully with message: "Rate limits updated."</td>
+</tr>
+<tr>
+<td><code>403 Forbidden</code></td>
+<td>Rate limit configuration is disabled globally. Enable <code>custom_limits_enabled</code> in the YAML configuration file and restart the daemon.</td>
+</tr>
+<tr>
+<td><code>429 Too Many Requests</code></td>
+<td>The configured rate limit has been exceeded. The client must wait until the time window resets before making additional requests.</td>
+</tr>
+</tbody>
+</table>
+
+<!-- MISSING_ELEMENT: No additional parameters (such as priority, burst settings, or IP-based limits) were documented in the source log. Manual verification required. -->
+
+<!-- MISSING_ELEMENT: No information on parameter validation ranges or constraints beyond the examples (e.g., maximum api-limit value, minimum window duration) was provided in the source log. Manual verification required. -->
