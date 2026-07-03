@@ -1,6 +1,6 @@
 ---
 name: docs-as-code-generator
-description: Convert raw technical communication (chat logs, transcripts, notes) into clean, structured HTML documentation. Use this skill whenever you need to transform noisy developer communication, meeting transcripts, or raw technical notes into semantic HTML5 documents (Task topics, conceptual guides, reference docs). The skill automatically extracts procedural intent, filters noise, validates against Microsoft Manual of Style using the Microsoft Learn MCP server, and flags missing content to prevent hallucination. Invoke with the source file name and desired documentation structure type. Essential for Docs-as-Code workflows where team members need to convert unstructured communication into build-ready documentation.
+description: Convert raw technical communication (chat logs, transcripts, notes) into clean, structured HTML documentation. Use this skill whenever you need to transform noisy developer communication, meeting transcripts, or raw technical notes into semantic HTML5 documents (Task topics, conceptual guides, reference docs). The skill automatically identifies which documentation topic types (task, concept, reference) the source material can support and generates each applicable topic, extracts procedural intent, filters noise, validates against Microsoft Manual of Style using the Microsoft Learn MCP server, and flags missing content to prevent hallucination. Invoke with the source file name; the topic type is detected automatically from the content. Essential for Docs-as-Code workflows where team members need to convert unstructured communication into build-ready documentation.
 compatibility: Requires access to local Git repository workspace and active Microsoft Learn MCP server connection.
 ---
 
@@ -10,18 +10,20 @@ This skill transforms messy, unstructured technical communication into clean, st
 
 The workflow:
 1. Reads the specified `.txt` log file from the local workspace
-2. Intelligently extracts procedural content, prerequisites, and validation steps while filtering conversational noise
-3. Generates semantic HTML5 fragments (no `<html>`, `<head>`, or `<body>` tags)
-4. Validates style compliance using the `/microsoft-docs` skill against MSTP guidelines (sentence case, active voice, second person, terminology)
-5. Verifies that all procedural elements are grounded in the source log (anti-hallucination protocol)
-6. Flags missing procedural elements and style violations with HTML comments
-7. Outputs build-ready, MSTP-compliant HTML ready for import into structured authoring systems
+2. Analyzes the content to determine which documentation topic types (`task`, `concept`, `reference`) the source material can actually support — the skill decides this, the user does not specify it
+3. Intelligently extracts procedural content, prerequisites, and validation steps while filtering conversational noise
+4. Generates semantic HTML5 fragments (no `<html>`, `<head>`, or `<body>` tags) for **each** applicable topic type
+5. Validates style compliance using the `/microsoft-docs` skill against MSTP guidelines (sentence case, active voice, second person, terminology)
+6. Verifies that all procedural elements are grounded in the source log (anti-hallucination protocol)
+7. Flags missing procedural elements and style violations with HTML comments
+8. Outputs build-ready, MSTP-compliant HTML ready for import into structured authoring systems
 
 ## Input Requirements
 
 - **Source file:** A `.txt` file containing raw technical communication (Slack export, Teams transcript, meeting notes, etc.) located in your working directory
 - **MCP connection:** Active Microsoft Learn MCP server connection (Claude will call `microsoft_docs_search` and `microsoft_docs_fetch` to retrieve MSTP guidance as needed)
-- **Documentation type:** Specify the desired output structure: `task` (procedural steps), `concept` (explanatory content), or `reference` (technical reference)
+- **Documentation type:** Determined automatically. The skill analyzes the source content and produces every topic type it can support — `task` (procedural steps), `concept` (explanatory content), and/or `reference` (technical reference). The user does not need to specify a type, though they may optionally request a specific type to restrict the output.
+- **Output location:** HTML files are written to `docs-as-code-generator-workspace/output/` relative to your working directory. If the directory doesn't exist, it will be created automatically.
 
 ## Output Format
 
@@ -37,23 +39,48 @@ All output is **semantic HTML5 fragments** — no boilerplate tags. Valid output
 
 Provide:
 1. The name of the `.txt` file in your working directory
-2. The desired documentation structure type (`task`, `concept`, or `reference`)
-3. Optional: Specific output constraints (e.g., "Task topic with prerequisites, steps, and troubleshooting")
+2. Optional: A specific documentation structure type (`task`, `concept`, or `reference`) if you want to restrict the output to that type. If omitted, the skill auto-detects and generates every applicable type.
+3. Optional: Specific output constraints (e.g., "include prerequisites, steps, and troubleshooting")
 
 **Example prompt:**
-> "Convert `v10_12_rate_limit_chat.txt` into a Task topic HTML. Extract the procedural steps for configuring custom API rate limits, include prerequisites and expected results, and flag any missing validation steps."
+> "Convert `v10_12_rate_limit_chat.txt` into HTML documentation. Extract everything useful for docs, and generate whichever topic types the content supports."
 
 ## Execution Instructions
 
+**Output files will be written directly to `docs-as-code-generator-workspace/output/` — not displayed in the Claude interface.**
+
 Process the source file and any requested parameters provided here: $ARGUMENTS
+
+File naming convention:
+- Task topics: `task_<topic-name>.html`
+- Concept topics: `concept_<topic-name>.html`
+- Reference topics: `reference_<topic-name>.html`
+
+Where `<topic-name>` is derived from the main heading in sentence case, slugified (lowercase, hyphens for spaces).
 
 ## Workflow
 
+### Phase 0: Detect Applicable Topic Types
+Before extracting or generating anything, analyze the source content to decide **which** documentation topic types it can genuinely support. Do not ask the user for a type — infer it from the material. Unless the user has explicitly restricted the output to a specific type, evaluate all three independently:
+
+- **Task** is applicable when the source contains a concrete procedure the reader could follow: ordered steps, commands to run, configuration changes, prerequisites, or expected results.
+- **Concept** is applicable **only** when the source contains genuine explanatory content that goes *beyond restating the procedure or the reference facts* — that is, content that would be lost if you generated only the task and reference topics. Qualifying content includes: a definition of *what* the feature is and the problem it solves, the *design rationale* for why it behaves as it does, or an explanation of *how components relate* architecturally. **Threshold test — generate a concept topic only if you can write at least two sentences of explanatory prose that (a) are grounded in the source and (b) are not simply a paraphrase of a step, a prerequisite, or a parameter definition.** If the only "why" content is a restatement of a procedural step (e.g., "you must enable X before the CLI works" — already a prerequisite), that does **not** meet the threshold: skip the concept topic and flag the gap instead.
+- **Reference** is applicable when the source contains lookup-style facts: parameters, types, valid values, CLI signatures, return codes, or configuration schemas.
+
+Rules for the decision:
+- A single source can support **multiple** types. If more than one applies, generate a separate topic for each applicable type.
+- Generate **only** the types the content actually supports — do not force a type that isn't grounded in the source. Apply the concept threshold test above strictly and consistently: the same source should always yield the same set of topics.
+- When a type does **not** meet its threshold, do not generate a partial or padded topic. Instead emit a `<!-- TOPIC NOT GENERATED: <type> -->` marker followed by a `<!-- MISSING_ELEMENT: ... -->` comment listing the specific content that would be required to author it.
+- If the source supports **no** documentation topic type (e.g., pure banter with no technical substance), do not fabricate one. Emit a short HTML comment explaining why no topic could be generated, and stop.
+- State your detection outcome briefly to the user (which types were detected, which were skipped, and why).
+
+Then, for **each** detected topic type, run Phases 1–3 below and **write each topic to a separate HTML file** in `docs-as-code-generator-workspace/output/` using the Write tool. Use the naming convention above. Do not display HTML in the chat — only report the filenames and file paths created.
+
 ### Phase 1: Parse and Extract
-1. Read the `.txt` file specified in $ARGUMENTS from the working directory
+1. Read the `.txt` file specified by the user from the working directory
 2. Identify and isolate procedural intent (steps, prerequisites, configuration, validation)
 3. Filter out all conversational noise: timestamps, usernames, tangents, failed attempts, timezone discussions, or banter
-4. Map extracted content to the appropriate documentation structure:
+4. Map extracted content to each documentation structure detected in Phase 0:
    - **Task topics:** Prerequisites, step-by-step procedures, expected results, troubleshooting
    - **Concept topics:** Introduction, key concepts, relationships, examples
    - **Reference topics:** Structure, parameters, return values, examples
@@ -96,6 +123,37 @@ When generating semantic HTML5 in Phase 2, follow these conventions:
 - Include introductory `<p>` explaining the goal before steps begin
 - Do not include `<html>`, `<head>`, `<body>`, or `<DOCTYPE>` tags — output semantic fragments only
 
+### Phase 5: Write Files and Report
+
+After generating all topics:
+
+1. **Construct the output path**: `docs-as-code-generator-workspace/output/<source-filename-without-extension>/`
+   - Example: For `resources/v10_12_rate_limit_chat.txt`, output goes to `docs-as-code-generator-workspace/output/v10_12_rate_limit_chat/`
+2. **Write each topic** to its own HTML file in this directory using the Write tool with the naming convention:
+   - `task_<topic-name>.html` for task topics
+   - `concept_<topic-name>.html` for concept topics
+   - `reference_<topic-name>.html` for reference topics
+3. **Do NOT display the full HTML in the chat.** Instead, return a summary listing:
+   - Which topic types were detected
+   - The filenames and full paths of all generated files
+   - Any flagged issues or missing elements (from HTML comments inside the files)
+
+Example summary output:
+```
+✓ Analysis complete
+
+Detected topic types: task, reference
+
+Generated files:
+- docs-as-code-generator-workspace/output/v10_12_rate_limit_chat/task_configure-custom-api-rate-limits.html
+- docs-as-code-generator-workspace/output/v10_12_rate_limit_chat/reference_api-rate-limit-configuration.html
+
+Files are ready for import into your documentation build system.
+
+Flagged issues:
+- concept topic not generated: missing conceptual content (definition, design rationale)
+```
+
 ## Example Output Structure (Task Topic)
 
 ```html
@@ -132,6 +190,8 @@ When generating semantic HTML5 in Phase 2, follow these conventions:
 3. **Semantic HTML only:** No boilerplate `<html>`, `<head>`, `<body>`, or `<DOCTYPE>` tags. Outputs must be importable into structured authoring systems.
 4. **Code formatting:** All CLI commands, file paths, and configuration snippets must be wrapped in `<code>` or `<pre>` tags with preserved formatting.
 5. **Comments for gaps:** Missing procedural elements (prerequisites, steps, expected results, troubleshooting) must be explicitly flagged with HTML comments. Do not skip sections.
+6. **Auto-detect topic types:** Do not ask the user which topic type to produce. Analyze the source and generate every topic type it supports (task, concept, and/or reference) — all of them, a subset, or none. Never force a topic type the source cannot ground. Only restrict to a single type when the user explicitly requests it.
+7. **Write files, do not display HTML:** Use the Write tool to create HTML files in `docs-as-code-generator-workspace/output/`. Do NOT paste the full HTML into the chat. Report only the summary: which topic types were detected, which files were created, and any flagged issues.
 
 ## Style and Voice (MSTP Compliance)
 
@@ -144,10 +204,14 @@ The skill enforces:
 
 ## Handling Variations
 
-The skill adapts to different documentation structures based on the prompt:
+The skill adapts to different documentation structures by detecting them automatically from the source content (see Phase 0):
 
 - **Task topics:** Extract procedural steps, prerequisites, results, troubleshooting
 - **Concept topics:** Extract explanatory content, relationships, key ideas, examples
 - **Reference topics:** Extract structure, parameters, properties, return values, error codes
 
-Always ask for clarification if the source material does not align with the requested output structure.
+Behavior:
+- If the source supports several types, generate a topic for each one.
+- If the source supports only one type, generate just that one.
+- If the source supports none, emit an HTML comment explaining why and generate nothing — do not force an unsupported structure.
+- If the user explicitly names a type, restrict the output to that type only.

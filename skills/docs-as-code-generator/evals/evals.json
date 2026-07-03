@@ -3,23 +3,23 @@
   "evals": [
     {
       "id": 1,
-      "eval_name": "task-topic-rate-limits",
-      "prompt": "Convert `resources/v10_12_rate_limit_chat.txt` into a Task topic HTML. Extract the procedural steps for configuring custom API rate limits. Include prerequisites (particularly the global YAML file modification at /etc/scanner/config.yml), step-by-step configuration procedure, expected results (429 Too Many Requests validation), and troubleshooting section (403 Forbidden error when prerequisites are missed). Validate all content against Microsoft Manual of Style using the Microsoft Learn MCP server. Flag any missing procedural elements with HTML comments.",
-      "expected_output": "Clean semantic HTML5 Task topic with: <h1> title, intro paragraph, <h3>Prerequisites section with YAML file path in <code>, <ol> containing at least 5 numbered steps (edit YAML, set custom_limits_enabled: true, restart daemon, run CLI command, validate with test), <h3>Expected Results section showing 429 response, <h3>Troubleshooting section explaining 403 error. All code elements wrapped in <code> tags. No hallucinated steps.",
+      "eval_name": "auto-detect-all-applicable-topics",
+      "prompt": "Convert `resources/v10_12_rate_limit_chat.txt` into HTML documentation. Do not tell me which topic type to use — analyze the chat, decide which documentation topic types it can support, and generate each applicable one. Validate all content against Microsoft Manual of Style using the Microsoft Learn MCP server. Flag any missing procedural elements with HTML comments.",
+      "expected_output": "The skill writes two separate HTML files to docs-as-code-generator-workspace/output/v10_12_rate_limit_chat/ and returns a summary (not the full HTML). Summary states: (1) which topic types were detected (task and reference); (2) the file paths of generated files (task_configure-custom-api-rate-limits.html and reference_api-rate-limit-configuration.html); (3) note that concept topic was not generated. Each file is semantic HTML5 (no <html>/<head>/<body> wrappers) with: Task topic — <h1> title, intro, Prerequisites with /etc/scanner/config.yml and custom_limits_enabled in <code>, <ol> of 5+ steps, Expected Results (429 response), Troubleshooting (403 error). Reference topic — configuration file, schema with YAML, CLI syntax, parameters, status codes. Every element grounded in source. No HTML displayed in chat — only file summary.",
       "files": []
     },
     {
       "id": 2,
-      "eval_name": "reference-topic-parameters",
-      "prompt": "Extract reference documentation from `resources/v10_12_rate_limit_chat.txt`. Generate a reference topic HTML documenting the rate limit configuration parameters (api-limit, window), their types, valid values, and CLI command signatures. Include the YAML configuration block structure. Apply Microsoft Manual of Style validation. Flag any missing parameter definitions or type information.",
-      "expected_output": "Clean semantic HTML5 reference topic with: <h1> title, <h3>Configuration Parameters section with structured list or table showing parameter names, types, defaults, and ranges (api-limit: integer, window: seconds), <h3>CLI Commands section with scanner-cli command signatures and return values (200 OK response), code blocks with proper formatting, YAML structure example, all grounded in source log. No invented parameters.",
+      "eval_name": "explicit-type-restriction-task-only",
+      "prompt": "From `resources/v10_12_rate_limit_chat.txt`, I only want a Task topic — do not generate concept or reference topics. Extract the procedural steps for configuring custom API rate limits, including prerequisites, expected results, and troubleshooting. Apply Microsoft Manual of Style validation.",
+      "expected_output": "The skill writes a single HTML file to docs-as-code-generator-workspace/output/v10_12_rate_limit_chat/task_configure-custom-api-rate-limits.html because the user explicitly restricted to task type. Returns a summary showing: (1) detected type: task only; (2) single file path written; (3) no mention of reference/concept topics. The file contains semantic HTML5 Task topic: <h1> title, intro, Prerequisites with /etc/scanner/config.yml and YAML edit in <code>, <ol> with 5+ numbered steps, Expected Results (429), Troubleshooting (403 when prerequisite missed). No <html>/<head>/<body> wrappers. No HTML shown in chat — only file summary.",
       "files": []
     },
     {
       "id": 3,
-      "eval_name": "concept-topic-feature-overview",
-      "prompt": "Convert `resources/v10_12_rate_limit_chat.txt` into a Concept topic HTML explaining how custom API rate limits work in the AppScan Enterprise system. Extract the design purpose, how it interacts with existing components (YAML config, daemon, CLI), and the prerequisite flow. Apply Microsoft Manual of Style validation. Flag missing conceptual elements or undefined technical terms.",
-      "expected_output": "Clean semantic HTML5 concept topic with: <h1> title explaining the feature, intro paragraph, <h3>How It Works section explaining the relationship between YAML config and daemon behavior, <h3>Components section explaining role of config file, daemon, and CLI, <h3>Prerequisites and Validation section, examples showing the successful 429 response behavior. All grounded in source log. May include validation flags if source lacks certain conceptual details.",
+      "eval_name": "subset-detection-with-gap-flagging",
+      "prompt": "Process `resources/v10_12_rate_limit_chat.txt` and produce documentation. Let the skill decide the topic type(s). If the source only weakly supports a given type, still surface that decision and flag what conceptual or reference detail is missing rather than inventing it. Validate against Microsoft Manual of Style.",
+      "expected_output": "The skill writes two HTML files (task and reference) to docs-as-code-generator-workspace/output/v10_12_rate_limit_chat/ and returns a summary. Summary states which types were detected (task, reference) and which were skipped with reason (concept fails threshold test). Lists file paths created. Within each HTML file, missing reference details (e.g., types/ranges for api-limit, timeout semantics) are flagged with <!-- MISSING_ELEMENT: ... --> HTML comments rather than invented. No concept file written. No HTML displayed in chat — only summary of detected types, file paths, and flagged gaps."
       "files": []
     }
   ]
