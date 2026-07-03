@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Review Report: Advanced Search API Reference</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        .score-card {
+            background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .score {
+            font-size: 56px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .score-label {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        h1 {
+            color: #0078d4;
+            border-bottom: 3px solid #0078d4;
+            padding-bottom: 15px;
+        }
+        h2 {
+            color: #106ebe;
+            margin-top: 25px;
+        }
+        .summary-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-box {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+            border-left: 4px solid #0078d4;
+        }
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0078d4;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .violations {
+            margin: 20px 0;
+        }
+        .violation {
+            background: white;
+            border-left: 4px solid #d13438;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .violation.warning {
+            border-left-color: #ffb81c;
+        }
+        .violation.info {
+            border-left-color: #0078d4;
+        }
+        .severity {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        .severity.critical {
+            background-color: #d13438;
+            color: white;
+        }
+        .severity.warning {
+            background-color: #ffb81c;
+            color: black;
+        }
+        .severity.info {
+            background-color: #0078d4;
+            color: white;
+        }
+        .passed {
+            background: white;
+            border-left: 4px solid #107c10;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            color: #107c10;
+        }
+        .passed strong {
+            color: #107c10;
+        }
+        .rule-id {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #0078d4;
+        }
+        .assessment-note {
+            background-color: #eff6fc;
+            border-left: 4px solid #0078d4;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Documentation Pre-Review Report</h1>
+    <p><strong>Document:</strong> Advanced Search API Reference (Reference Topic)<br>
+       <strong>Assessment Date:</strong> 2024-12-19<br>
+       <strong>Standards Applied:</strong> Microsoft Writing Style Guide, IBM Standards, DITA Best Practices</p>
+
+    <div class="score-card">
+        <div class="score-label">Compliance Score</div>
+        <div class="score">87%</div>
+        <p>Overall adherence to technical documentation standards</p>
+    </div>
+
+    <h2>Summary</h2>
+    <div class="summary-stats">
+        <div class="stat-box">
+            <div class="stat-number">0</div>
+            <div class="stat-label">Critical Issues</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">1</div>
+            <div class="stat-label">Warnings</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">2</div>
+            <div class="stat-label">Info</div>
+        </div>
+    </div>
+
+    <div class="assessment-note">
+        <strong>Assessment:</strong> This Reference topic is well-structured with comprehensive API parameter and configuration documentation. Tables are properly formatted and include all required information. One minor capitalization note and recommendations for links would increase compliance to 95%+.
+    </div>
+
+    <h2>Strengths Identified</h2>
+    <div class="passed">
+        <strong>✓ Complete Parameter Documentation:</strong> All API parameters documented with type, required status, default, and description. 6 parameters fully documented for /search endpoint.
+    </div>
+    <div class="passed">
+        <strong>✓ Configuration Coverage:</strong> All server configuration options documented across 3 categories (search engine, ranking/filtering, caching). 7 configuration options fully documented.
+    </div>
+    <div class="passed">
+        <strong>✓ Table Quality:</strong> Tables are well-formatted with consistent styling, proper column headers, readable fonts, and hover effects. Data is left-aligned and scannable.
+    </div>
+    <div class="passed">
+        <strong>✓ Code Examples:</strong> Request and response examples provided with proper syntax highlighting. JSON is properly formatted and includes realistic data.
+    </div>
+    <div class="passed">
+        <strong>✓ Filter Documentation:</strong> Filter sub-configuration (document_type, date_range, author, tags) clearly documented with valid values and examples.
+    </div>
+    <div class="passed">
+        <strong>✓ Accessibility:</strong> HTML includes proper semantic structure. Tables use <th> for headers, code blocks include inline styling, color not used as only differentiator.
+    </div>
+
+    <h2>Issues Found</h2>
+
+    <div class="violation warning">
+        <span class="severity warning">WARNING</span>
+        <span class="rule-id">FORMATTING_HYPERLINKS</span>
+        <strong>Related topics section uses placeholder text instead of actual links</strong>
+        <p><strong>Location:</strong> "Related Topics" section at end of document</p>
+        <p><strong>Current:</strong> "See also: Setting Up Advanced Search Configuration" (plain text)</p>
+        <p><strong>Suggestion:</strong> For production use, convert to actual hyperlinks: <code>&lt;a href="path/to/config-guide.html"&gt;Setting Up Advanced Search Configuration&lt;/a&gt;</code></p>
+        <p><strong>Impact:</strong> Minor - placeholder text is acceptable for draft documentation. Links should be added before publication.</p>
+    </div>
+
+    <div class="violation info">
+        <span class="severity info">INFO</span>
+        <span class="rule-id">DOCUMENTATION_RESPONSE_SCHEMA</span>
+        <strong>Consider documenting response schema more explicitly</strong>
+        <p><strong>Status:</strong> Example response provided is helpful. For production API docs, consider adding a formal response schema table.</p>
+        <p><strong>Suggestion:</strong> Optional enhancement: Add a "Response Structure" section documenting response properties in tabular format.</p>
+    </div>
+
+    <div class="violation info">
+        <span class="severity info">INFO</span>
+        <span class="rule-id">DOCUMENTATION_ERROR_CODES</span>
+        <strong>HTTP error codes and error responses not documented</strong>
+        <p><strong>Status:</strong> Optional enhancement for comprehensive API reference.</p>
+        <p><strong>Suggestion:</strong> Consider adding section documenting common HTTP error codes (400, 401, 403, 404, 500) and example error responses.</p>
+    </div>
+
+    <h2>Standards Assessment</h2>
+
+    <h3>✓ Microsoft Writing Style Guide</h3>
+    <ul>
+        <li>Clear, concise descriptions for each parameter and configuration</li>
+        <li>No contractions in formal documentation</li>
+        <li>Consistent terminology (e.g., always "relevance_score", not "relevance score" or "score")</li>
+        <li>Active voice in descriptions: "Filter results by..." not "Results can be filtered by..."</li>
+    </ul>
+
+    <h3>✓ IBM Standards</h3>
+    <ul>
+        <li>Structured reference topic with clear parameter documentation</li>
+        <li>Examples provided for complex parameters</li>
+        <li>Default values clearly indicated</li>
+        <li>Valid values enumerated for enum-type parameters</li>
+    </ul>
+
+    <h3>✓ DITA Best Practices</h3>
+    <ul>
+        <li>Reference topic structure with single purpose (API parameter reference)</li>
+        <li>Tables used appropriately for structured data</li>
+        <li>Code examples with language markers</li>
+        <li>Cross-references to related topics</li>
+        <li>Modular, reusable content</li>
+    </ul>
+
+    <h2>Recommendations for Improvement</h2>
+
+    <ol>
+        <li><strong>Add Hyperlinks:</strong> Convert "Related Topics" to actual links for navigation in production version.</li>
+        <li><strong>Error Handling (Optional):</strong> Document common error codes and example error responses for comprehensive API reference.</li>
+        <li><strong>Rate Limiting (Optional):</strong> If applicable, document API rate limiting and throttling behavior.</li>
+        <li><strong>Authentication:</strong> Add section documenting authentication method (API key, OAuth, Bearer token, etc.) if not documented elsewhere.</li>
+        <li><strong>Timestamp Formats:</strong> Clarify timestamp format for date_range filters (explicitly state ISO 8601).</li>
+    </ol>
+
+    <h2>Conclusion</h2>
+    <p>This Reference topic successfully documents all API endpoints, parameters, and configuration options with excellent clarity and formatting. The 87% compliance score indicates high-quality documentation ready for stakeholder review. Minor additions (hyperlinks, error codes) would further enhance comprehensiveness. Recommended for approval.</p>
+
+    <p><em>Generated by Document Intelligence Generator | Pre-review assessment only | Human review recommended before publication</em></p>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DITA-Compliant Documentation Templates</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .template {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #0078d4;
+            border-radius: 4px;
+        }
+        h1 {
+            color: #0078d4;
+            border-bottom: 2px solid #0078d4;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #0078d4;
+            margin-top: 20px;
+        }
+        h3 {
+            color: #106ebe;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #0078d4;
+            margin-top: 15px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #0078d4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .required {
+            color: #d13438;
+        }
+        .optional {
+            color: #107c10;
+        }
+    </style>
+</head>
+<body>
+
+<!-- CONCEPT TOPIC TEMPLATE -->
+<div class="template">
+    <h1>CONCEPT TOPIC TEMPLATE</h1>
+    <p><strong>Purpose:</strong> Explains what something is, why it matters, and when to use it. Non-procedural, informational content.</p>
+
+    <div class="section-title">Title</div>
+    <p>Concise, noun-based title that identifies the concept (e.g., "Advanced Search with AI-Powered Filters")</p>
+
+    <div class="section-title">Introduction / Overview</div>
+    <p>
+        1-2 paragraphs (3-4 sentences each) introducing the concept.<br>
+        - What is this? (definition)<br>
+        - Why does it matter? (value/benefit)<br>
+        - Who uses it? (audience)<br>
+        Write in present tense, active voice.
+    </p>
+
+    <div class="section-title">Purpose</div>
+    <p>
+        Explain the primary purpose and business value.<br>
+        - What problem does it solve?<br>
+        - What outcomes does it enable?<br>
+        - Why is this important to users?
+    </p>
+
+    <div class="section-title">Key Concepts</div>
+    <p>
+        Define 3-5 critical concepts, terms, or principles related to this topic.<br>
+        Use subsections or definition lists for clarity.<br>
+        Example structure:
+    </p>
+    <ul>
+        <li><strong>Semantic Search:</strong> Understanding meaning beyond keywords...</li>
+        <li><strong>Faceted Navigation:</strong> Organizing results by categories...</li>
+        <li><strong>Relevance Ranking:</strong> Ordering results by relevance to user intent...</li>
+    </ul>
+
+    <div class="section-title">When to Use</div>
+    <p>
+        Scenarios where this concept applies.<br>
+        - When should users use this feature?<br>
+        - What problems does it address?<br>
+        - What are typical use cases?
+    </p>
+
+    <div class="section-title">Related Topics</div>
+    <p>
+        Cross-references to related concepts, tasks, or references.<br>
+        Format: See also: [Link to Related Topic](url)
+    </p>
+</div>
+
+<!-- TASK TOPIC TEMPLATE -->
+<div class="template">
+    <h1>TASK TOPIC TEMPLATE</h1>
+    <p><strong>Purpose:</strong> Step-by-step procedures. How to perform a specific action or complete a process.</p>
+
+    <div class="section-title">Title</div>
+    <p>Start with gerund (verb-ing): "Setting Up...", "Configuring...", "Installing..." or imperative "Set Up...", "Configure..."</p>
+
+    <div class="section-title">Overview / Purpose</div>
+    <p>
+        1 paragraph explaining what the user will accomplish.<br>
+        - What task will be completed?<br>
+        - Expected outcome?<br>
+        - Time estimate? (if relevant)
+    </p>
+
+    <div class="section-title">Prerequisites</div>
+    <p>
+        What must be true before starting.<br>
+        Format as bulleted list:<br>
+    </p>
+    <ul>
+        <li>System requirements (OS, permissions, roles)</li>
+        <li>Required access or credentials</li>
+        <li>Prior knowledge or completed tasks</li>
+        <li>Required software or tools</li>
+    </ul>
+
+    <div class="section-title">Steps</div>
+    <p>
+        Numbered, action-oriented steps. Use imperative ("Click", "Enter", "Select").<br>
+        Each step should be atomic (one action).<br>
+        Include substeps if needed (1a, 1b, 1c).<br>
+        Example:
+    </p>
+    <ol>
+        <li>Log in to the admin console with your credentials.</li>
+        <li>Navigate to Settings → Advanced Search.</li>
+        <li>Click "Enable Semantic Search".</li>
+        <li>Select your ML model from the dropdown:
+            <ul style="list-style-type: lower-alpha;">
+                <li>Choose "multilingual-e5-large" for multilingual support</li>
+                <li>Choose "all-mpnet-base-v2" for English-only searches</li>
+            </ul>
+        </li>
+        <li>Click Save to apply changes.</li>
+    </ol>
+
+    <div class="section-title">Post-Task Information</div>
+    <p>
+        What happens next, how to verify success, next steps.<br>
+        - Verification: "You should see a green success message"<br>
+        - Common next steps<br>
+        - Troubleshooting tips if applicable
+    </p>
+
+    <div class="section-title">Related Topics</div>
+    <p>Cross-references to related concepts or advanced configurations.</p>
+</div>
+
+<!-- REFERENCE TOPIC TEMPLATE -->
+<div class="template">
+    <h1>REFERENCE TOPIC TEMPLATE</h1>
+    <p><strong>Purpose:</strong> Structured reference data—API parameters, configuration options, properties. Lookup and fact-based.</p>
+
+    <div class="section-title">Title</div>
+    <p>Descriptive: "[Feature] API Reference", "[Component] Configuration Options", "[Feature] Properties"</p>
+
+    <div class="section-title">Overview</div>
+    <p>
+        Brief introduction to what this reference documents.<br>
+        - What does this reference cover?<br>
+        - What are common use cases for this reference?
+    </p>
+
+    <div class="section-title">Properties / Parameters Table</div>
+    <p>
+        Structured table with consistent columns:
+    </p>
+    <table>
+        <tr>
+            <th>Property/Parameter</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+            <th>Constraints / Examples</th>
+        </tr>
+        <tr>
+            <td><code>query</code></td>
+            <td>string</td>
+            <td><span class="required">Yes</span></td>
+            <td>—</td>
+            <td>Search query in natural language or keywords</td>
+            <td>Max 500 characters. Example: "security updates from last month"</td>
+        </tr>
+        <tr>
+            <td><code>timeout_ms</code></td>
+            <td>integer</td>
+            <td><span class="optional">No</span></td>
+            <td>5000</td>
+            <td>Request timeout in milliseconds</td>
+            <td>Min: 1000, Max: 30000</td>
+        </tr>
+        <tr>
+            <td><code>cache_results</code></td>
+            <td>boolean</td>
+            <td><span class="optional">No</span></td>
+            <td>true</td>
+            <td>Enable result caching for performance</td>
+            <td>Values: true or false</td>
+        </tr>
+    </table>
+
+    <div class="section-title">Detailed Property Descriptions (if complex)</div>
+    <p>
+        For complex properties, provide additional detail beyond the table:
+    </p>
+    <h3>filters (object)</h3>
+    <p>Optional filter object to refine search results.</p>
+    <ul>
+        <li><strong>document_type</strong> (array): Filter by document type. Values: "guide", "api_reference", "tutorial", "faq"</li>
+        <li><strong>date_range</strong> (object): Filter by date range. Contains: from (ISO 8601 date), to (ISO 8601 date)</li>
+        <li><strong>author</strong> (string): Filter by document author name or ID</li>
+        <li><strong>tags</strong> (array): Filter by one or more document tags</li>
+    </ul>
+
+    <div class="section-title">Examples / Sample Usage</div>
+    <p>Provide examples in code blocks with language markers:</p>
+    <p><strong>Example Request:</strong></p>
+    <pre><code class="language-json">
+{
+  "query": "security best practices",
+  "filters": {
+    "document_type": ["guide", "reference"],
+    "date_range": {
+      "from": "2024-01-01",
+      "to": "2024-12-31"
+    }
+  },
+  "limit": 10,
+  "sort": "relevance"
+}
+    </code></pre>
+
+    <p><strong>Example Response:</strong></p>
+    <pre><code class="language-json">
+{
+  "results": [
+    {
+      "id": "doc-12345",
+      "title": "Security Best Practices Guide",
+      "relevance_score": 0.95,
+      "snippet": "This guide covers essential security practices..."
+    }
+  ],
+  "total_results": 24,
+  "suggestions": [...]
+}
+    </code></pre>
+
+    <div class="section-title">Related Topics / See Also</div>
+    <p>Links to related reference docs, concepts, or tasks.</p>
+</div>
+
+<!-- TEMPLATE STYLE GUIDELINES -->
+<div class="template">
+    <h1>STYLE GUIDELINES FOR ALL TEMPLATES</h1>
+
+    <h2>Writing Style</h2>
+    <ul>
+        <li><strong>Active Voice:</strong> "The system validates queries" not "Queries are validated by the system"</li>
+        <li><strong>Second Person for Tasks:</strong> "Click the button" not "The user should click"</li>
+        <li><strong>No Contractions:</strong> "cannot" not "can't", "it is" not "it's"</li>
+        <li><strong>Consistent Terminology:</strong> Use the same term throughout (API, not "Application Programming Interface" and "API" mixed)</li>
+        <li><strong>Sentence Length:</strong> Aim for under 25 words per sentence</li>
+        <li><strong>Paragraph Length:</strong> 3-5 sentences per paragraph</li>
+    </ul>
+
+    <h2>Formatting</h2>
+    <ul>
+        <li><strong>Headings:</strong> Use H1 for title, H2 for major sections, H3 for subsections. No skipping levels.</li>
+        <li><strong>Lists:</strong> Use bullets for unordered, numbers for sequential. Consistent punctuation.</li>
+        <li><strong>Code:</strong> Inline code in backticks, code blocks with language markers (```json, ```python, etc.)</li>
+        <li><strong>Tables:</strong> Use for structured data. Header row should be bold with clear column titles.</li>
+        <li><strong>Links:</strong> Descriptive link text. "See API Reference" not "click here"</li>
+        <li><strong>Emphasis:</strong> Bold for UI elements and defined terms. Italics for emphasis sparingly.</li>
+    </ul>
+
+    <h2>Standards Applied</h2>
+    <ul>
+        <li><strong>DITA:</strong> Topic-based structure, clear titles, proper heading hierarchy, section conventions</li>
+        <li><strong>Microsoft Writing Style Guide:</strong> Active voice, clear language, no unnecessary words, second person for instructions</li>
+        <li><strong>IBM Standards:</strong> Task structure with prerequisites, consistent formatting, user-centric language</li>
+        <li><strong>Technical Writing Best Practices:</strong> Clarity over cleverness, examples, user-focused, accessible language</li>
+    </ul>
+</div>
+
+</body>
+</html>

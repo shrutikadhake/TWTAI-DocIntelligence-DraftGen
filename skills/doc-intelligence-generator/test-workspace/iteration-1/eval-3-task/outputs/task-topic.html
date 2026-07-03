@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setting Up Advanced Search with AI-Powered Filters</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        h1 {
+            color: #0078d4;
+            border-bottom: 3px solid #0078d4;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        h2 {
+            color: #106ebe;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        h3 {
+            color: #326ce5;
+            margin-top: 15px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 4px;
+        }
+        ol {
+            margin: 15px 0;
+            padding-left: 40px;
+        }
+        ol ol {
+            margin: 10px 0;
+            padding-left: 50px;
+            list-style-type: lower-alpha;
+        }
+        li {
+            margin: 12px 0;
+            line-height: 1.8;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        ul li {
+            margin: 8px 0;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .note {
+            background-color: #fff8d6;
+            border-left: 4px solid #ffb81c;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+        .success {
+            background-color: #f0f9f7;
+            border-left: 4px solid #107c10;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Setting Up Advanced Search with AI-Powered Filters</h1>
+
+    <div class="section">
+        <h2>Overview</h2>
+        <p>This guide walks you through enabling and configuring the Advanced Search feature with AI-powered semantic understanding and intelligent filtering. After completing these steps, your users will have access to natural language search with automatic filter suggestions, faceted result browsing, and personalized ranking. The setup process takes approximately 30 minutes and requires administrator access to your system.</p>
+    </div>
+
+    <div class="section">
+        <h2>Prerequisites</h2>
+        <p>Before you begin, ensure you have the following in place:</p>
+        <ul>
+            <li>Administrator access to your platform with settings and configuration permissions</li>
+            <li>Basic understanding of search concepts, semantic search, and machine learning models</li>
+            <li>Access to the system Administrator Dashboard and configuration panels</li>
+            <li>System requirements: Python 3.8 or higher available on your server infrastructure</li>
+            <li>Disk space: Approximately 2 GB available for ML model files</li>
+            <li>Network connectivity: Access to model repositories for downloading pre-trained language models</li>
+            <li>Optional but recommended: Basic knowledge of your organization's document structure and metadata standards</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Step-by-Step Instructions</h2>
+
+        <ol>
+            <li><strong>Log in to the Administrator Dashboard.</strong> Open your browser and navigate to the admin console. Enter your administrator credentials. Verify you are logged in successfully.
+            </li>
+
+            <li><strong>Navigate to Advanced Search Settings.</strong> From the main dashboard menu, select <code>Settings</code> → <code>Advanced Features</code> → <code>Search Configuration</code>. The Search Configuration panel loads.
+            </li>
+
+            <li><strong>Enable the Semantic Search Engine.</strong> In the Search Configuration panel, locate the toggle labeled "Semantic Search Engine". Click to enable it (toggle should turn blue). You will see a confirmation message: "Semantic search engine initialization started".
+            </li>
+
+            <li><strong>Select a Machine Learning Model.</strong> A dropdown menu appears after enabling semantic search. Choose your model based on your deployment:
+                <ol>
+                    <li><code>multilingual-e5-large</code> — Recommended for organizations serving multiple languages. Supports over 100 languages with excellent performance.</li>
+                    <li><code>all-mpnet-base-v2</code> — Recommended for English-only deployments. Smaller memory footprint, faster inference.</li>
+                    <li><code>bge-large-en-v1.5</code> — Recommended for maximum search accuracy. Larger model, requires more system resources (4+ GB RAM).</li>
+                </ol>
+                For most deployments, select <code>multilingual-e5-large</code>.
+            </li>
+
+            <li><strong>Configure Query Timeout.</strong> Enter a timeout value in milliseconds:
+                <ul>
+                    <li>Standard deployments: <code>5000</code> (5 seconds)</li>
+                    <li>Large datasets (>1M documents): <code>10000</code> (10 seconds)</li>
+                    <li>Very large deployments (>10M documents): <code>15000</code> (15 seconds)</li>
+                </ul>
+                Enter your value and press Tab to confirm.
+            </li>
+
+            <li><strong>Enable Filter Suggestions.</strong> Check the box labeled "Enable Smart Filter Suggestions". This allows the system to automatically suggest relevant filters (document type, date, author, tags) based on each search query.
+            </li>
+
+            <li><strong>Set Minimum Relevance Score.</strong> Use the slider to set minimum relevance threshold (0.0 to 1.0):
+                <ul>
+                    <li>Conservative (more filtering): <code>0.7</code> or higher</li>
+                    <li>Balanced (recommended): <code>0.5</code></li>
+                    <li>Permissive (more results): <code>0.3</code> or lower</li>
+                </ul>
+                The recommended value of <code>0.5</code> balances relevance and result coverage.
+            </li>
+
+            <li><strong>Enable Personalization.</strong> Check the box "Enable Personalized Ranking" to allow the system to adapt search results based on individual user behavior over time. This improves result quality after the system gathers sufficient usage data (typically 2-4 weeks).
+            </li>
+
+            <li><strong>Configure Caching (Optional).</strong> If performance is a concern:
+                <ol>
+                    <li>Check "Cache Popular Search Results"</li>
+                    <li>Set cache time-to-live (TTL) to <code>3600</code> (1 hour) for typical deployments</li>
+                </ol>
+                Caching improves response time for frequently-run searches.
+            </li>
+
+            <li><strong>Review All Settings.</strong> Scroll through the configuration panel and verify all settings are correct. Check that:
+                <ul>
+                    <li>Semantic Search Engine is enabled</li>
+                    <li>ML model is selected</li>
+                    <li>Timeout is set appropriately</li>
+                    <li>Filter suggestions are enabled</li>
+                    <li>Relevance threshold is set</li>
+                </ul>
+            </li>
+
+            <li><strong>Save Configuration.</strong> Click the blue "Save Configuration" button at the bottom of the panel. A progress indicator appears as the system applies settings. Wait for the confirmation message: "✓ Configuration saved successfully".
+            </li>
+
+            <li><strong>Run System Test.</strong> After saving, click "Run System Test". The system performs the following checks:
+                <ul>
+                    <li>Verifies semantic search engine is responding</li>
+                    <li>Confirms ML model is loaded and ready</li>
+                    <li>Tests filter suggestion service</li>
+                    <li>Validates cache layer (if enabled)</li>
+                </ul>
+                Wait 30-60 seconds for test results.
+            </li>
+
+            <li><strong>Verify Test Results.</strong> Successful setup shows:
+                <ul>
+                    <li>✓ Semantic search engine initialized successfully</li>
+                    <li>✓ ML model loaded and ready for inference</li>
+                    <li>✓ Filter suggestion service operational</li>
+                    <li>✓ System ready for user searches</li>
+                </ul>
+                If any tests fail, review error messages and troubleshoot (see Troubleshooting section below).
+            </li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Post-Setup Verification</h2>
+        <p>After completing setup, perform these verification steps to ensure everything is working correctly:</p>
+
+        <h3>Test Basic Search</h3>
+        <p>As a test user (or yourself), try these searches in the search bar:</p>
+        <ol>
+            <li>Natural language search: Type <code>"documents about security from last month"</code> and press Enter.</li>
+            <li>Verify results appear within 1-2 seconds.</li>
+            <li>Verify filter suggestions appear below the search box (document type, date range, etc.).</li>
+            <li>Click one suggested filter and verify results update immediately.</li>
+        </ol>
+
+        <h3>Test Filter Functionality</h3>
+        <ol>
+            <li>Run a search for <code>"API documentation"</code>.</li>
+            <li>Click filter suggestion "api_reference" (document type).</li>
+            <li>Verify results narrow to API reference documents only.</li>
+            <li>Add date filter for the last 90 days.</li>
+            <li>Verify results update to show only recent API documentation.</li>
+        </ol>
+
+        <h3>Verify Performance</h3>
+        <p>Check search performance metrics:</p>
+        <ul>
+            <li>Search response time should be under 2 seconds for typical queries</li>
+            <li>With caching enabled, subsequent identical searches should return in &lt;500ms</li>
+            <li>No errors in system logs during search operations</li>
+        </ul>
+
+        <h3>Success Criteria</h3>
+        <div class="success">
+            <strong>✓ Setup is successful when:</strong>
+            <ul>
+                <li>Natural language queries are understood and return relevant results</li>
+                <li>Filter suggestions appear within 500 milliseconds of each search</li>
+                <li>All suggested filters work correctly</li>
+                <li>Search results display relevance scores and organization</li>
+                <li>No errors appear in system logs or user-facing messages</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Next Steps</h2>
+        <p>After successful setup:</p>
+        <ol>
+            <li>Configure filter preferences specific to your organization's document types and categories</li>
+            <li>If personalization was enabled, allow 2-4 weeks for the system to gather usage data and optimize results</li>
+            <li>Set up monitoring and alerts for search performance metrics</li>
+            <li>Conduct user acceptance testing with a small group of power users</li>
+            <li>Prepare user training materials explaining new search capabilities</li>
+            <li>Plan rollout to all users with communication about the new feature</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Troubleshooting</h2>
+
+        <h3>Problem: System Test Fails with "ML Model Load Error"</h3>
+        <p><strong>Solution:</strong> Verify sufficient disk space (2+ GB) is available. Check that network connectivity to model repositories is working. Retry the test after waiting 5 minutes for the system to complete initialization.</p>
+
+        <h3>Problem: Search Results Are Irrelevant or Missing</h3>
+        <p><strong>Solution:</strong> Check that minimum relevance score is not set too high. Try lowering from 0.7 to 0.5. Verify the ML model matches your language needs (e.g., use multilingual-e5 if indexing multiple languages). Reindex your document collection to ensure all content is searchable.</p>
+
+        <h3>Problem: Filter Suggestions Not Appearing</h3>
+        <p><strong>Solution:</strong> Verify "Enable Smart Filter Suggestions" is checked in configuration. Check browser console for JavaScript errors. Try clearing browser cache and reloading the search page.</p>
+
+        <h3>Problem: Slow Search Performance (&gt;3 seconds)</h3>
+        <p><strong>Solution:</strong> Increase timeout setting from 5000 to 10000 milliseconds. Enable result caching. Consider upgrading server hardware or scaling search infrastructure. For very large datasets, consider splitting into multiple search indices.</p>
+
+        <div class="note">
+            <strong>Note:</strong> For additional support, consult the Advanced Search API Reference documentation or contact your system administrator.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Related Topics</h2>
+        <ul>
+            <li>See also: Advanced Search Concepts and Architecture</li>
+            <li>See also: Advanced Search API Reference</li>
+            <li>See also: Performance Tuning and Optimization Guide</li>
+        </ul>
+    </div>
+
+</body>
+</html>

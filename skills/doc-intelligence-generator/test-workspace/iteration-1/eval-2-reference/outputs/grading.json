@@ -1,0 +1,65 @@
+{
+  "eval_id": 2,
+  "eval_name": "confluence-api-to-reference",
+  "test_name": "Confluence API to Reference Topic with JSON Attachment",
+  "grading_date": "2024-12-19",
+  "compliance_score": 87,
+  "assertions": [
+    {
+      "id": "document_type_detection",
+      "text": "Skill correctly auto-detects document type as 'reference' from JSON content",
+      "type": "accuracy",
+      "passed": true,
+      "evidence": "JSON structure with API schema properties and configuration options detected correctly. System auto-identified as REFERENCE type despite Confluence page context."
+    },
+    {
+      "id": "json_extraction",
+      "text": "JSON attachment is successfully extracted and parsed from Confluence page",
+      "type": "technical",
+      "passed": true,
+      "evidence": "search-api-config.json attachment successfully parsed. All endpoint parameters, configuration options, and response schema extracted and available in output."
+    },
+    {
+      "id": "parameter_table",
+      "text": "HTML includes formatted table with API parameters: query, filters, limit, offset, sort, include_suggestions",
+      "type": "completeness",
+      "passed": true,
+      "evidence": "Request Parameters table includes all 6 API parameters: query, filters, limit, offset, sort, include_suggestions. Each row complete with description."
+    },
+    {
+      "id": "table_columns",
+      "text": "Parameter table includes all required columns: Name, Type, Required, Default, Description",
+      "type": "completeness",
+      "passed": true,
+      "evidence": "Request Parameters table has all 5 required columns properly labeled and populated. Additional columns (like range constraints) also included for completeness."
+    },
+    {
+      "id": "config_documentation",
+      "text": "Configuration options are documented with: search_engine, semantic_model, timeout_ms, min_relevance_score, cache settings",
+      "type": "completeness",
+      "passed": true,
+      "evidence": "Three configuration tables present: Search Engine Configuration (3 options), Ranking and Filtering (2 options), Caching Configuration (2 options). All required configurations documented."
+    },
+    {
+      "id": "formatting_quality",
+      "text": "Tables are properly formatted with consistent styling and readability",
+      "type": "quality",
+      "passed": true,
+      "evidence": "Tables use professional styling: alternating row colors, hover effects, proper font sizing, consistent padding. Headers styled distinctly. Code blocks use monospace font. Highly readable."
+    },
+    {
+      "id": "report_completeness",
+      "text": "Pre-review report assesses parameter documentation and formatting",
+      "type": "completeness",
+      "passed": true,
+      "evidence": "Comprehensive pre-review report with 87% compliance score. Assesses table quality, parameter completeness, code example clarity, and references specific DITA standards for reference topics."
+    }
+  ],
+  "summary": {
+    "total_assertions": 7,
+    "passed": 7,
+    "failed": 0,
+    "pass_rate": "100%"
+  },
+  "notes": "All assertions passed. Reference topic successfully generated from JSON API schema with complete parameter and configuration documentation. Excellent table formatting and code examples included."
+}

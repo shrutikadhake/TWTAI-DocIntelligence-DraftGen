@@ -1,0 +1,195 @@
+{
+  "api_name": "Advanced Search API",
+  "version": "2.0",
+  "description": "API for configuring and executing advanced search queries with semantic understanding",
+  "endpoints": {
+    "search": {
+      "method": "POST",
+      "path": "/api/v2/search",
+      "description": "Execute a search query with optional filters",
+      "parameters": {
+        "query": {
+          "type": "string",
+          "required": true,
+          "description": "Search query in natural language. Can include conversational phrases or traditional keywords.",
+          "example": "documents about security from last month",
+          "max_length": 500
+        },
+        "filters": {
+          "type": "object",
+          "required": false,
+          "description": "Optional filters to refine results",
+          "properties": {
+            "document_type": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["guide", "api_reference", "tutorial", "faq"]
+              },
+              "description": "Filter by document type"
+            },
+            "date_range": {
+              "type": "object",
+              "description": "Filter by date range",
+              "properties": {
+                "from": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "Start date (ISO 8601 format)"
+                },
+                "to": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "End date (ISO 8601 format)"
+                }
+              }
+            },
+            "author": {
+              "type": "string",
+              "description": "Filter by document author name or ID"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Filter by document tags"
+            }
+          }
+        },
+        "limit": {
+          "type": "integer",
+          "required": false,
+          "default": 20,
+          "minimum": 1,
+          "maximum": 100,
+          "description": "Maximum number of results to return"
+        },
+        "offset": {
+          "type": "integer",
+          "required": false,
+          "default": 0,
+          "minimum": 0,
+          "description": "Pagination offset for result set"
+        },
+        "sort": {
+          "type": "string",
+          "required": false,
+          "default": "relevance",
+          "enum": ["relevance", "date_desc", "date_asc", "popularity"],
+          "description": "Sort order for results"
+        },
+        "include_suggestions": {
+          "type": "boolean",
+          "required": false,
+          "default": true,
+          "description": "Include AI-generated filter suggestions in response"
+        }
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "description": "Array of matching documents",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique document identifier"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Document title"
+                },
+                "relevance_score": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1,
+                  "description": "Relevance score from 0 (not relevant) to 1 (highly relevant)"
+                },
+                "snippet": {
+                  "type": "string",
+                  "description": "Preview text from the document with search terms highlighted"
+                }
+              }
+            }
+          },
+          "total_results": {
+            "type": "integer",
+            "description": "Total number of matching documents"
+          },
+          "suggestions": {
+            "type": "array",
+            "description": "AI-suggested filters based on query",
+            "items": {
+              "type": "object",
+              "properties": {
+                "filter_type": {
+                  "type": "string",
+                  "description": "Type of filter (document_type, date_range, etc.)"
+                },
+                "suggested_value": {
+                  "type": "string",
+                  "description": "Suggested filter value"
+                },
+                "confidence": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1,
+                  "description": "Confidence score for this suggestion"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "configuration": {
+    "search_engine": {
+      "type": "string",
+      "description": "Search backend engine to use",
+      "default": "elasticsearch",
+      "enum": ["elasticsearch", "opensearch", "meilisearch"]
+    },
+    "semantic_model": {
+      "type": "string",
+      "description": "ML model for semantic understanding",
+      "default": "multilingual-e5-large",
+      "enum": ["multilingual-e5-large", "all-mpnet-base-v2", "bge-large-en-v1.5"]
+    },
+    "timeout_ms": {
+      "type": "integer",
+      "description": "Search query timeout in milliseconds",
+      "default": 5000,
+      "minimum": 1000,
+      "maximum": 30000
+    },
+    "min_relevance_score": {
+      "type": "number",
+      "description": "Minimum relevance score (0-1) to include in results",
+      "default": 0.5,
+      "minimum": 0,
+      "maximum": 1
+    },
+    "enable_personalization": {
+      "type": "boolean",
+      "description": "Enable personalized ranking based on user behavior",
+      "default": true
+    },
+    "cache_results": {
+      "type": "boolean",
+      "description": "Cache popular search results",
+      "default": true
+    },
+    "cache_ttl_seconds": {
+      "type": "integer",
+      "description": "Time-to-live for cached results in seconds",
+      "default": 3600,
+      "minimum": 60,
+      "maximum": 86400
+    }
+  }
+}

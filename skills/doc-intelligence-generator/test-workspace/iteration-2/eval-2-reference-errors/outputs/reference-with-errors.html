@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Search API Reference</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        h1 {
+            color: #0078d4;
+            border-bottom: 3px solid #0078d4;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        h2 {
+            color: #106ebe;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        h3 {
+            color: #326ce5;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background: white;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #0078d4;
+            font-weight: bold;
+            padding: 14px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        td {
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        tr:hover {
+            background-color: #f0f7ff;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        a {
+            color: #0078d4;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .enhancement-badge {
+            display: inline-block;
+            background-color: #107c10;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin-left: 10px;
+        }
+        .error-critical {
+            background-color: #fde7e7;
+        }
+        .error-client {
+            background-color: #fff8d6;
+        }
+        .error-server {
+            background-color: #fce4d6;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advanced Search API Reference</h1>
+    <p><strong>Version:</strong> 2.0 | <strong>Last Updated:</strong> 2024-12-19</p>
+
+    <div class="section">
+        <h2>Overview</h2>
+        <p>The Advanced Search API provides endpoints for executing search queries with natural language understanding and configurable filtering. Developers can integrate semantic search capabilities into their applications with support for intelligent filter suggestions, faceted result organization, and personalized ranking.</p>
+    </div>
+
+    <div class="section">
+        <h2>API Endpoint: POST /api/v2/search</h2>
+        <p>Execute a search query with optional filters and retrieve results ranked by relevance.</p>
+
+        <h3>Request Parameters</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter Name</th>
+                    <th>Type</th>
+                    <th>Required</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>query</code></td>
+                    <td>string</td>
+                    <td><strong>Yes</strong></td>
+                    <td>—</td>
+                    <td>Search query in natural language. Maximum 500 characters. Example: "security from last month"</td>
+                </tr>
+                <tr>
+                    <td><code>filters</code></td>
+                    <td>object</td>
+                    <td>No</td>
+                    <td>null</td>
+                    <td>Optional filters. Supports: document_type, date_range, author, tags</td>
+                </tr>
+                <tr>
+                    <td><code>limit</code></td>
+                    <td>integer</td>
+                    <td>No</td>
+                    <td>20</td>
+                    <td>Results per page. Range: 1-100</td>
+                </tr>
+                <tr>
+                    <td><code>offset</code></td>
+                    <td>integer</td>
+                    <td>No</td>
+                    <td>0</td>
+                    <td>Pagination offset for result sets</td>
+                </tr>
+                <tr>
+                    <td><code>sort</code></td>
+                    <td>string</td>
+                    <td>No</td>
+                    <td>relevance</td>
+                    <td>Sort: relevance | date_desc | date_asc | popularity</td>
+                </tr>
+                <tr>
+                    <td><code>include_suggestions</code></td>
+                    <td>boolean</td>
+                    <td>No</td>
+                    <td>true</td>
+                    <td>Include AI-generated filter suggestions</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Common Error Responses <span class="enhancement-badge">✨ NEW</span></h2>
+        <p>The API returns standardized error responses with HTTP status codes. Handle errors gracefully using the status code and error message.</p>
+
+        <h3>Error Response Format</h3>
+        <p>All error responses follow this JSON structure:</p>
+        <pre>
+{
+  "error": "Error message describing what went wrong",
+  "code": "ERROR_CODE",
+  "details": {
+    "field": "field_name",
+    "issue": "specific validation or processing issue"
+  }
+}
+        </pre>
+
+        <h3>HTTP Error Codes Reference</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th>Example Error Response</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="error-client">
+                    <td><strong>400</strong></td>
+                    <td>Bad Request</td>
+                    <td>Invalid query syntax, missing required parameters, or malformed request body</td>
+                    <td><code>{"error": "Missing required parameter: query", "code": "MISSING_PARAMETER"}</code></td>
+                </tr>
+                <tr class="error-client">
+                    <td><strong>401</strong></td>
+                    <td>Unauthorized</td>
+                    <td>Missing or invalid API authentication credentials. API key may be expired or invalid.</td>
+                    <td><code>{"error": "Invalid API token", "code": "INVALID_AUTH"}</code></td>
+                </tr>
+                <tr class="error-client">
+                    <td><strong>403</strong></td>
+                    <td>Forbidden</td>
+                    <td>User does not have permission to access this resource or perform this action</td>
+                    <td><code>{"error": "Insufficient permissions for search", "code": "FORBIDDEN"}</code></td>
+                </tr>
+                <tr class="error-client">
+                    <td><strong>404</strong></td>
+                    <td>Not Found</td>
+                    <td>The requested document, collection, or resource was not found</td>
+                    <td><code>{"error": "Document with ID not found", "code": "NOT_FOUND"}</code></td>
+                </tr>
+                <tr class="error-client">
+                    <td><strong>429</strong></td>
+                    <td>Too Many Requests</td>
+                    <td>Rate limit exceeded. Too many API requests in too short a time period</td>
+                    <td><code>{"error": "Rate limit exceeded", "code": "RATE_LIMITED", "retry_after": 60}</code></td>
+                </tr>
+                <tr class="error-server">
+                    <td><strong>500</strong></td>
+                    <td>Internal Server Error</td>
+                    <td>Search service encountered an unexpected error processing the request</td>
+                    <td><code>{"error": "Internal server error", "code": "INTERNAL_ERROR"}</code></td>
+                </tr>
+                <tr class="error-server">
+                    <td><strong>503</strong></td>
+                    <td>Service Unavailable</td>
+                    <td>Search service is temporarily unavailable, under maintenance, or overloaded</td>
+                    <td><code>{"error": "Service temporarily unavailable", "code": "SERVICE_UNAVAILABLE"}</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Common Error Scenarios and Solutions</h3>
+        <p><strong>Handling 429 (Rate Limited):</strong> Implement exponential backoff. Check the <code>retry_after</code> field in the response to know how long to wait before retrying.</p>
+        <p><strong>Handling 503 (Service Unavailable):</strong> Implement retry logic with increasing delays. Service should recover within minutes.</p>
+        <p><strong>Handling 400 (Bad Request):</strong> Check request syntax, ensure all required parameters are provided, and validate parameter values against API specification.</p>
+    </div>
+
+    <div class="section">
+        <h2>Configuration Options</h2>
+        <p>Server-side configuration parameters that control search behavior:</p>
+
+        <h3>Search Engine Configuration</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>search_engine</code></td>
+                    <td>string</td>
+                    <td>elasticsearch</td>
+                    <td>Backend search engine: elasticsearch | opensearch | meilisearch</td>
+                </tr>
+                <tr>
+                    <td><code>semantic_model</code></td>
+                    <td>string</td>
+                    <td>multilingual-e5-large</td>
+                    <td>ML model: multilingual-e5-large | all-mpnet-base-v2 | bge-large-en-v1.5</td>
+                </tr>
+                <tr>
+                    <td><code>timeout_ms</code></td>
+                    <td>integer</td>
+                    <td>5000</td>
+                    <td>Query timeout in milliseconds. Range: 1000-30000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Related Topics <span class="enhancement-badge">✨ UPDATED</span></h2>
+        <ul>
+            <li><a href="/docs/advanced-search-concepts.html">Advanced Search Concepts</a></li>
+            <li><a href="/docs/advanced-search-setup.html">Setting Up Advanced Search</a></li>
+            <li><a href="/docs/api-authentication.html">API Authentication and Security</a></li>
+        </ul>
+    </div>
+
+</body>
+</html>

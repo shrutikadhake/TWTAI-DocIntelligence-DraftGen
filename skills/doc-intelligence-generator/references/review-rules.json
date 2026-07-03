@@ -1,0 +1,228 @@
+{
+  "review_rules": [
+    {
+      "id": "GRAMMAR_ACTIVE_VOICE",
+      "category": "Grammar",
+      "severity": "warning",
+      "title": "Use active voice",
+      "description": "Sentences should use active voice (subject performs action) rather than passive voice",
+      "example_violation": "The API is called by the client.",
+      "example_fixed": "The client calls the API.",
+      "standards": ["Microsoft Writing Style Guide", "IBM Standards"]
+    },
+    {
+      "id": "GRAMMAR_CONTRACTIONS",
+      "category": "Grammar",
+      "severity": "warning",
+      "title": "Avoid contractions in formal documentation",
+      "description": "Formal technical documentation should not use contractions like don't, can't, it's",
+      "example_violation": "You can't modify the config after it's been deployed.",
+      "example_fixed": "You cannot modify the configuration after it has been deployed.",
+      "standards": ["Microsoft Writing Style Guide"]
+    },
+    {
+      "id": "GRAMMAR_PUNCTUATION",
+      "category": "Grammar",
+      "severity": "info",
+      "title": "Consistent punctuation in lists",
+      "description": "List items should consistently end with or without periods",
+      "example_violation": "1. Start the server\n2. Open the dashboard.",
+      "example_fixed": "1. Start the server\n2. Open the dashboard",
+      "standards": ["Microsoft Writing Style Guide"]
+    },
+    {
+      "id": "STRUCTURE_HEADING_HIERARCHY",
+      "category": "Structure",
+      "severity": "critical",
+      "title": "Proper heading hierarchy",
+      "description": "Document should have single H1, with H2-H3 in proper order (no skipping levels)",
+      "example_violation": "H1: Topic\nH3: Subtopic (missing H2)",
+      "example_fixed": "H1: Topic\nH2: Section\nH3: Subtopic",
+      "standards": ["DITA", "Technical Writing Standards"]
+    },
+    {
+      "id": "STRUCTURE_SECTION_ORDER",
+      "category": "Structure",
+      "severity": "warning",
+      "title": "Concept topics should follow standard section order",
+      "description": "Concept docs should order sections: Overview, Purpose, Key Concepts, When to Use, Related Topics",
+      "example_violation": "Overview, Related Topics, Purpose, Key Concepts",
+      "example_fixed": "Overview, Purpose, Key Concepts, When to Use, Related Topics",
+      "standards": ["DITA"]
+    },
+    {
+      "id": "STRUCTURE_TASK_PREREQUISITES",
+      "category": "Structure",
+      "severity": "critical",
+      "title": "Task topics must have Prerequisites section",
+      "description": "Procedural tasks should clearly list prerequisites before step instructions",
+      "example_violation": "Steps: 1. Install...",
+      "example_fixed": "Prerequisites: You must have admin access\nSteps: 1. Install...",
+      "standards": ["DITA", "Technical Writing Standards"]
+    },
+    {
+      "id": "TERMINOLOGY_ACRONYMS_DEFINED",
+      "category": "Terminology",
+      "severity": "warning",
+      "title": "Define acronyms on first use",
+      "description": "Acronyms and abbreviations should be spelled out with acronym in parentheses on first use",
+      "example_violation": "Configure the API endpoint.",
+      "example_fixed": "Configure the Application Programming Interface (API) endpoint.",
+      "standards": ["Microsoft Writing Style Guide", "IBM Standards"]
+    },
+    {
+      "id": "TERMINOLOGY_CONSISTENCY",
+      "category": "Terminology",
+      "severity": "warning",
+      "title": "Consistent terminology",
+      "description": "Use the same term consistently throughout the document (e.g., always 'configuration' not 'config' and 'configuration')",
+      "example_violation": "First use: API. Later: Application Programming Interface.",
+      "example_fixed": "Consistent use of 'API' or spell out each time",
+      "standards": ["Microsoft Writing Style Guide"]
+    },
+    {
+      "id": "CLARITY_SENTENCE_LENGTH",
+      "category": "Clarity",
+      "severity": "info",
+      "title": "Keep sentences under 25 words",
+      "description": "Long sentences reduce readability; aim for clear, concise sentences",
+      "example_violation": "The system processes incoming requests and validates them against the configured rules to ensure that they meet all the required criteria before they are forwarded to the next processing step.",
+      "example_fixed": "The system validates incoming requests against configured rules. It then forwards approved requests to the next step.",
+      "standards": ["Microsoft Writing Style Guide", "Technical Writing Standards"]
+    },
+    {
+      "id": "CLARITY_PARAGRAPH_LENGTH",
+      "category": "Clarity",
+      "severity": "info",
+      "title": "Keep paragraphs under 5 sentences",
+      "description": "Short paragraphs are easier to scan and read",
+      "example_violation": "Long paragraph with 8+ sentences",
+      "example_fixed": "Paragraphs of 3-4 sentences maximum",
+      "standards": ["Microsoft Writing Style Guide"]
+    },
+    {
+      "id": "CLARITY_JARGON_EXPLAINED",
+      "category": "Clarity",
+      "severity": "warning",
+      "title": "Explain or define technical jargon",
+      "description": "Technical terms should be defined, especially for audience with varying expertise",
+      "example_violation": "Configure the OAuth2 token endpoint.",
+      "example_fixed": "Configure the OAuth2 token endpoint (the server that issues authentication tokens).",
+      "standards": ["Technical Writing Standards"]
+    },
+    {
+      "id": "COMPLETENESS_ALL_SECTIONS",
+      "category": "Completeness",
+      "severity": "critical",
+      "title": "Concept topics must include all required sections",
+      "description": "Required: Title, Introduction, Purpose, Key Concepts, When to Use, Related Topics",
+      "example_violation": "Missing 'When to Use' section",
+      "example_fixed": "All required sections present",
+      "standards": ["DITA"]
+    },
+    {
+      "id": "COMPLETENESS_EXAMPLES",
+      "category": "Completeness",
+      "severity": "warning",
+      "title": "Include examples or code samples",
+      "description": "Technical documentation should include practical examples where applicable",
+      "example_violation": "Explain how to use the API without example code",
+      "example_fixed": "Explain with example code block showing usage",
+      "standards": ["Technical Writing Standards"]
+    },
+    {
+      "id": "COMPLETENESS_PARAMETERS_DOCUMENTED",
+      "category": "Completeness",
+      "severity": "critical",
+      "title": "All parameters must be documented",
+      "description": "Reference topics must document all properties/parameters with type, description, and constraints",
+      "example_violation": "Parameter 'timeout' listed but no description",
+      "example_fixed": "timeout (number): Request timeout in milliseconds. Default: 5000. Min: 0.",
+      "standards": ["DITA"]
+    },
+    {
+      "id": "FORMATTING_CODE_BLOCKS",
+      "category": "Formatting",
+      "severity": "info",
+      "title": "Code blocks should have language markers",
+      "description": "Code samples should be marked with language (json, python, javascript, etc.)",
+      "example_violation": "```\n{json code}\n```",
+      "example_fixed": "```json\n{json code}\n```",
+      "standards": ["Technical Writing Standards"]
+    },
+    {
+      "id": "FORMATTING_LISTS",
+      "category": "Formatting",
+      "severity": "warning",
+      "title": "Proper list formatting",
+      "description": "Lists should have consistent indentation, punctuation, and use appropriate list type (ordered vs unordered)",
+      "example_violation": "Inconsistently formatted lists with mixed punctuation",
+      "example_fixed": "All list items consistently formatted",
+      "standards": ["Microsoft Writing Style Guide", "DITA"]
+    },
+    {
+      "id": "FORMATTING_HYPERLINKS",
+      "category": "Formatting",
+      "severity": "info",
+      "title": "Descriptive hyperlink text",
+      "description": "Links should have descriptive text, not 'click here' or generic terms",
+      "example_violation": "[click here](url)",
+      "example_fixed": "[API Reference Documentation](url)",
+      "standards": ["Microsoft Writing Style Guide", "Accessibility Standards"]
+    },
+    {
+      "id": "ACCESSIBILITY_ALT_TEXT",
+      "category": "Accessibility",
+      "severity": "warning",
+      "title": "Images must have alt text",
+      "description": "All images should include descriptive alt text for screen readers",
+      "example_violation": "<img src='diagram.png'>",
+      "example_fixed": "<img src='diagram.png' alt='Architecture diagram showing client-server connection'>",
+      "standards": ["Accessibility Standards", "WCAG 2.1"]
+    },
+    {
+      "id": "ACCESSIBILITY_COLOR_CONTRAST",
+      "category": "Accessibility",
+      "severity": "warning",
+      "title": "Sufficient color contrast",
+      "description": "Text should have sufficient contrast ratio (4.5:1 for normal text)",
+      "example_violation": "Light gray text on white background",
+      "example_fixed": "Dark text on white or white text on dark background",
+      "standards": ["WCAG 2.1"]
+    },
+    {
+      "id": "STYLE_TONE_CONSISTENT",
+      "category": "Style",
+      "severity": "info",
+      "title": "Maintain consistent tone",
+      "description": "Documentation should maintain consistent tone (formal, conversational, etc.) throughout",
+      "example_violation": "Mix of very formal and very casual language",
+      "example_fixed": "Consistently professional tone throughout",
+      "standards": ["Microsoft Writing Style Guide"]
+    },
+    {
+      "id": "STYLE_SECOND_PERSON",
+      "category": "Style",
+      "severity": "info",
+      "title": "Use second person for task docs",
+      "description": "Task and procedural documentation should address reader as 'you'",
+      "example_violation": "The user should click the button.",
+      "example_fixed": "Click the button.",
+      "standards": ["Technical Writing Standards"]
+    }
+  ],
+  "severity_levels": {
+    "critical": {
+      "description": "Must fix - prevents documentation from meeting minimum standards",
+      "weight": 3
+    },
+    "warning": {
+      "description": "Should fix - impacts clarity or consistency",
+      "weight": 2
+    },
+    "info": {
+      "description": "Nice to fix - minor improvements to readability or style",
+      "weight": 1
+    }
+  }
+}

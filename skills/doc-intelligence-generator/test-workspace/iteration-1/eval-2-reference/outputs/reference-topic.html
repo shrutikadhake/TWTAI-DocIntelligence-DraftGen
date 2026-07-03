@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Search API Reference</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        h1 {
+            color: #0078d4;
+            border-bottom: 3px solid #0078d4;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        h2 {
+            color: #106ebe;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        h3 {
+            color: #326ce5;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background: white;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #0078d4;
+            font-weight: bold;
+            padding: 14px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        td {
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        tr:hover {
+            background-color: #f0f7ff;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .required {
+            color: #d13438;
+            font-weight: bold;
+        }
+        .optional {
+            color: #107c10;
+            font-weight: bold;
+        }
+        .default-value {
+            background-color: #f4f4f4;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        .json-key { color: #9cdcfe; }
+        .json-string { color: #ce9178; }
+        .json-number { color: #b5cea8; }
+        .json-boolean { color: #569cd6; }
+    </style>
+</head>
+<body>
+    <h1>Advanced Search API Reference</h1>
+    <p><strong>Version:</strong> 2.0<br>
+       <strong>Description:</strong> API for configuring and executing advanced search queries with semantic understanding and intelligent filtering</p>
+
+    <div class="section">
+        <h2>Overview</h2>
+        <p>The Advanced Search API provides endpoints for executing search queries with natural language understanding and configurable filtering. Developers can integrate semantic search capabilities into their applications with support for intelligent filter suggestions, faceted result organization, and personalized ranking.</p>
+    </div>
+
+    <div class="section">
+        <h2>Search Endpoint: POST /api/v2/search</h2>
+        <p>Execute a search query with optional filters and retrieve results ranked by relevance.</p>
+
+        <h3>Request Parameters</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter Name</th>
+                    <th>Type</th>
+                    <th>Required</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>query</code></td>
+                    <td>string</td>
+                    <td><span class="required">Yes</span></td>
+                    <td>—</td>
+                    <td>Search query in natural language or keywords. Maximum 500 characters. Example: <code>"documents about security from last month"</code></td>
+                </tr>
+                <tr>
+                    <td><code>filters</code></td>
+                    <td>object</td>
+                    <td><span class="optional">No</span></td>
+                    <td><span class="default-value">null</span></td>
+                    <td>Optional filter object. Can include: document_type, date_range, author, tags. See filters configuration below.</td>
+                </tr>
+                <tr>
+                    <td><code>limit</code></td>
+                    <td>integer</td>
+                    <td><span class="optional">No</span></td>
+                    <td><span class="default-value">20</span></td>
+                    <td>Maximum number of results to return. Range: 1-100. Larger limits increase response time.</td>
+                </tr>
+                <tr>
+                    <td><code>offset</code></td>
+                    <td>integer</td>
+                    <td><span class="optional">No</span></td>
+                    <td><span class="default-value">0</span></td>
+                    <td>Pagination offset. Use for retrieving results beyond the first page. Example: offset=20 returns results 21-40.</td>
+                </tr>
+                <tr>
+                    <td><code>sort</code></td>
+                    <td>string</td>
+                    <td><span class="optional">No</span></td>
+                    <td><span class="default-value">relevance</span></td>
+                    <td>Sort order for results. Valid values: <code>relevance</code>, <code>date_desc</code>, <code>date_asc</code>, <code>popularity</code></td>
+                </tr>
+                <tr>
+                    <td><code>include_suggestions</code></td>
+                    <td>boolean</td>
+                    <td><span class="optional">No</span></td>
+                    <td><span class="default-value">true</span></td>
+                    <td>Include AI-generated filter suggestions in response. Set to false to reduce response payload size.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Filter Configuration</h3>
+        <p>The <code>filters</code> object supports the following properties:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Filter Property</th>
+                    <th>Type</th>
+                    <th>Values</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>document_type</code></td>
+                    <td>array of strings</td>
+                    <td><code>guide</code>, <code>api_reference</code>, <code>tutorial</code>, <code>faq</code></td>
+                    <td>Filter results by document type. Example: <code>["guide", "api_reference"]</code></td>
+                </tr>
+                <tr>
+                    <td><code>date_range</code></td>
+                    <td>object</td>
+                    <td><code>from</code>, <code>to</code> (ISO 8601 dates)</td>
+                    <td>Filter by publication date range. Example: <code>{"from": "2024-01-01", "to": "2024-12-31"}</code></td>
+                </tr>
+                <tr>
+                    <td><code>author</code></td>
+                    <td>string</td>
+                    <td>Author name or ID</td>
+                    <td>Filter results by document author. Example: <code>"Jane Smith"</code></td>
+                </tr>
+                <tr>
+                    <td><code>tags</code></td>
+                    <td>array of strings</td>
+                    <td>Any custom tag values</td>
+                    <td>Filter by document tags. Example: <code>["security", "authentication"]</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Server Configuration Options</h2>
+        <p>Configure the search service behavior using the following parameters:</p>
+
+        <h3>Search Engine Configuration</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Configuration</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                    <th>Valid Values</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>search_engine</code></td>
+                    <td>string</td>
+                    <td><span class="default-value">elasticsearch</span></td>
+                    <td><code>elasticsearch</code>, <code>opensearch</code>, <code>meilisearch</code></td>
+                    <td>Underlying search backend engine. Elasticsearch recommended for large deployments.</td>
+                </tr>
+                <tr>
+                    <td><code>semantic_model</code></td>
+                    <td>string</td>
+                    <td><span class="default-value">multilingual-e5-large</span></td>
+                    <td><code>multilingual-e5-large</code>, <code>all-mpnet-base-v2</code>, <code>bge-large-en-v1.5</code></td>
+                    <td>ML model for semantic understanding. Multilingual-e5 recommended for international deployments.</td>
+                </tr>
+                <tr>
+                    <td><code>timeout_ms</code></td>
+                    <td>integer</td>
+                    <td><span class="default-value">5000</span></td>
+                    <td>1000–30000</td>
+                    <td>Query timeout in milliseconds. Increase for large datasets or slow networks.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Ranking and Filtering</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Configuration</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                    <th>Range</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>min_relevance_score</code></td>
+                    <td>number</td>
+                    <td><span class="default-value">0.5</span></td>
+                    <td>0.0–1.0</td>
+                    <td>Minimum relevance threshold for results. Higher values exclude less relevant matches.</td>
+                </tr>
+                <tr>
+                    <td><code>enable_personalization</code></td>
+                    <td>boolean</td>
+                    <td><span class="default-value">true</span></td>
+                    <td>true, false</td>
+                    <td>Enable personalized ranking based on user behavior. Improves result quality over time.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Caching Configuration</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Configuration</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                    <th>Range</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>cache_results</code></td>
+                    <td>boolean</td>
+                    <td><span class="default-value">true</span></td>
+                    <td>true, false</td>
+                    <td>Cache popular search results for improved performance. Reduces backend load.</td>
+                </tr>
+                <tr>
+                    <td><code>cache_ttl_seconds</code></td>
+                    <td>integer</td>
+                    <td><span class="default-value">3600</span></td>
+                    <td>60–86400</td>
+                    <td>Time-to-live for cached results in seconds. Default: 1 hour. Increase for stable content.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Example Request</h2>
+        <pre><span class="json-key">POST</span> /api/v2/search
+<span class="json-key">Content-Type</span>: application/json
+
+{
+  <span class="json-key">"query"</span>: <span class="json-string">"security best practices"</span>,
+  <span class="json-key">"filters"</span>: {
+    <span class="json-key">"document_type"</span>: [<span class="json-string">"guide"</span>, <span class="json-string">"reference"</span>],
+    <span class="json-key">"date_range"</span>: {
+      <span class="json-key">"from"</span>: <span class="json-string">"2024-01-01"</span>,
+      <span class="json-key">"to"</span>: <span class="json-string">"2024-12-31"</span>
+    }
+  },
+  <span class="json-key">"limit"</span>: <span class="json-number">10</span>,
+  <span class="json-key">"sort"</span>: <span class="json-string">"relevance"</span>,
+  <span class="json-key">"include_suggestions"</span>: <span class="json-boolean">true</span>
+}</pre>
+    </div>
+
+    <div class="section">
+        <h2>Example Response</h2>
+        <pre>{
+  <span class="json-key">"results"</span>: [
+    {
+      <span class="json-key">"id"</span>: <span class="json-string">"doc-12345"</span>,
+      <span class="json-key">"title"</span>: <span class="json-string">"Security Best Practices Guide"</span>,
+      <span class="json-key">"relevance_score"</span>: <span class="json-number">0.95</span>,
+      <span class="json-key">"snippet"</span>: <span class="json-string">"This guide covers essential security practices including authentication, authorization, and encryption..."</span>
+    }
+  ],
+  <span class="json-key">"total_results"</span>: <span class="json-number">24</span>,
+  <span class="json-key">"suggestions"</span>: [
+    {
+      <span class="json-key">"filter_type"</span>: <span class="json-string">"document_type"</span>,
+      <span class="json-key">"suggested_value"</span>: <span class="json-string">"guide"</span>,
+      <span class="json-key">"confidence"</span>: <span class="json-number">0.87</span>
+    }
+  ]
+}</pre>
+    </div>
+
+    <div class="section">
+        <h2>Related Topics</h2>
+        <ul>
+            <li>See also: Setting Up Advanced Search Configuration</li>
+            <li>See also: Advanced Search Concepts and Architecture</li>
+            <li>See also: API Authentication and Rate Limiting</li>
+        </ul>
+    </div>
+
+</body>
+</html>

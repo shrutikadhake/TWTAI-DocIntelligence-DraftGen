@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setting Up Advanced Search with AI-Powered Filters</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        h1 {
+            color: #0078d4;
+            border-bottom: 3px solid #0078d4;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        h2 {
+            color: #106ebe;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        h3 {
+            color: #326ce5;
+            margin-top: 15px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 4px;
+        }
+        ol {
+            margin: 15px 0;
+            padding-left: 40px;
+        }
+        ol ol {
+            margin: 10px 0;
+            padding-left: 50px;
+            list-style-type: lower-alpha;
+        }
+        li {
+            margin: 12px 0;
+            line-height: 1.8;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        ul li {
+            margin: 8px 0;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        a {
+            color: #0078d4;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .screenshot-placeholder {
+            background-color: #f0f7ff;
+            border: 2px dashed #0078d4;
+            border-radius: 4px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .screenshot-placeholder strong {
+            color: #0078d4;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        .screenshot-placeholder em {
+            display: block;
+            color: #333;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        .screenshot-placeholder small {
+            color: #666;
+            display: block;
+            font-style: normal;
+        }
+        .enhancement-badge {
+            display: inline-block;
+            background-color: #107c10;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin-left: 10px;
+        }
+        .note {
+            background-color: #fff8d6;
+            border-left: 4px solid #ffb81c;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+        .success {
+            background-color: #f0f9f7;
+            border-left: 4px solid #107c10;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Setting Up Advanced Search with AI-Powered Filters</h1>
+
+    <div class="section">
+        <h2>Overview</h2>
+        <p>This guide walks you through enabling and configuring the Advanced Search feature with AI-powered semantic understanding and intelligent filtering. After completing these steps, your users will have access to natural language search with automatic filter suggestions, faceted result browsing, and personalized ranking. The setup process takes approximately 30 minutes and requires administrator access to your system.</p>
+    </div>
+
+    <div class="section">
+        <h2>Prerequisites</h2>
+        <p>Before you begin, ensure you have the following in place:</p>
+        <ul>
+            <li>Administrator access to your platform with settings and configuration permissions</li>
+            <li>Basic understanding of search concepts and machine learning models</li>
+            <li>Access to the system Administrator Dashboard and configuration panels</li>
+            <li>System requirements: Python 3.8 or higher available on your server</li>
+            <li>Disk space: Approximately 2 GB available for ML model files</li>
+            <li>Network connectivity: Access to model repositories for downloading language models</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Step-by-Step Instructions</h2>
+
+        <ol>
+            <li><strong>Log in to the Administrator Dashboard.</strong> Open your browser and navigate to the admin console. Enter your administrator credentials. Verify successful login.
+
+            <div class="screenshot-placeholder">
+                <strong>📸 Screenshot Placeholder</strong>
+                <em>Step 1: Log in to Administrator Dashboard</em>
+                <small>Insert screenshot showing the login page with username/password fields and login button</small>
+            </div>
+            </li>
+
+            <li><strong>Navigate to Advanced Search Settings.</strong> From the main dashboard menu, select <code>Settings</code> → <code>Advanced Features</code> → <code>Search Configuration</code>. The configuration panel loads.
+
+            <div class="screenshot-placeholder">
+                <strong>📸 Screenshot Placeholder</strong>
+                <em>Step 2: Navigate to Search Configuration</em>
+                <small>Insert screenshot showing the Settings menu navigation path with dropdown menus highlighted</small>
+            </div>
+            </li>
+
+            <li><strong>Enable the Semantic Search Engine.</strong> In the Search Configuration panel, locate the toggle labeled "Semantic Search Engine". Click to enable it (toggle turns blue). Confirmation message appears: "Semantic search engine initialization started".
+
+            <div class="screenshot-placeholder">
+                <strong>📸 Screenshot Placeholder</strong>
+                <em>Step 3: Enable Semantic Search Engine</em>
+                <small>Insert screenshot showing the toggle switch in OFF position, then in ON position (blue), showing the Settings panel</small>
+            </div>
+            </li>
+
+            <li><strong>Select a Machine Learning Model.</strong> After enabling semantic search, a dropdown menu appears. Choose your model:
+                <ol>
+                    <li><code>multilingual-e5-large</code> — Recommended for multiple languages</li>
+                    <li><code>all-mpnet-base-v2</code> — Recommended for English-only deployments</li>
+                    <li><code>bge-large-en-v1.5</code> — Recommended for maximum accuracy</li>
+                </ol>
+                Select <code>multilingual-e5-large</code> for most deployments.
+
+            <div class="screenshot-placeholder">
+                <strong>📸 Screenshot Placeholder</strong>
+                <em>Step 4: Select ML Model from Dropdown</em>
+                <small>Insert screenshot showing the ML Model dropdown menu expanded with the three options visible</small>
+            </div>
+            </li>
+
+            <li><strong>Configure Query Timeout.</strong> Enter a timeout value in milliseconds:
+                <ul>
+                    <li>Standard: <code>5000</code> (5 seconds)</li>
+                    <li>Large datasets: <code>10000</code> (10 seconds)</li>
+                    <li>Very large: <code>15000</code> (15 seconds)</li>
+                </ul>
+                Press Tab to confirm.
+            </li>
+
+            <li><strong>Enable Filter Suggestions.</strong> Check the box labeled "Enable Smart Filter Suggestions". This allows automatic filter suggestion based on search queries.
+
+            <div class="screenshot-placeholder">
+                <strong>📸 Screenshot Placeholder</strong>
+                <em>Step 6: Enable Filter Suggestions Checkbox</em>
+                <small>Insert screenshot showing the checkbox for "Enable Smart Filter Suggestions" in both unchecked and checked states</small>
+            </div>
+            </li>
+
+            <li><strong>Set Minimum Relevance Score.</strong> Use the slider to set the threshold (0.0–1.0):
+                <ul>
+                    <li>Conservative (strict filtering): <code>0.7</code> or higher</li>
+                    <li>Balanced (recommended): <code>0.5</code></li>
+                    <li>Permissive (more results): <code>0.3</code> or lower</li>
+                </ul>
+            </li>
+
+            <li><strong>Enable Personalization.</strong> Check "Enable Personalized Ranking" to adapt results based on user behavior over time.
+            </li>
+
+            <li><strong>Review All Settings.</strong> Verify all configuration is correct before saving.
+            </li>
+
+            <li><strong>Save Configuration.</strong> Click the blue "Save Configuration" button. A progress indicator appears. Wait for confirmation: "✓ Configuration saved successfully".
+
+            <div class="screenshot-placeholder">
+                <strong>📸 Screenshot Placeholder</strong>
+                <em>Step 10: Click Save Configuration Button</em>
+                <small>Insert screenshot showing the blue "Save Configuration" button and the progress indicator during save</small>
+            </div>
+            </li>
+
+            <li><strong>Run System Test.</strong> After saving, click "Run System Test". The system verifies:
+                <ul>
+                    <li>Semantic search engine responding</li>
+                    <li>ML model loaded and ready</li>
+                    <li>Filter suggestion service operational</li>
+                    <li>Cache layer functional</li>
+                </ul>
+                Wait 30-60 seconds for results.
+
+            <div class="screenshot-placeholder">
+                <strong>📸 Screenshot Placeholder</strong>
+                <em>Step 11: Run System Test</em>
+                <small>Insert screenshot showing the "Run System Test" button and the test progress/results panel</small>
+            </div>
+            </li>
+
+            <li><strong>Verify Test Results.</strong> Successful setup shows:
+                <ul>
+                    <li>✓ Semantic search engine initialized successfully</li>
+                    <li>✓ ML model loaded and ready for inference</li>
+                    <li>✓ Filter suggestion service operational</li>
+                    <li>✓ System ready for user searches</li>
+                </ul>
+
+            <div class="screenshot-placeholder">
+                <strong>📸 Screenshot Placeholder</strong>
+                <em>Step 12: Verify Test Results</em>
+                <small>Insert screenshot showing successful test results with green checkmarks for all 4 tests</small>
+            </div>
+            </li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Post-Setup Verification</h2>
+        <p>After completing setup, perform these verification steps:</p>
+
+        <h3>Test Basic Search</h3>
+        <ol>
+            <li>Try this search: <code>"documents about security from last month"</code></li>
+            <li>Verify results appear within 1-2 seconds</li>
+            <li>Verify filter suggestions appear below search box</li>
+            <li>Click a suggested filter and verify results update</li>
+        </ol>
+
+        <h3>Success Criteria</h3>
+        <div class="success">
+            <strong>✓ Setup is successful when:</strong>
+            <ul>
+                <li>Natural language queries are understood and return relevant results</li>
+                <li>Filter suggestions appear within 500 milliseconds</li>
+                <li>All suggested filters work correctly</li>
+                <li>Search results display with relevance scores</li>
+                <li>No errors in system logs</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Next Steps</h2>
+        <ol>
+            <li>Configure filter preferences specific to your organization</li>
+            <li>Allow 2-4 weeks for personalization engine to optimize results</li>
+            <li>Set up monitoring and alerts for search performance</li>
+            <li>Conduct user acceptance testing</li>
+            <li>Prepare user training materials</li>
+            <li>Plan rollout to all users</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Related Topics <span class="enhancement-badge">✨ UPDATED</span></h2>
+        <ul>
+            <li><a href="/docs/advanced-search-concepts.html">Advanced Search Concepts</a></li>
+            <li><a href="/docs/advanced-search-api-reference.html">Advanced Search API Reference</a></li>
+            <li><a href="/docs/performance-tuning.html">Performance Tuning and Optimization</a></li>
+        </ul>
+    </div>
+
+</body>
+</html>

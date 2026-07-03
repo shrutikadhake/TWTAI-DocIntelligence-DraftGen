@@ -1,0 +1,120 @@
+{
+  "skill_name": "doc-intelligence-generator",
+  "iteration": 2,
+  "enhancement_focus": "Smart Hyperlinks, Screenshot Placeholders, Error Documentation, Glossary Extraction",
+  "description": "Test cases for Iteration 2 enhancements with focus on hyperlink generation, screenshot support, error codes, and automatic glossary",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "concept-with-glossary",
+      "prompt": "Generate a Concept topic for 'Advanced Search with AI-Powered Filters' from the PRD. NEW: Auto-extract and include a glossary section listing technical terms used in the documentation (e.g., semantic search, relevance, personalization, faceted navigation). Add hyperlinks in the Related Topics section linking to other documentation pages.",
+      "expected_output": "HTML Concept topic with: proper structure, all required sections, a new Glossary section with 5+ technical terms and their definitions, and Related Topics section with actual hyperlinks (not plain text) pointing to /docs/setup.html, /docs/api-ref.html, /docs/best-practices.html",
+      "confluence_url": "https://twtai-workspace.atlassian.net/wiki/spaces/DOCS/pages/11111/Advanced-Search-PRD",
+      "confluence_content_type": "confluence_markup",
+      "expected_document_type": "concept",
+      "enhancements_tested": ["hyperlinks", "glossary_extraction"],
+      "assertions": [
+        {
+          "id": "glossary_present",
+          "text": "Glossary section is present with technical terms extracted and defined",
+          "type": "completeness"
+        },
+        {
+          "id": "glossary_terms",
+          "text": "At least 5 technical terms included with clear, concise definitions",
+          "type": "completeness"
+        },
+        {
+          "id": "hyperlinks_functional",
+          "text": "Related Topics section contains actual hyperlinks (HTML <a> tags) with href attributes",
+          "type": "structural"
+        },
+        {
+          "id": "link_targets",
+          "text": "Links point to standard documentation paths (/docs/ URLs)",
+          "type": "accuracy"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "reference-with-errors",
+      "prompt": "Generate a Reference topic for the Advanced Search API. NEW: Include a 'Common Error Responses' section documenting HTTP error codes (400, 401, 403, 404, 429, 500, 503) with status messages and example error response JSON. Include hyperlinks in the Related Topics section.",
+      "expected_output": "HTML Reference topic with: parameter documentation tables (unchanged from iteration 1), a NEW 'Common Error Responses' section with table showing HTTP codes, status, description, and example JSON responses. Related Topics with functional hyperlinks.",
+      "confluence_url": "https://twtai-workspace.atlassian.net/wiki/spaces/API/pages/22222/Advanced-Search-API-Reference",
+      "confluence_attachment": "search-api-config.json",
+      "expected_document_type": "reference",
+      "enhancements_tested": ["error_documentation", "hyperlinks"],
+      "assertions": [
+        {
+          "id": "error_section_present",
+          "text": "Common Error Responses section is present in the reference documentation",
+          "type": "completeness"
+        },
+        {
+          "id": "error_codes_documented",
+          "text": "All major HTTP error codes documented: 400, 401, 403, 404, 429, 500, 503",
+          "type": "completeness"
+        },
+        {
+          "id": "error_response_examples",
+          "text": "Example JSON error responses provided for each error code",
+          "type": "completeness"
+        },
+        {
+          "id": "error_table_format",
+          "text": "Errors presented in well-formatted table with columns: Code, Status, Description, Example",
+          "type": "structural"
+        },
+        {
+          "id": "error_hyperlinks",
+          "text": "Related Topics section includes functional hyperlinks to related documentation",
+          "type": "structural"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "task-with-screenshots",
+      "prompt": "Generate a Task topic for 'Setting Up Advanced Search'. NEW: The guide should include screenshot placeholders for UI interaction steps. Whenever a step mentions clicking a button, navigating menus, selecting options, or interacting with UI elements, insert a screenshot placeholder with: (1) a visual placeholder area, (2) a caption describing what to screenshot, (3) alt text for accessibility. Include hyperlinks in Related Topics.",
+      "expected_output": "HTML Task topic with: all required task sections (overview, prerequisites, numbered steps, verification), PLUS screenshot placeholders inserted at UI-interaction steps with visual indicator boxes showing '📸 Screenshot Placeholder' and descriptive captions. Each placeholder should indicate the step number and what UI element to capture. Related Topics with hyperlinks.",
+      "confluence_url": "https://twtai-workspace.atlassian.net/wiki/spaces/DOCS/pages/11111/Advanced-Search-PRD",
+      "confluence_content_type": "confluence_markup",
+      "document_type_override": "task",
+      "expected_document_type": "task",
+      "enhancements_tested": ["screenshot_placeholders", "hyperlinks"],
+      "assertions": [
+        {
+          "id": "screenshot_placeholders_present",
+          "text": "Screenshot placeholders inserted for UI-heavy steps",
+          "type": "completeness"
+        },
+        {
+          "id": "placeholder_count",
+          "text": "At least 5 screenshot placeholders included for major UI steps",
+          "type": "completeness"
+        },
+        {
+          "id": "placeholder_formatting",
+          "text": "Placeholders are visually distinct with blue dashed border, emoji indicator, and clear labeling",
+          "type": "structural"
+        },
+        {
+          "id": "placeholder_captions",
+          "text": "Each placeholder has descriptive caption indicating the step and what UI element to capture",
+          "type": "completeness"
+        },
+        {
+          "id": "placeholder_accessibility",
+          "text": "Placeholders include alt text or accessibility descriptions",
+          "type": "quality"
+        },
+        {
+          "id": "task_hyperlinks",
+          "text": "Related Topics section includes functional hyperlinks",
+          "type": "structural"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "eval_id": 1,
+  "eval_name": "confluence-prd-to-concept",
+  "test_name": "Confluence PRD to Concept Topic",
+  "grading_date": "2024-12-19",
+  "compliance_score": 83,
+  "assertions": [
+    {
+      "id": "html_valid",
+      "text": "Output is valid HTML with proper DOCTYPE and structure",
+      "type": "structural",
+      "passed": true,
+      "evidence": "Document includes proper <!DOCTYPE html>, <html>, <head>, <body> tags. Meta tags for charset and viewport present. All HTML elements properly closed."
+    },
+    {
+      "id": "concept_sections",
+      "text": "HTML includes all required Concept topic sections: Overview, Purpose, Key Concepts, When to Use, Related Topics",
+      "type": "completeness",
+      "passed": true,
+      "evidence": "All 5 required sections present and properly labeled with <h2> headings: Overview, Purpose, Key Concepts, When to Use, Related Topics"
+    },
+    {
+      "id": "heading_hierarchy",
+      "text": "Document has single H1 title with H2 sections in proper order (no skipped levels)",
+      "type": "structural",
+      "passed": true,
+      "evidence": "Single H1 'Advanced Search with AI-Powered Filters'. Six H2 sections (Overview, Purpose, Key Concepts, When to Use, Related Topics). No H3 or H4 skipping H2. Proper nesting."
+    },
+    {
+      "id": "report_present",
+      "text": "Pre-review report is generated with compliance score, violations list, and assessment",
+      "type": "completeness",
+      "passed": true,
+      "evidence": "Comprehensive pre-review report generated with 83% compliance score, summary statistics (0 critical, 2 warnings, 1 info), violations detailed with severity levels, standards assessment, and recommendations"
+    },
+    {
+      "id": "compliance_target",
+      "text": "Compliance score is 70% or higher (indicates acceptable documentation quality)",
+      "type": "quality",
+      "passed": true,
+      "evidence": "Compliance score is 83%, well above the 70% target. Indicates strong documentation quality with minor optimization opportunities."
+    },
+    {
+      "id": "content_extraction",
+      "text": "Key content from PRD (overview, benefits, purpose) is properly extracted and included",
+      "type": "accuracy",
+      "passed": true,
+      "evidence": "PRD content successfully extracted: overview (search feature explained), purpose (problem solved, business value), benefits (reduced time, improved relevance), features transformed into Key Concepts section with 6 detailed concept explanations"
+    }
+  ],
+  "summary": {
+    "total_assertions": 6,
+    "passed": 6,
+    "failed": 0,
+    "pass_rate": "100%"
+  },
+  "notes": "All assertions passed. Concept topic successfully generated from Confluence PRD with complete DITA compliance. Quality is high with minor style suggestions in report."
+}

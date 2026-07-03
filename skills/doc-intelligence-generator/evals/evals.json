@@ -1,0 +1,141 @@
+{
+  "skill_name": "doc-intelligence-generator",
+  "description": "Test cases for Document Intelligence Generator with Confluence wiki URLs and attachments",
+  "mcp_required": "atlassian-mcp",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "confluence-prd-to-concept",
+      "prompt": "Process this Confluence wiki page containing a Product Requirements Document for the Advanced Search feature. The page is in Confluence Markup format and contains: overview, problem statement, solution, key features, target users, benefits. Generate an HTML Concept topic that explains what the feature is, why it matters, and when to use it. Also provide a pre-review report assessing style, structure, and completeness against technical writing standards.",
+      "expected_output": "HTML Concept topic with: proper title (h1), introduction/overview section, purpose section, key concepts (from features/benefits), when to use section, and related topics section. Pre-review report showing compliance score (target >80%), list of any style or structure violations, and suggestions.",
+      "confluence_url": "https://twtai-workspace.atlassian.net/wiki/spaces/DOCS/pages/11111/Advanced-Search-PRD",
+      "confluence_content_type": "confluence_markup",
+      "expected_document_type": "concept",
+      "assertions": [
+        {
+          "id": "html_valid",
+          "text": "Output is valid HTML with proper DOCTYPE and structure",
+          "type": "structural"
+        },
+        {
+          "id": "concept_sections",
+          "text": "HTML includes all required Concept topic sections: Overview, Purpose, Key Concepts, When to Use, Related Topics",
+          "type": "completeness"
+        },
+        {
+          "id": "heading_hierarchy",
+          "text": "Document has single H1 title with H2 sections in proper order (no skipped levels)",
+          "type": "structural"
+        },
+        {
+          "id": "report_present",
+          "text": "Pre-review report is generated with compliance score, violations list, and assessment",
+          "type": "completeness"
+        },
+        {
+          "id": "compliance_target",
+          "text": "Compliance score is 70% or higher (indicates acceptable documentation quality)",
+          "type": "quality"
+        },
+        {
+          "id": "content_extraction",
+          "text": "Key content from PRD (overview, benefits, purpose) is properly extracted and included",
+          "type": "accuracy"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "confluence-api-to-reference",
+      "prompt": "Process this Confluence page that documents the Advanced Search API. The page has a JSON file (search-api-config.json) attached containing the API schema with endpoint parameters, configuration options, and response structures. Extract the JSON attachment and generate an HTML Reference topic with well-formatted parameter and configuration tables. Auto-detect this as a Reference topic type. Provide a pre-review report.",
+      "expected_output": "HTML Reference topic with: title, overview, Parameters table (name, type, required, default, description columns) for query, filters, limit, offset, sort, include_suggestions. Configuration table for engine, model, timeout, min_relevance_score, cache options. Pre-review report assessing parameter documentation completeness and formatting compliance.",
+      "confluence_url": "https://twtai-workspace.atlassian.net/wiki/spaces/API/pages/22222/Advanced-Search-API-Reference",
+      "confluence_attachment": "search-api-config.json",
+      "expected_document_type": "reference",
+      "assertions": [
+        {
+          "id": "document_type_detection",
+          "text": "Skill correctly auto-detects document type as 'reference' from JSON content",
+          "type": "accuracy"
+        },
+        {
+          "id": "json_extraction",
+          "text": "JSON attachment is successfully extracted and parsed from Confluence page",
+          "type": "technical"
+        },
+        {
+          "id": "parameter_table",
+          "text": "HTML includes formatted table with API parameters: query, filters, limit, offset, sort, include_suggestions",
+          "type": "completeness"
+        },
+        {
+          "id": "table_columns",
+          "text": "Parameter table includes all required columns: Name, Type, Required, Default, Description",
+          "type": "completeness"
+        },
+        {
+          "id": "config_documentation",
+          "text": "Configuration options are documented with: search_engine, semantic_model, timeout_ms, min_relevance_score, cache settings",
+          "type": "completeness"
+        },
+        {
+          "id": "formatting_quality",
+          "text": "Tables are properly formatted with consistent styling and readability",
+          "type": "quality"
+        },
+        {
+          "id": "report_completeness",
+          "text": "Pre-review report assesses parameter documentation and formatting",
+          "type": "completeness"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "confluence-prd-to-task",
+      "prompt": "Take the Advanced Search PRD from the first Confluence page and transform it into a Task/How-to topic that guides users through setting up the advanced search feature. Override auto-detection and explicitly set type as 'Task'. Include prerequisites (what's needed before starting), overview of what will be accomplished, step-by-step numbered instructions for setup and configuration, and post-task verification information. Generate HTML output and a pre-review report checking for clarity, step quality, and procedural completeness.",
+      "expected_output": "HTML Task topic with: title (gerund form: 'Setting Up...'), overview/purpose section, prerequisites list (system requirements, permissions, knowledge needed), numbered step-by-step instructions (5-7 steps covering: enable semantic search, configure ML model, set up filters, enable personalization, configure timeout, test feature), post-task information (how to verify, next steps). Pre-review report assessing procedural clarity and completeness, checking for active voice in instructions, consistent use of second person.",
+      "confluence_url": "https://twtai-workspace.atlassian.net/wiki/spaces/DOCS/pages/11111/Advanced-Search-PRD",
+      "confluence_content_type": "confluence_markup",
+      "document_type_override": "task",
+      "expected_document_type": "task",
+      "assertions": [
+        {
+          "id": "type_override",
+          "text": "Document type override is respected - task type is used despite content",
+          "type": "accuracy"
+        },
+        {
+          "id": "task_structure",
+          "text": "HTML follows Task topic structure: Overview, Prerequisites, Step-by-Step Instructions, Post-Task Information",
+          "type": "structural"
+        },
+        {
+          "id": "prerequisites_section",
+          "text": "Prerequisites section lists required knowledge, permissions, and tools needed",
+          "type": "completeness"
+        },
+        {
+          "id": "numbered_steps",
+          "text": "Instructions are presented as numbered list (not bullets) with 5-7 clear, actionable steps",
+          "type": "completeness"
+        },
+        {
+          "id": "active_voice",
+          "text": "Instructions use active voice and imperative mood (e.g., 'Click', 'Configure', 'Enable')",
+          "type": "quality"
+        },
+        {
+          "id": "verification_section",
+          "text": "Post-task section includes how to verify setup was successful",
+          "type": "completeness"
+        },
+        {
+          "id": "clarity_score",
+          "text": "Compliance report shows good score (70%+) for clarity and procedural completeness",
+          "type": "quality"
+        }
+      ]
+    }
+  ]
+}
