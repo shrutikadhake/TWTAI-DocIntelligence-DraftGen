@@ -1,0 +1,17 @@
+<h1>Custom API rate limits</h1>
+
+<p>Custom API rate limits allow you to define how many requests to your API are permitted within a specific time window. By enforcing rate limits, you prevent accidental or malicious abuse that could degrade service availability.</p>
+
+<h3>How custom rate limits work</h3>
+
+<p>The scanner system stores rate limit settings in a global configuration file. Before the CLI can apply limits, custom limits must be explicitly enabled in the configuration. This design prevents accidental configuration changes and ensures intentional control over rate limiting behavior.</p>
+
+<p>Once enabled, you use the CLI to set the threshold (maximum number of requests) and the time window (in seconds). When a client exceeds this threshold within the window, the API rejects further requests with a <code>429 Too Many Requests</code> response until the window expires.</p>
+
+<h3>Configuration and the daemon</h3>
+
+<p>The scanner daemon reads configuration settings when it starts and holds them in memory. If you modify the configuration file while the daemon is running, the changes are not applied automatically—the daemon does not hot-reload. You must explicitly restart the daemon after configuration changes for them to take effect. This prevents unexpected behavior changes while the system is running.</p>
+
+<h3>Authentication requirement</h3>
+
+<p>Only users with a valid admin authentication token can apply or modify rate limits. This restriction protects the API from unauthorized configuration changes.</p>

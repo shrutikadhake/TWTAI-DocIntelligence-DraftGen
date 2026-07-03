@@ -1,0 +1,93 @@
+<h1>API rate limit configuration reference</h1>
+
+<h3>Configuration file</h3>
+
+<p>The global configuration file is located at <code>/etc/scanner/config.yml</code>. The rate limit settings are defined within the <code>api_settings</code> block.</p>
+
+<h3>api_settings block structure</h3>
+
+<pre><code>api_settings:
+  timeout: &lt;seconds&gt;
+  custom_limits_enabled: &lt;true|false&gt;
+  default_limit: &lt;number&gt;</code></pre>
+
+<table>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Integer (seconds)</td>
+<td>Request timeout duration. Requests that exceed this duration are terminated.</td>
+</tr>
+<tr>
+<td><code>custom_limits_enabled</code></td>
+<td>Boolean</td>
+<td>Must be set to <code>true</code> to enable custom rate limit configuration via CLI. If <code>false</code>, CLI commands to set rate limits return a 403 error.</td>
+</tr>
+<tr>
+<td><code>default_limit</code></td>
+<td>Integer</td>
+<td>The default number of requests allowed per window if no custom limit is configured.</td>
+</tr>
+</table>
+
+<h3>CLI command reference</h3>
+
+<p><code>scanner-cli config update --api-limit &lt;number&gt; --window &lt;seconds&gt;</code></p>
+
+<table>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+<tr>
+<td><code>--api-limit</code></td>
+<td>Integer</td>
+<td>Maximum number of requests allowed within the specified window.</td>
+<td><code>1000</code></td>
+</tr>
+<tr>
+<td><code>--window</code></td>
+<td>Integer (seconds)</td>
+<td>Time window in seconds for the rate limit calculation.</td>
+<td><code>60</code> (one minute)</td>
+</tr>
+</table>
+
+<h3>Response codes</h3>
+
+<table>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Condition</th>
+</tr>
+<tr>
+<td>200</td>
+<td><code>200 OK: Rate limits updated.</code></td>
+<td>Rate limits successfully applied.</td>
+</tr>
+<tr>
+<td>403</td>
+<td><code>403 Forbidden: Rate limit configuration is disabled globally.</code></td>
+<td><code>custom_limits_enabled</code> is set to <code>false</code> in the configuration file, or the daemon has not been restarted after enabling it.</td>
+</tr>
+<tr>
+<td>429</td>
+<td><code>429 Too Many Requests</code></td>
+<td>A client request exceeded the configured rate limit and was rejected. The client may retry after the time window expires.</td>
+</tr>
+</table>
+
+<h3>Daemon restart</h3>
+
+<p>After modifying <code>/etc/scanner/config.yml</code>, restart the daemon to load the changes:</p>
+
+<pre><code>sudo systemctl restart scanner-daemon</code></pre>
+
+<p>The daemon does not hot-reload configuration, so this step is required for configuration changes to take effect.</p>
