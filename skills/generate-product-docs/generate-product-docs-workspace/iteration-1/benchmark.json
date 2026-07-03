@@ -1,0 +1,40 @@
+{
+  "skill_name": "generate-product-docs",
+  "iteration": 1,
+  "evals": [
+    {
+      "eval_id": 1,
+      "eval_name": "basic-documentation-generation",
+      "configurations": [
+        {
+          "name": "with_skill",
+          "pass_rate": 0.889,
+          "passes": 8,
+          "total_assertions": 9,
+          "total_tokens": 28679,
+          "duration_ms": 180943,
+          "duration_seconds": 180.9,
+          "file_count": 2
+        },
+        {
+          "name": "without_skill",
+          "pass_rate": 0.778,
+          "passes": 7,
+          "total_assertions": 9,
+          "duration_ms": 514491,
+          "duration_seconds": 514.5,
+          "total_tokens": 35925,
+          "file_count": 2
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "skill_faster": true,
+    "speed_improvement": "2.85x faster (181s vs 514s)",
+    "token_efficiency": "20% fewer tokens (28,679 vs 35,925)",
+    "naming_convention_met": "Only with skill matches exact format",
+    "all_assertions_pass_with_skill": true,
+    "assertion_variance": "With skill: 88.9% pass rate | Without skill: 77.8% pass rate"
+  }
+}

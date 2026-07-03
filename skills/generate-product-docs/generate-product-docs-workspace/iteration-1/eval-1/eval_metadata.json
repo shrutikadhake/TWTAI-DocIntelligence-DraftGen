@@ -1,0 +1,43 @@
+{
+  "eval_id": 1,
+  "eval_name": "basic-documentation-generation",
+  "prompt": "I have feature specifications in D:\\twtaiworkshop\\TWTAI-DocIntelligence-DraftGen\\resources folder. Please generate product documentation from these files and create HTML output in the output folder. Include all features found in the specification files.",
+  "assertions": [
+    {
+      "name": "html_files_created",
+      "description": "HTML output files are created for each feature found"
+    },
+    {
+      "name": "correct_file_naming",
+      "description": "HTML files follow the <Feature-Name>output.html naming convention"
+    },
+    {
+      "name": "contains_feature_name",
+      "description": "Each HTML contains the feature name as a heading"
+    },
+    {
+      "name": "contains_description",
+      "description": "Each HTML contains a brief description of what the feature does"
+    },
+    {
+      "name": "contains_access_instructions",
+      "description": "Each HTML contains 'How to Access' section with step-by-step instructions"
+    },
+    {
+      "name": "contains_ui_options",
+      "description": "Each HTML documents UI options with descriptions and defaults where applicable"
+    },
+    {
+      "name": "valid_html_structure",
+      "description": "Generated HTML is valid and well-formed"
+    },
+    {
+      "name": "docx_handling",
+      "description": "Any .docx files are skipped and user is informed"
+    },
+    {
+      "name": "professional_formatting",
+      "description": "Documentation follows technical writing standards with clear formatting and language"
+    }
+  ]
+}
