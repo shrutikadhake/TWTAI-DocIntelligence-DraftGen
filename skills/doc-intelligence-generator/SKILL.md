@@ -214,6 +214,16 @@ See `references/review-rules.json` for the complete ruleset.
 - Marks first use of terms for reader reference
 - Creates cross-references to glossary items
 
+### JSON Schema in Reference Topics
+- Automatically includes full JSON schema/specification in Reference documents
+- Displays JSON in professional code block with dark background (#1e1e1e)
+- Makes documentation self-contained and complete
+- Easy for developers to copy and reference JSON directly
+- Positioned after parameters table for logical flow
+- Supports any valid JSON content (API schemas, configurations, definitions)
+- Monospace font with proper syntax highlighting readiness
+- Scroll support for large JSON files
+
 ## Notes
 
 - The skill performs a **first-pass** pre-review; it does not replace formal human review

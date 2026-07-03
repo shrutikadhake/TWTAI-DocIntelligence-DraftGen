@@ -473,8 +473,8 @@ class HTMLGenerator:
         return html
 
     @staticmethod
-    def generate_reference_html(title: str, content: Dict) -> str:
-        """Generate HTML for Reference topic with parameter tables and error documentation"""
+    def generate_reference_html(title: str, content: Dict, json_schema: str = None) -> str:
+        """Generate HTML for Reference topic with parameter tables, JSON schema, and error documentation"""
         html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -525,6 +525,16 @@ class HTMLGenerator:
             padding: 2px 6px;
             border-radius: 3px;
         }}
+        pre {{
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }}
         a {{
             color: #0078d4;
             text-decoration: none;
@@ -566,8 +576,18 @@ class HTMLGenerator:
 
         html += """        </table>
     </div>
+"""
 
-    <div class="section">
+        # Add JSON Schema section if available
+        if json_schema:
+            html += f"""    <div class="section">
+        <h2>JSON Schema</h2>
+        <p>The following JSON schema defines the structure of this API specification:</p>
+        <pre><code>{json_schema}</code></pre>
+    </div>
+"""
+
+        html += """    <div class="section">
 """
 
         # Add error documentation
