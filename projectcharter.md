@@ -1,2 +1,0 @@
-# Charter Title
-Charter content
