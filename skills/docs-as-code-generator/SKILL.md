@@ -12,9 +12,10 @@ The workflow:
 1. Reads the specified `.txt` log file from the local workspace
 2. Intelligently extracts procedural content, prerequisites, and validation steps while filtering conversational noise
 3. Generates semantic HTML5 fragments (no `<html>`, `<head>`, or `<body>` tags)
-4. Validates style compliance using the Microsoft Learn MCP server for MSTP enforcement
-5. Flags missing procedural elements with HTML comments to prevent hallucination
-6. Outputs build-ready HTML ready for import into structured authoring systems
+4. Validates style compliance using the `/microsoft-docs` skill against MSTP guidelines (sentence case, active voice, second person, terminology)
+5. Verifies that all procedural elements are grounded in the source log (anti-hallucination protocol)
+6. Flags missing procedural elements and style violations with HTML comments
+7. Outputs build-ready, MSTP-compliant HTML ready for import into structured authoring systems
 
 ## Input Requirements
 
@@ -58,14 +59,18 @@ Process the source file and any requested parameters provided here: $ARGUMENTS
    - **Reference topics:** Structure, parameters, return values, examples
 
 ### Phase 2: Style Validation (MSTP)
-1. Query the Microsoft Learn MCP server for MSTP guidance on:
+1. Generate initial semantic HTML5 from extracted content following the output format specification
+2. Invoke the `/microsoft-docs` skill to validate the generated HTML against Microsoft Manual of Style (MSTP) guidelines:
+   - Sentence case for titles and headings (only first word and proper nouns capitalized)
    - Active voice enforcement (rewrite passive constructions)
    - Second-person perspective ("you" instead of "the user")
    - Imperative verb forms for procedures
    - Consistent terminology
    - Proper capitalization and punctuation
-2. Apply corrections to align extracted content with Microsoft style before generating HTML
-3. **Do not output HTML until MSTP validation is complete**
+3. Review the style validation results from `/microsoft-docs`:
+   - If violations found: either flag them with HTML comments (`<!-- STYLE_VIOLATION: ... -->`) or re-process the content for corrections
+   - If compliant: proceed to Phase 3
+4. **Do not output final HTML until MSTP validation is complete and all violations are resolved or flagged**
 
 ### Phase 3: Anti-Hallucination Protocol
 Before finalizing output, verify that all procedural elements are grounded in the source log:
@@ -80,15 +85,16 @@ If any critical element is **missing from the source log**, insert an HTML comme
 
 Do **not** invent missing steps, parameters, or validation results.
 
-### Phase 4: Generate HTML
-Produce clean semantic HTML5 fragments following these conventions:
-- Use `<h1>` for the main title (usually derived from task name)
+### Phase 4: HTML Output Format (Applied in Phase 2)
+When generating semantic HTML5 in Phase 2, follow these conventions:
+- Use `<h1>` for the main title (usually derived from task name) — apply sentence case per MSTP
 - Use `<h3>` for major sections (Prerequisites, Steps, Expected Results, Troubleshooting, Concepts, Parameters)
 - Use `<ol>` for numbered step sequences in Task topics
 - Use `<ul>` for non-sequential lists
 - Wrap code snippets in `<code>` (inline) or `<pre>` (blocks); preserve formatting
 - Wrap configuration file paths and filenames in `<code>`
 - Include introductory `<p>` explaining the goal before steps begin
+- Do not include `<html>`, `<head>`, `<body>`, or `<DOCTYPE>` tags — output semantic fragments only
 
 ## Example Output Structure (Task Topic)
 

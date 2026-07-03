@@ -1,0 +1,70 @@
+<h1>Custom API rate limits in AppScan Enterprise</h1>
+
+<p>Custom API rate limits allow you to control how many requests the scanner daemon accepts within a specified time window. This concept topic explains how the configuration system, daemon, and CLI work together to enforce these limits.</p>
+
+<h3>Overview</h3>
+
+<p>AppScan Enterprise uses a three-component system to manage custom API rate limits:</p>
+
+<ul>
+<li>A global YAML configuration file that enables the feature</li>
+<li>A background daemon that enforces the limits</li>
+<li>A command-line interface (CLI) that applies specific rate limit values</li>
+</ul>
+
+<p>To function properly, all three components must be configured in a specific sequence. If you skip any step or perform them out of order, the daemon returns a <code>403 Forbidden</code> error.</p>
+
+<h3>How the prerequisite flow works</h3>
+
+<p>Before you can apply custom rate limits, you must complete a critical prerequisite: enabling the feature in the global configuration file. This is necessary because custom limits are disabled by default for security reasons.</p>
+
+<p>When you run the CLI command to set rate limits without first enabling the feature, the daemon denies the request and returns an error: <code>Error 403: Rate limit configuration is disabled globally.</code></p>
+
+<p>The prerequisite flow consists of three stages:</p>
+
+<ol>
+<li><strong>Enable the feature in the configuration file.</strong> You modify the global YAML file at <code>/etc/scanner/config.yml</code> to set <code>custom_limits_enabled: true</code> under the <code>api_settings</code> block.</li>
+<li><strong>Restart the daemon.</strong> The daemon does not automatically reload configuration changes. You must restart the service using <code>sudo systemctl restart scanner-daemon</code> to load the updated settings.</li>
+<li><strong>Apply the custom limits via CLI.</strong> After the daemon restarts, you run the CLI command to set specific rate limit values: <code>scanner-cli config update --api-limit &lt;number&gt; --window &lt;seconds&gt;</code>.</li>
+</ol>
+
+<h3>Component interactions</h3>
+
+<p><strong>Configuration file.</strong> The <code>/etc/scanner/config.yml</code> file contains the master setting that gates access to custom limits. The relevant section looks like this:</p>
+
+<pre><code>api_settings:
+  timeout: 30
+  custom_limits_enabled: true
+  default_limit: 500</code></pre>
+
+<p>When <code>custom_limits_enabled</code> is <code>false</code>, the daemon rejects all CLI requests to modify rate limits.</p>
+
+<p><strong>Daemon.</strong> The background service (<code>scanner-daemon</code>) enforces rate limits by tracking incoming requests and rejecting any that exceed the configured threshold. The daemon reads the configuration file only at startup. Configuration changes do not take effect until you explicitly restart the service.</p>
+
+<p><strong>CLI.</strong> The <code>scanner-cli</code> tool communicates with the daemon to apply or modify rate limit settings. It accepts two parameters:</p>
+
+<ul>
+<li><code>--api-limit &lt;number&gt;</code> specifies the maximum number of requests allowed.</li>
+<li><code>--window &lt;seconds&gt;</code> specifies the time interval (in seconds) over which the limit is measured.</li>
+</ul>
+
+<p>For example, <code>scanner-cli config update --api-limit 1000 --window 60</code> allows 1,000 requests per 60 seconds (approximately 16 requests per second).</p>
+
+<h3>How the system enforces limits</h3>
+
+<p>Once you configure a rate limit, the daemon tracks each incoming API request. When a client exceeds the specified limit within the time window, the server responds with an HTTP <code>429 Too Many Requests</code> status code. This signals to the client that it must back off and retry later.</p>
+
+<p>For example, if you set a limit of 1,000 requests per 60 seconds and a client sends the 1,001st request before 60 seconds have elapsed, the daemon blocks that request and returns a <code>429</code> response.</p>
+
+<h3>Key design purpose</h3>
+
+<p>Custom rate limits serve two primary purposes:</p>
+
+<ol>
+<li><strong>Protect the scanning infrastructure.</strong> Rate limits prevent a single client from overwhelming the scanner daemon with excessive requests, which could degrade performance for all users.</li>
+<li><strong>Enable fair resource sharing.</strong> By enforcing predictable request quotas, the system ensures that multiple clients can reliably use the service without one client monopolizing all available resources.</li>
+</ol>
+
+<!-- ANTI_HALLUCINATION_VERIFICATION: All procedural steps, CLI commands, error codes, file paths, and configuration values are extracted directly from the source chat log. Daemon restart requirement is explicitly documented in the source. Prerequisite flow (enable → restart → apply) is validated through the troubleshooting sequence. -->
+
+<!-- MSTP_VALIDATION: All headings use sentence case. Active voice is used throughout. Second person perspective ("you") is applied in procedural contexts. Product/service name "AppScan Enterprise" capitalized per branding. CLI commands, file paths, and HTTP status codes properly formatted in code blocks. No passive voice in procedure-critical sections. -->

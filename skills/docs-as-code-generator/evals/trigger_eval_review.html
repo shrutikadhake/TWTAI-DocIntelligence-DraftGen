@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docs-as-Code Generator — Trigger Eval Review</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        h1 { font-size: 28px; margin-bottom: 10px; }
+        .subtitle { font-size: 14px; opacity: 0.9; }
+        .content {
+            padding: 30px;
+        }
+        .instructions {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .stat-box {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 3px solid #667eea;
+        }
+        .stat-box strong { display: block; font-size: 20px; margin-bottom: 5px; }
+        .eval-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: #fafafa;
+        }
+        .eval-item:hover {
+            background: #f5f5f5;
+            border-color: #667eea;
+        }
+        .eval-query {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        .eval-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .should-trigger {
+            background: #d4edda;
+            color: #155724;
+        }
+        .should-not-trigger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .eval-id {
+            color: #999;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+        footer {
+            background: #f5f5f5;
+            padding: 20px 30px;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 Docs-as-Code Generator</h1>
+            <p class="subtitle">Trigger Evaluation Review — Description Optimization</p>
+        </header>
+
+        <div class="content">
+            <div class="instructions">
+                <strong>Review these trigger eval queries:</strong> These 20 prompts test whether the skill description will trigger correctly across different contexts. "Should trigger" queries represent legitimate use cases; "should not trigger" are edge cases or adjacent domains where the skill shouldn't activate.
+            </div>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <strong>12</strong>
+                    Should Trigger (legitimate use cases)
+                </div>
+                <div class="stat-box">
+                    <strong>8</strong>
+                    Should Not Trigger (edge cases / adjacent domains)
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 20px;">Trigger Queries</h3>
+
+            <div id="eval-list"></div>
+
+            <div class="action-buttons">
+                <button class="btn-primary" onclick="prepareForOptimization()">✓ Approve & Run Optimization</button>
+                <button class="btn-secondary" onclick="editAndReview()">✏️ Edit Queries</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>To edit specific queries: copy trigger_evals.json, modify, and re-run optimization loop.</p>
+            <p style="margin-top: 10px; color: #999;">Skill: docs-as-code-generator | Model: Claude | Optimization target: description field</p>
+        </footer>
+    </div>
+
+    <script>
+        const evals = [
+  {
+    "query": "I've got a bunch of Slack messages from our engineering team about how we configured rate limiting for the new API release. We need to turn this into proper technical documentation for v10.12. Can you help convert this chat dump into clean HTML that follows our docs style guide?",
+    "should_trigger": true
+  },
+  {
+    "query": "We recorded a video call with our product team discussing the new feature rollout. I have a transcript here (transcript.txt) that needs to become a task-based procedure document. The content is noisy with lots of off-topic discussion, but there are clear procedural steps buried in there.",
+    "should_trigger": true
+  },
+  {
+    "query": "I exported a Teams conversation about database schema migrations and I need to extract the technical details into a reference document showing all the SQL commands, parameter definitions, and error codes. How do I convert messy chat into structured docs?",
+    "should_trigger": true
+  },
+  {
+    "query": "Can you take these raw meeting notes from QA about our testing procedures and turn them into a clean, well-formatted concept guide that explains how the testing framework actually works?",
+    "should_trigger": true
+  },
+  {
+    "query": "I have 500 lines of developer chat logs from Slack. About 80% of it is banter and timezone discussions, but 20% contains the actual steps to set up the CI/CD pipeline. I need this converted to HTML documentation that follows Microsoft style. The output needs to work in our docs build system (semantic HTML only, no page wrappers).",
+    "should_trigger": true
+  },
+  {
+    "query": "Our team uses Discord for technical discussions. I exported a conversation where Sarah explained how the custom rate limiting feature works, John asked clarifying questions, and we went through troubleshooting scenarios. Can I convert this transcript into a procedure topic?",
+    "should_trigger": true
+  },
+  {
+    "query": "I have a raw transcript from a technical interview with an engineer. It's full of 'um's and 'uh's and tangents, but contains valuable information about our API design decisions. How do I extract the conceptual content and generate clean documentation?",
+    "should_trigger": true
+  },
+  {
+    "query": "We need to document a new feature for AppScan Enterprise. I have the developer's notes from the implementation (notes.txt) that describe the setup procedure, prerequisites, and common errors. Can this be converted to semantic HTML following technical writing standards?",
+    "should_trigger": true
+  },
+  {
+    "query": "I'm writing a blog post about our recent product launch and I want to include some technical details from internal discussions. Can you help me extract information from chat logs?",
+    "should_trigger": false
+  },
+  {
+    "query": "Can you summarize this PDF marketing brochure for me? I need a one-page overview of our product features.",
+    "should_trigger": false
+  },
+  {
+    "query": "I need to convert this Word document (.docx file) into Markdown. It's already well-structured documentation.",
+    "should_trigger": false
+  },
+  {
+    "query": "We have a design document in Figma that shows the UI mockups for the new dashboard. Can you convert this to HTML?",
+    "should_trigger": false
+  },
+  {
+    "query": "I've got a recording of a support call where a customer describes a problem. Can you extract the issue and create a knowledge base article from it?",
+    "should_trigger": true
+  },
+  {
+    "query": "Our PM sent an email thread about feature requirements. The thread has lots of back-and-forth about priorities, but buried in there are the actual technical specifications. Can I turn this into a reference document?",
+    "should_trigger": true
+  },
+  {
+    "query": "I have a spreadsheet (.xlsx) with API endpoint documentation — parameter names, types, descriptions. Do you have a tool to convert spreadsheet tables into HTML reference docs?",
+    "should_trigger": false
+  },
+  {
+    "query": "We just did a code review on GitHub with detailed comments about a new algorithm implementation. The reviewer explained the design rationale and trade-offs in the PR comments. Can this be converted to a concept guide?",
+    "should_trigger": true
+  },
+  {
+    "query": "I'm trying to improve my technical writing skills. Can you give me tips on how to structure better documentation?",
+    "should_trigger": false
+  },
+  {
+    "query": "We have raw output from a technical support ticket system where engineers answered questions about deploying the service. There's a lot of Q&A format with some repetition and clarifications. Can this be cleaned up and formatted as a troubleshooting guide?",
+    "should_trigger": true
+  },
+  {
+    "query": "I have a transcript from our architecture review meeting where we debated design decisions for the new microservice. The discussion covers prerequisites, deployment steps, and failure scenarios. I need this as structured technical documentation in HTML.",
+    "should_trigger": true
+  },
+  {
+    "query": "Can you help me write a cover letter for a technical writing job?",
+    "should_trigger": false
+  }
+        ];
+
+        function renderEvals() {
+            const container = document.getElementById('eval-list');
+            evals.forEach((eval, idx) => {
+                const badge = eval.should_trigger
+                    ? '<span class="badge should-trigger">Should Trigger</span>'
+                    : '<span class="badge should-not-trigger">Should Not Trigger</span>';
+
+                const item = document.createElement('div');
+                item.className = 'eval-item';
+                item.innerHTML = `
+                    <div class="eval-query">${eval.query}</div>
+                    <div class="eval-controls">
+                        <span class="eval-id">#${idx + 1}</span>
+                        ${badge}
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function prepareForOptimization() {
+            alert('✓ Trigger eval set approved!\n\nNext: Run description optimization loop using run_loop.py\n\nThis will test the current skill description against these queries and suggest improvements.');
+        }
+
+        function editAndReview() {
+            alert('To edit queries:\n1. Edit trigger_evals.json\n2. Re-run optimization loop\n\nCurrent location: skills/docs-as-code-generator/evals/trigger_evals.json');
+        }
+
+        renderEvals();
+    </script>
+</body>
+</html>

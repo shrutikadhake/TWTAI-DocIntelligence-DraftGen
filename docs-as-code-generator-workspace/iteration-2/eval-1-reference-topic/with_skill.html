@@ -1,0 +1,126 @@
+<h1>Rate limit configuration reference</h1>
+
+<p>Configure custom API rate limits for your scanner daemon using the CLI command or YAML configuration file. Custom rate limits must be enabled in your configuration file before you can apply them.</p>
+
+<h3>Prerequisites</h3>
+<p>Before you apply custom rate limits, you must enable the feature in your configuration file:</p>
+<ol>
+<li>Log in to the host server as root.</li>
+<li>Open <code>/etc/scanner/config.yml</code> in a text editor.</li>
+<li>Under the <code>api_settings</code> section, set <code>custom_limits_enabled: true</code>.</li>
+<li>Save the file.</li>
+<li>Restart the scanner daemon: <code>sudo systemctl restart scanner-daemon</code>.</li>
+</ol>
+
+<h3>YAML configuration block structure</h3>
+<p>Add or update the <code>api_settings</code> block in your <code>/etc/scanner/config.yml</code> file with the following structure:</p>
+<pre><code>api_settings:
+  timeout: 30
+  custom_limits_enabled: true
+  default_limit: 500</code></pre>
+
+<h3>Configuration parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>timeout</code></td>
+<td>Integer (seconds)</td>
+<td>The API request timeout in seconds.</td>
+<td>30</td>
+</tr>
+<tr>
+<td><code>custom_limits_enabled</code></td>
+<td>Boolean</td>
+<td>Enable or disable custom rate limit configuration. Set to <code>true</code> to allow CLI commands to apply custom limits.</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code>default_limit</code></td>
+<td>Integer</td>
+<td>The default request limit if no custom limits are applied.</td>
+<td>500</td>
+</tr>
+</tbody>
+</table>
+
+<h3>CLI command reference</h3>
+<p>After you enable custom limits in the YAML configuration, use the following CLI command to apply rate limit settings:</p>
+
+<h3>scanner-cli config update</h3>
+<p>Update the rate limit configuration for the API.</p>
+
+<h3>Syntax</h3>
+<pre><code>scanner-cli config update --api-limit &lt;number&gt; --window &lt;seconds&gt;</code></pre>
+
+<h3>Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Valid values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--api-limit</code></td>
+<td>Integer</td>
+<td>Yes</td>
+<td>The maximum number of API requests allowed within the time window.</td>
+<td>Positive integers (e.g., <code>1000</code>)</td>
+</tr>
+<tr>
+<td><code>--window</code></td>
+<td>Integer</td>
+<td>Yes</td>
+<td>The time window in seconds during which the API limit applies.</td>
+<td>Positive integers (e.g., <code>60</code>)</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Example</h3>
+<p>Set the API rate limit to 1000 requests per 60 seconds:</p>
+<pre><code>scanner-cli config update --api-limit 1000 --window 60</code></pre>
+
+<h3>Response codes</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+<th>Cause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200 OK</code></td>
+<td>Rate limits updated successfully.</td>
+<td>Configuration applied successfully.</td>
+</tr>
+<tr>
+<td><code>403 Forbidden</code></td>
+<td>Rate limit configuration is disabled globally.</td>
+<td>Verify that <code>custom_limits_enabled: true</code> is set in <code>api_settings</code> and the daemon has been restarted.</td>
+</tr>
+<tr>
+<td><code>429 Too Many Requests</code></td>
+<td>API request limit has been exceeded.</td>
+<td>The client must wait until the time window resets before sending additional requests.</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Verify rate limits are applied</h3>
+<p>After you apply custom rate limits, you can verify they are working by sending requests to your API endpoint until you reach the limit. When you exceed the rate limit, the server returns a <code>429 Too Many Requests</code> response.</p>
+<p>For example, if you set <code>--api-limit 1000 --window 60</code>, the 1001st request within 60 seconds triggers a rate limit error.</p>
