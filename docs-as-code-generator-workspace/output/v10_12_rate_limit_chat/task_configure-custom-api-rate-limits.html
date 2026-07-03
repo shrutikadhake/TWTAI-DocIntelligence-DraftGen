@@ -1,42 +1,28 @@
-<h1>Configure custom API rate limits</h1>
+﻿<h1>Configure custom API rate limits</h1>
 
-<p>Configure custom rate limits for your API to control request volume and prevent abuse. This task requires modifying the global configuration file and using the CLI to apply the limits.</p>
+<p>Set up custom rate limits for your API by enabling the feature in the global configuration file and applying limits via the CLI.</p>
 
 <h3>Prerequisites</h3>
 <ul>
-<li>Root or admin access to the host server</li>
-<li>A valid admin authentication token</li>
-<li>Write permissions for <code>/etc/scanner/config.yml</code></li>
-<li>The scanner daemon installed and available for restart</li>
+<li>Root or administrator access to the host server</li>
+<li>Valid authentication token</li>
+<li>Latest build deployed to your staging or production environment</li>
 </ul>
 
 <h3>Steps</h3>
 <ol>
 <li>Log into the host server as root.</li>
 <li>Open <code>/etc/scanner/config.yml</code> in a text editor.</li>
-<li>Locate the <code>api_settings</code> block. Under this section, set <code>custom_limits_enabled: true</code> and save the file.</li>
-<li>Restart the daemon by running <code>sudo systemctl restart scanner-daemon</code>. The daemon does not hot-reload configuration changes.</li>
-<li>Apply the custom rate limits using the CLI: <code>scanner-cli config update --api-limit &lt;number&gt; --window &lt;seconds&gt;</code>
-<ul>
-<li>Replace <code>&lt;number&gt;</code> with the maximum number of requests allowed.</li>
-<li>Replace <code>&lt;seconds&gt;</code> with the time window in seconds (for example, 60 for one minute).</li>
-</ul>
-</li>
-<li>Validate the configuration by sending test requests to the API endpoint. Once the limit is exceeded, the API should return a <code>429 Too Many Requests</code> response.</li>
+<li>Locate the <code>api_settings</code> block and set <code>custom_limits_enabled: true</code>, then save the file.</li>
+<li>Restart the scanner daemon to apply the configuration change: <code>sudo systemctl restart scanner-daemon</code></li>
+<li>Apply the custom rate limits using the CLI: <code>scanner-cli config update --api-limit &lt;number&gt; --window &lt;seconds&gt;</code></li>
 </ol>
 
 <h3>Expected results</h3>
-<p>After you apply the custom rate limits, requests to the API are accepted until the limit is reached within the specified time window. When the limit is exceeded, the API returns a <code>429 Too Many Requests</code> response and rejects further requests until the window expires.</p>
+<p>The CLI command returns <code>200 OK: Rate limits updated.</code> When the rate limit is exceeded, the API responds with <code>429 Too Many Requests</code> on the next request.</p>
 
 <h3>Troubleshooting</h3>
-
-<p><strong>Error: <code>403 Forbidden - Rate limit configuration is disabled globally</code></strong></p>
-<p>This error occurs when <code>custom_limits_enabled</code> is not set to <code>true</code> in the <code>api_settings</code> block. Verify that you completed step 3 and that the YAML file was saved correctly. Check that the setting appears as follows:</p>
-<pre><code>api_settings:
-  custom_limits_enabled: true</code></pre>
-
-<p><strong>Still receiving 403 error after enabling the setting</strong></p>
-<p>The daemon caches the configuration in memory and does not automatically reload configuration file changes. After you modify the YAML file, you must restart the daemon as described in step 4: <code>sudo systemctl restart scanner-daemon</code></p>
-
-<p><strong>Error with authentication token</strong></p>
-<p>Verify that your admin token is still valid. Tokens may expire over time. Generate a new admin token and retry the CLI command.</p>
+<p><strong>Error: 403 Forbidden with message "Rate limit configuration is disabled globally"</strong></p>
+<p>You did not enable <code>custom_limits_enabled: true</code> in the <code>api_settings</code> block. Edit the configuration file and set this parameter to <code>true</code>, then restart the daemon.</p>
+<p><strong>Configuration changes not taking effect</strong></p>
+<p>The scanner daemon does not automatically reload configuration changes. You must restart it after editing <code>/etc/scanner/config.yml</code> using <code>sudo systemctl restart scanner-daemon</code></p>
