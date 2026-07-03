@@ -1,0 +1,15 @@
+{
+  "expectations": [
+    {"text": "html-valid-structure", "passed": true, "evidence": "Output contains DOCTYPE, <html lang=\"en\">, <head> with meta tags, and <body> elements in valid HTML5 structure"},
+    {"text": "api-title-present", "passed": true, "evidence": "API name 'Payment Processing API' is present in <h1> tag"},
+    {"text": "endpoint-method-present", "passed": true, "evidence": "HTTP method 'POST' and endpoint '/payments/process' are present in <code>POST /payments/process</code>"},
+    {"text": "authentication-exact-preservation", "passed": true, "evidence": "Authentication section exists with exact wording 'API key in X-API-Key header' in the text"},
+    {"text": "parameters-table-complete", "passed": true, "evidence": "Request Parameters table includes all four parameters (amount, currency, customer_id, metadata) with correct types (number, string, string, object) and required flags (Yes, Yes, Yes, No)"},
+    {"text": "success-response-table-present", "passed": true, "evidence": "Success Response table shows status code 200 with response JSON object containing transaction_id, status, and amount"},
+    {"text": "all-error-codes-present", "passed": true, "evidence": "Error Responses table includes all five error codes: 400, 401, 422, 429, 500"},
+    {"text": "error-descriptions-exact", "passed": true, "evidence": "Error descriptions match source: 400 has 'Invalid currency code or missing required field', 401 has 'Invalid or missing API key', 422 has 'Customer not found or insufficient funds', 429 has 'Rate limit exceeded (10 requests per minute)', 500 has 'Payment processor unavailable'"},
+    {"text": "notes-section-present", "passed": true, "evidence": "Notes section includes rate limit information (10 requests per minute per API key) and retry behavior detail (Retry-After header in 429 responses)"},
+    {"text": "css-classes-applied", "passed": true, "evidence": "Tables have correct CSS classes: api-parameters, api-success-responses, api-error-responses"},
+    {"text": "no-invented-details", "passed": true, "evidence": "All content derives from source notes; no inferred details present (all parameters, error codes, status codes, and descriptions are explicitly documented)"}
+  ]
+}

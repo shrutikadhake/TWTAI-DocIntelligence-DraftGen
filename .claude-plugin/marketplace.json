@@ -1,0 +1,18 @@
+{
+  "name": "TWTAI-DocIntelligence-DraftGen",
+  "owner": {
+    "name": "Poornima",
+    "email": "poornima@example.com"
+  },
+  "metadata": {
+    "description": "Marketplace for the TWTAI-DocIntelligence-DraftGen",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "api-doc-generator",
+      "source": "./plugins/api-doc-generator",
+      "description": "API documentation generation commands and agents"
+    }
+  ]
+}

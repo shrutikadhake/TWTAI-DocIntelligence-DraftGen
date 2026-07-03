@@ -1,0 +1,14 @@
+{
+  "expectations": [
+    {"text": "html-valid-structure", "passed": true, "evidence": "HTML5 document contains DOCTYPE, html, head, and body tags in correct structure"},
+    {"text": "api-title-present", "passed": true, "evidence": "API name 'User Lookup API' present in both <title> tag and <h1> tag"},
+    {"text": "endpoint-method-present", "passed": true, "evidence": "HTTP method 'GET' and endpoint '/api/v1/users/{user_id}' both present in <code> tag under Endpoint section"},
+    {"text": "authentication-section-present", "passed": true, "evidence": "Authentication section exists with text 'Bearer token in Authorization header'"},
+    {"text": "parameters-table-present", "passed": true, "evidence": "Table with class 'api-parameters' present with all required columns: Parameter, Type, Description, Required"},
+    {"text": "success-response-table-present", "passed": true, "evidence": "Table with class 'api-success-responses' present containing status code 200 and response object with id, name, email, created_at fields"},
+    {"text": "error-responses-table-present", "passed": true, "evidence": "Table with class 'api-error-responses' present containing all three required error codes: 401, 404, 500"},
+    {"text": "no-invented-content", "passed": true, "evidence": "All content is based on provided API specification; no placeholder text, 'To be determined', or invented sections present"},
+    {"text": "semantic-html-tables", "passed": true, "evidence": "All three tables use semantic HTML5 with proper <thead>, <tbody>, <tr>, and <td> elements"},
+    {"text": "code-formatting", "passed": true, "evidence": "HTTP method and endpoint are wrapped in <code> tags: '<code>GET /api/v1/users/{user_id}</code>'"}
+  ]
+}

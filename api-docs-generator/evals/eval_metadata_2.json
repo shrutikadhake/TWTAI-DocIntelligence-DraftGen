@@ -1,0 +1,47 @@
+{
+  "eval_id": 2,
+  "eval_name": "minimal-endpoint",
+  "prompt": "Convert these API notes into HTML documentation:\n\n---\nCreate Post\n\nPOST /posts\n\nCreates a new post in the system.\n\nResponse on success (201):\n{\n  \"id\": \"post_789\",\n  \"title\": \"My First Post\",\n  \"body\": \"This is the content.\",\n  \"created_at\": \"2024-01-20T14:22:00Z\"\n}\n---",
+  "assertions": [
+    {
+      "name": "html-valid-structure",
+      "description": "Output contains valid HTML5 structure with DOCTYPE, html, head, and body tags"
+    },
+    {
+      "name": "api-title-present",
+      "description": "API name 'Create Post' is present in the HTML (in title tag or h1)"
+    },
+    {
+      "name": "endpoint-method-present",
+      "description": "HTTP method 'POST' and endpoint '/posts' are present"
+    },
+    {
+      "name": "description-section-present",
+      "description": "Description section exists with text 'Creates a new post in the system'"
+    },
+    {
+      "name": "success-response-present",
+      "description": "Success Response section is present with status code 201 and response JSON structure"
+    },
+    {
+      "name": "no-authentication-section",
+      "description": "Authentication section is NOT present (because source notes do not mention authentication)"
+    },
+    {
+      "name": "no-parameters-section",
+      "description": "Request Parameters section is NOT present (because source notes do not describe parameters)"
+    },
+    {
+      "name": "no-error-section",
+      "description": "Error Responses section is NOT present (because source notes do not describe error responses)"
+    },
+    {
+      "name": "no-invented-sections",
+      "description": "No placeholder or invented sections for missing data. Only sections mentioned in source are included."
+    },
+    {
+      "name": "semantic-html",
+      "description": "Uses semantic HTML5 structure with proper heading hierarchy and code formatting"
+    }
+  ]
+}

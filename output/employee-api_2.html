@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Onboarding API | API Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
+            color: white;
+            padding: 50px 40px;
+            border-bottom: 4px solid #004578;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        section {
+            margin-bottom: 45px;
+        }
+
+        section:last-child {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            font-size: 1.6em;
+            color: #0078d4;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e8f0f8;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+
+        h3 {
+            font-size: 1.1em;
+            color: #2c3e50;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #34495e;
+            font-size: 1em;
+        }
+
+        .endpoint-box {
+            background: #f8f9fa;
+            border-left: 4px solid #0078d4;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.05em;
+            color: #2c3e50;
+            letter-spacing: 0.5px;
+        }
+
+        .endpoint-box code {
+            background: transparent;
+            color: #d63384;
+            font-weight: 600;
+            padding: 0;
+        }
+
+        .auth-box {
+            background: #f0f8ff;
+            border-left: 4px solid #0066cc;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 6px;
+            color: #003d99;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #ffffff;
+            border: 1px solid #d4dce6;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        thead {
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
+            color: white;
+        }
+
+        th {
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95em;
+            letter-spacing: 0.3px;
+            border-bottom: 2px solid #004578;
+        }
+
+        td {
+            padding: 14px 20px;
+            border-bottom: 1px solid #e8eef5;
+            font-size: 0.95em;
+        }
+
+        tbody tr:hover {
+            background-color: #f8f9fa;
+            transition: background-color 0.2s ease;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        code {
+            background-color: #f4f6f8;
+            color: #d63384;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .param-required {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .param-optional {
+            color: #6c757d;
+        }
+
+        .status-success {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .status-error {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .response-json {
+            background: #f8f9fa;
+            border: 1px solid #d4dce6;
+            border-radius: 6px;
+            padding: 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #2c3e50;
+            overflow-x: auto;
+            line-height: 1.5;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge-post {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .badge-201 {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .badge-error {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 40px;
+            border-top: 1px solid #d4dce6;
+            text-align: center;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 30px 20px;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 12px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Employee Onboarding API</h1>
+            <p>Create and manage employee records in the HR system</p>
+        </header>
+
+        <div class="content">
+            <!-- Overview Section -->
+            <section>
+                <h2>Overview</h2>
+                <p>The Employee Onboarding API enables you to create new employee records in the HR system. This endpoint accepts employee information and returns the created employee object with a unique identifier.</p>
+            </section>
+
+            <!-- Endpoint Section -->
+            <section>
+                <h2>Endpoint</h2>
+                <div class="endpoint-box">
+                    <span class="badge badge-post">POST</span> <code>/employees</code>
+                </div>
+            </section>
+
+            <!-- Authentication Section -->
+            <section>
+                <h2>Authentication</h2>
+                <div class="auth-box">
+                    <strong>Type:</strong> Bearer Token<br>
+                    <strong>Usage:</strong> Include the token in the <code>Authorization</code> header as <code>Bearer {token}</code>
+                </div>
+            </section>
+
+            <!-- Request Parameters Section -->
+            <section>
+                <h2>Request Parameters</h2>
+                <p>The request body should contain the following JSON fields:</p>
+                <table class="api-parameters">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>first_name</code></td>
+                            <td>string</td>
+                            <td><span class="param-required">Yes</span></td>
+                            <td>Employee's first name</td>
+                        </tr>
+                        <tr>
+                            <td><code>last_name</code></td>
+                            <td>string</td>
+                            <td><span class="param-required">Yes</span></td>
+                            <td>Employee's last name</td>
+                        </tr>
+                        <tr>
+                            <td><code>email</code></td>
+                            <td>string</td>
+                            <td><span class="param-required">Yes</span></td>
+                            <td>Employee's email address</td>
+                        </tr>
+                        <tr>
+                            <td><code>department</code></td>
+                            <td>string</td>
+                            <td><span class="param-optional">No</span></td>
+                            <td>Employee's department (optional)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Success Response Section -->
+            <section>
+                <h2>Success Response</h2>
+                <p><span class="badge badge-201">201 Created</span> Successfully created a new employee record</p>
+                <p><strong>Response Body:</strong></p>
+                <table class="api-success-responses">
+                    <thead>
+                        <tr>
+                            <th>Status Code</th>
+                            <th>Response</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="status-success">201</span></td>
+                            <td>
+                                <div class="response-json">
+{
+  "id": "emp_123456",
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "john.doe@company.com",
+  "department": "Engineering"
+}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Error Responses Section -->
+            <section>
+                <h2>Error Responses</h2>
+                <p>The API returns standard HTTP error status codes. Refer to the following table for details:</p>
+                <table class="api-error-responses">
+                    <thead>
+                        <tr>
+                            <th>Status Code</th>
+                            <th>Error Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="status-error">400</span></td>
+                            <td>Bad Request</td>
+                            <td>Invalid request payload or missing required fields</td>
+                        </tr>
+                        <tr>
+                            <td><span class="status-error">401</span></td>
+                            <td>Unauthorized</td>
+                            <td>Authentication failed or invalid bearer token provided</td>
+                        </tr>
+                        <tr>
+                            <td><span class="status-error">409</span></td>
+                            <td>Conflict</td>
+                            <td>Employee with the provided email already exists in the system</td>
+                        </tr>
+                        <tr>
+                            <td><span class="status-error">500</span></td>
+                            <td>Internal Server Error</td>
+                            <td>An unexpected error occurred on the server. Please retry the request.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Employee Onboarding API Documentation. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "skill_name": "api-docs-generator",
+  "evals": [
+    {
+      "id": 1,
+      "name": "straightforward-get-endpoint",
+      "prompt": "Convert these API notes into HTML documentation:\n\n---\nUser Lookup API\n\nRetrieve user details by ID.\n\nGET /api/v1/users/{user_id}\n\nAuthentication: Bearer token in Authorization header\n\nRequest Parameters:\n- user_id (path, required): The unique identifier for the user\n- include_profile (query, optional): Include user profile information (boolean)\n\nSuccess Response (200):\n{\n  \"id\": \"usr_12345\",\n  \"name\": \"Alice Johnson\",\n  \"email\": \"alice@example.com\",\n  \"created_at\": \"2023-01-15T10:30:00Z\"\n}\n\nError Responses:\n- 401 Unauthorized: Missing or invalid Bearer token\n- 404 Not Found: User ID does not exist\n- 500 Internal Server Error: Server error occurred\n---",
+      "expected_output": "Complete HTML5 page with API documentation including endpoint method, authentication details, parameters table, success response, and error responses table",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "minimal-endpoint",
+      "prompt": "Convert these API notes into HTML documentation:\n\n---\nCreate Post\n\nPOST /posts\n\nCreates a new post in the system.\n\nResponse on success (201):\n{\n  \"id\": \"post_789\",\n  \"title\": \"My First Post\",\n  \"body\": \"This is the content.\",\n  \"created_at\": \"2024-01-20T14:22:00Z\"\n}\n---",
+      "expected_output": "Complete HTML5 page with only the sections present in the source: endpoint, description, and success response. No authentication, parameters, or error sections.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "complex-endpoint-with-constraints",
+      "prompt": "Convert these API notes into HTML documentation:\n\n---\nPayment Processing API\n\nProcess a payment transaction.\n\nPOST /payments/process\n\nAuthentication: API key in X-API-Key header\n\nRequest body:\n- amount (required, number): Transaction amount in cents\n- currency (required, string): ISO 4217 currency code (e.g., USD, EUR)\n- customer_id (required, string): Unique customer identifier\n- metadata (optional, object): Additional transaction metadata\n\nSuccess (200):\n{ \"transaction_id\": \"txn_abc123\", \"status\": \"completed\", \"amount\": 5000 }\n\nErrors:\n- 400 Bad Request: Invalid currency code or missing required field\n- 401 Unauthorized: Invalid or missing API key\n- 422 Unprocessable Entity: Customer not found or insufficient funds\n- 429 Too Many Requests: Rate limit exceeded (10 requests per minute)\n- 500 Internal Server Error: Payment processor unavailable\n\nRate Limit: 10 requests per minute per API key\nRetry-After header included in 429 responses\n---",
+      "expected_output": "Complete HTML5 page with endpoint, authentication, parameters table, success response, error responses table with all error codes, and a notes section covering rate limits and retry behavior",
+      "files": []
+    }
+  ]
+}

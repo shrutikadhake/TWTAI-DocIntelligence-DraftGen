@@ -1,0 +1,18 @@
+document new employee onboarding API.
+
+POST endpoint: /employees
+
+to create a new employee record in the HR system.
+
+authenticate using a bearer token.
+
+The request has first name, last name and email. Department - optional.
+
+Successful request - status code 201 and the created employee object.
+
+Possible failures:
+- 400 if the request is invalid
+- 401 if authentication fails
+- 409 if the employee already exists
+- 500 for server errors
+

@@ -1,0 +1,51 @@
+{
+  "eval_id": 3,
+  "eval_name": "complex-endpoint-with-constraints",
+  "prompt": "Convert these API notes into HTML documentation:\n\n---\nPayment Processing API\n\nProcess a payment transaction.\n\nPOST /payments/process\n\nAuthentication: API key in X-API-Key header\n\nRequest body:\n- amount (required, number): Transaction amount in cents\n- currency (required, string): ISO 4217 currency code (e.g., USD, EUR)\n- customer_id (required, string): Unique customer identifier\n- metadata (optional, object): Additional transaction metadata\n\nSuccess (200):\n{ \"transaction_id\": \"txn_abc123\", \"status\": \"completed\", \"amount\": 5000 }\n\nErrors:\n- 400 Bad Request: Invalid currency code or missing required field\n- 401 Unauthorized: Invalid or missing API key\n- 422 Unprocessable Entity: Customer not found or insufficient funds\n- 429 Too Many Requests: Rate limit exceeded (10 requests per minute)\n- 500 Internal Server Error: Payment processor unavailable\n\nRate Limit: 10 requests per minute per API key\nRetry-After header included in 429 responses\n---",
+  "assertions": [
+    {
+      "name": "html-valid-structure",
+      "description": "Output contains valid HTML5 structure with DOCTYPE, html, head, and body tags"
+    },
+    {
+      "name": "api-title-present",
+      "description": "API name 'Payment Processing API' is present in the HTML"
+    },
+    {
+      "name": "endpoint-method-present",
+      "description": "HTTP method 'POST' and endpoint '/payments/process' are present"
+    },
+    {
+      "name": "authentication-exact-preservation",
+      "description": "Authentication section exists and uses exact wording 'API key in X-API-Key header'"
+    },
+    {
+      "name": "parameters-table-complete",
+      "description": "Request Parameters table includes all four parameters: amount, currency, customer_id, metadata with correct types and required flags"
+    },
+    {
+      "name": "success-response-table-present",
+      "description": "Success Response table shows status 200 with response JSON"
+    },
+    {
+      "name": "all-error-codes-present",
+      "description": "Error Responses table includes all five error codes: 400, 401, 422, 429, 500"
+    },
+    {
+      "name": "error-descriptions-exact",
+      "description": "Error descriptions match source exactly: 'Invalid currency code or missing required field', 'Invalid or missing API key', etc."
+    },
+    {
+      "name": "notes-section-present",
+      "description": "Notes section includes rate limit information and retry behavior details"
+    },
+    {
+      "name": "css-classes-applied",
+      "description": "Tables have correct CSS classes: api-parameters, api-success-responses, api-error-responses"
+    },
+    {
+      "name": "no-invented-details",
+      "description": "No inferred or invented details. All content derives from source notes."
+    }
+  ]
+}

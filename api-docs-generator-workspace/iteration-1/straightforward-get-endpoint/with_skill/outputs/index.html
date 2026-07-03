@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Lookup API Documentation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 { border-bottom: 3px solid #0078d4; padding-bottom: 10px; }
+        h2 { color: #0078d4; margin-top: 30px; }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+            font-weight: 600;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .section-note {
+            background-color: #e8f4f8;
+            border-left: 4px solid #0078d4;
+            padding: 10px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Lookup API</h1>
+
+    <h2>Description</h2>
+    <p>Retrieve user details by ID.</p>
+
+    <h2>Endpoint</h2>
+    <p><code>GET /api/v1/users/{user_id}</code></p>
+
+    <h2>Authentication</h2>
+    <p>Bearer token in Authorization header</p>
+
+    <h2>Request Parameters</h2>
+    <table class="api-parameters">
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Required</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>user_id</code></td>
+                <td>string</td>
+                <td>The unique identifier for the user</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td><code>include_profile</code></td>
+                <td>boolean</td>
+                <td>Include user profile information</td>
+                <td>No</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Success Response</h2>
+    <table class="api-success-responses">
+        <thead>
+            <tr>
+                <th>Status Code</th>
+                <th>Response Body</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>200</td>
+                <td><code>{ "id": "usr_12345", "name": "Alice Johnson", "email": "alice@example.com", "created_at": "2023-01-15T10:30:00Z" }</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Error Responses</h2>
+    <table class="api-error-responses">
+        <thead>
+            <tr>
+                <th>Status Code</th>
+                <th>Error Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>401</td>
+                <td>Unauthorized: Missing or invalid Bearer token</td>
+            </tr>
+            <tr>
+                <td>404</td>
+                <td>Not Found: User ID does not exist</td>
+            </tr>
+            <tr>
+                <td>500</td>
+                <td>Internal Server Error: Server error occurred</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
