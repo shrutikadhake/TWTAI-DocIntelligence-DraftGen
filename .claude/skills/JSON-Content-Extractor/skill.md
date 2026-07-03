@@ -1,4 +1,3 @@
-````markdown
 ---
 name: JSON to HTML Technical Documentation
 description: Converts technical documentation provided in JSON format into clean, semantic HTML.
@@ -130,15 +129,3 @@ Whenever applicable, organize the output using the following structure:
   </section>
 
 </article>
-````
-
-If a section is not available in the source JSON, omit that section from the output.
-
-
-## Output
-
-* Return only the generated HTML enclosed within a single `<article>` element.
-* Do not include Markdown, explanations, or commentary outside the HTML.
-
-```
-```

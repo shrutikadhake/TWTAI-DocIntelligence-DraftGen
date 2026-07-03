@@ -1,4 +1,3 @@
-```markdown
 ## Documentation Style Guide
 
 Apply the documentation style guide specified by the user.
@@ -121,4 +120,3 @@ Regardless of the selected style guide:
 - Produce properly indented HTML.
 - Ensure all HTML tags are correctly nested and closed.
 - Omit documentation sections that are not present in the input.
-```

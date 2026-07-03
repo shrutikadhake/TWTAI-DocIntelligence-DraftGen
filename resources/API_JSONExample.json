@@ -1,0 +1,127 @@
+{
+    "title": "Create User API",
+    "product": "Enterprise User Management Service",
+    "version": "v2.1",
+  
+    "overview": "Creates a new user account in the Enterprise User Management Service. The API returns the created user details upon successful completion.",
+  
+    "baseUrl": "https://api.example.com",
+  
+    "endpoint": "/v2/users",
+  
+    "method": "POST",
+  
+    "authentication": {
+      "type": "Bearer Token",
+      "header": "Authorization: Bearer <access_token>"
+    },
+  
+    "permissions": [
+      "User.Create"
+    ],
+  
+    "requestHeaders": [
+      {
+        "name": "Authorization",
+        "value": "Bearer <access_token>",
+        "required": true
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json",
+        "required": true
+      }
+    ],
+  
+    "requestBody": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@example.com",
+      "department": "Engineering",
+      "role": "Developer",
+      "active": true
+    },
+  
+    "requestParameters": [
+      {
+        "name": "sendWelcomeEmail",
+        "type": "boolean",
+        "required": false,
+        "description": "Sends a welcome email after the user account is created."
+      }
+    ],
+  
+    "sampleRequest": {
+      "method": "POST",
+      "url": "https://api.example.com/v2/users?sendWelcomeEmail=true",
+      "body": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john.doe@example.com",
+        "department": "Engineering",
+        "role": "Developer",
+        "active": true
+      }
+    },
+  
+    "successResponse": {
+      "statusCode": 201,
+      "description": "User created successfully.",
+      "body": {
+        "userId": "USR-10245",
+        "status": "Created",
+        "createdDate": "2026-07-03T10:30:00Z"
+      }
+    },
+  
+    "errorResponses": [
+      {
+        "statusCode": 400,
+        "error": "Bad Request",
+        "description": "One or more required fields are missing or invalid."
+      },
+      {
+        "statusCode": 401,
+        "error": "Unauthorized",
+        "description": "Authentication token is missing or invalid."
+      },
+      {
+        "statusCode": 403,
+        "error": "Forbidden",
+        "description": "The authenticated user does not have permission to create users."
+      },
+      {
+        "statusCode": 409,
+        "error": "Conflict",
+        "description": "A user with the specified email address already exists."
+      }
+    ],
+  
+    "validationRules": [
+      "Email address must be unique.",
+      "First Name is required.",
+      "Last Name is required.",
+      "Role must exist in the system."
+    ],
+  
+    "notes": [
+      "User IDs are generated automatically.",
+      "Email addresses are stored in lowercase."
+    ],
+  
+    "warnings": [
+      "Deleting a user is a separate operation.",
+      "Do not expose access tokens in client-side code."
+    ],
+  
+    "rateLimiting": {
+      "limit": "100 requests per minute",
+      "retryAfter": "60 seconds"
+    },
+  
+    "relatedApis": [
+      "Get User API",
+      "Update User API",
+      "Delete User API"
+    ]
+  }

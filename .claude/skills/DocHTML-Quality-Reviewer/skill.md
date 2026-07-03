@@ -1,4 +1,3 @@
-```markdown
 ---
 name: Technical Documentation Quality Reviewer
 description: Reviews HTML technical documentation for structure, completeness, technical writing quality, semantic HTML, accessibility, and publication readiness.
@@ -164,4 +163,3 @@ Return:
 3. If a Filesystem MCP is available and the user requests file output, save the corrected HTML to the specified output location.
 
 Do not include explanations outside the requested outputs.
-```
