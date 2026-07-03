@@ -1,0 +1,45 @@
+[2026-06-25 09:02] Mark (PM): Morning everyone. Are we ready to sign off on the custom API rate limits for the v10.12 release? Docs team needs the final procedure by tomorrow.
+[2026-06-25 09:05] John (QA): I still need to run the end-to-end test on the staging environment. Sarah, do you have the exact steps to configure it? 
+[2026-06-25 09:08] Sarah (Dev): Hey John. Yeah, it’s pretty straightforward now. You just need to hit the config endpoint using the CLI and pass the new rate limit values.
+[2026-06-25 09:09] Sarah (Dev): Run this:
+[2026-06-25 09:09] Sarah (Dev): scanner-cli config update --api-limit 1000 --window 60
+[2026-06-25 09:10] John (QA): Thanks. Give me a sec, firing up the staging server now.
+[2026-06-25 09:15] John (QA): Okay, I ran it, but it threw a 403 Forbidden error. 
+[2026-06-25 09:16] John (QA): `Error 403: Rate limit configuration is disabled globally.`
+[2026-06-25 09:18] Sarah (Dev): Wait, really? Did you authenticate with the admin token?
+[2026-06-25 09:19] John (QA): Yeah, I used the same token I generated yesterday. Let me check if it expired. 
+[2026-06-25 09:22] John (QA): Token is valid. Is there a cache issue? Staging has been acting weird since the weekend patch.
+[2026-06-25 09:25] Sarah (Dev): Ah, damn. My bad. I completely forgot about the new prerequisite we added on Tuesday. You have to enable the custom limits in the global YAML file first before the CLI commands will be accepted.
+[2026-06-25 09:26] John (QA): Lol okay. Where is the YAML file and what do I add?
+[2026-06-25 09:28] Sarah (Dev): It's in `/etc/scanner/config.yml`.
+[2026-06-25 09:29] Sarah (Dev): Open it up, look for the `api_settings` block, and change `custom_limits_enabled` from false to true.
+[2026-06-25 09:30] Sarah (Dev): Should look like this:
+[2026-06-25 09:30] Sarah (Dev): 
+api_settings:
+  timeout: 30
+  custom_limits_enabled: true
+  default_limit: 500
+[2026-06-25 09:35] John (QA): Got it. Updated the YAML. Running the CLI command again...
+[2026-06-25 09:37] John (QA): Nope, still getting the 403. Did you push the latest build to Staging-B?
+[2026-06-25 09:40] Sarah (Dev): Yeah, I pushed it last night at 11 PM UTC. Wait, what timezone is your Staging-B server on?
+[2026-06-25 09:41] John (QA): It's on IST.
+[2026-06-25 09:42] Sarah (Dev): Okay, that shouldn't matter for the config. Did you restart the daemon after saving the YAML file? It doesn't hot-reload.
+[2026-06-25 09:44] John (QA): Ah. No, I didn't. 
+[2026-06-25 09:45] John (QA): Brb, going to grab a coffee while the service restarts.
+[2026-06-25 09:46] Mark (PM): Please tell me we aren't blocked on this. I have a sync with the release managers in an hour.
+[2026-06-25 09:48] Sarah (Dev): Not blocked, just testing the sequence. It'll be fine.
+[2026-06-25 09:55] John (QA): Back. Okay, daemon restarted (`sudo systemctl restart scanner-daemon`). 
+[2026-06-25 09:56] John (QA): Now I ran `scanner-cli config update --api-limit 1000 --window 60`
+[2026-06-25 09:57] John (QA): Success! Got `200 OK: Rate limits updated.`
+[2026-06-25 10:00] Sarah (Dev): Awesome. Can you verify it applied by sending a test curl?
+[2026-06-25 10:02] John (QA): Yep, just spammed the endpoint. It blocked me on the 1001st request with a `429 Too Many Requests`. Looks perfect.
+[2026-06-25 10:05] Mark (PM): Excellent. So what is the final procedure for the user documentation? We need to send this to the Tech Writers today so they can run their Draft Generator skill.
+[2026-06-25 10:08] Sarah (Dev): Okay, here is the clean sequence they need:
+[2026-06-25 10:09] Sarah (Dev): 1. Log into the host server as root.
+[2026-06-25 10:09] Sarah (Dev): 2. Open `/etc/scanner/config.yml` in a text editor.
+[2026-06-25 10:10] Sarah (Dev): 3. Under `api_settings`, set `custom_limits_enabled: true` and save the file.
+[2026-06-25 10:10] Sarah (Dev): 4. Restart the service using `sudo systemctl restart scanner-daemon`.
+[2026-06-25 10:11] Sarah (Dev): 5. Apply the custom limits using the CLI: `scanner-cli config update --api-limit <number> --window <seconds>`.
+[2026-06-25 10:12] John (QA): Looks accurate to me. Make sure to note that the default if they skip step 3 is a 403 error. 
+[2026-06-25 10:14] Sarah (Dev): Good call. I'll drop this log in the project folder so the Doc team can process it. 
+[2026-06-25 10:15] Mark (PM): Thanks both. Heading to lunch.
