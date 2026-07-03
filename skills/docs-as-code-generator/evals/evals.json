@@ -1,0 +1,26 @@
+{
+  "skill_name": "docs-as-code-generator",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "task-topic-rate-limits",
+      "prompt": "Convert `resources/v10_12_rate_limit_chat.txt` into a Task topic HTML. Extract the procedural steps for configuring custom API rate limits. Include prerequisites (particularly the global YAML file modification at /etc/scanner/config.yml), step-by-step configuration procedure, expected results (429 Too Many Requests validation), and troubleshooting section (403 Forbidden error when prerequisites are missed). Validate all content against Microsoft Manual of Style using the Microsoft Learn MCP server. Flag any missing procedural elements with HTML comments.",
+      "expected_output": "Clean semantic HTML5 Task topic with: <h1> title, intro paragraph, <h3>Prerequisites section with YAML file path in <code>, <ol> containing at least 5 numbered steps (edit YAML, set custom_limits_enabled: true, restart daemon, run CLI command, validate with test), <h3>Expected Results section showing 429 response, <h3>Troubleshooting section explaining 403 error. All code elements wrapped in <code> tags. No hallucinated steps.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "eval_name": "reference-topic-parameters",
+      "prompt": "Extract reference documentation from `resources/v10_12_rate_limit_chat.txt`. Generate a reference topic HTML documenting the rate limit configuration parameters (api-limit, window), their types, valid values, and CLI command signatures. Include the YAML configuration block structure. Apply Microsoft Manual of Style validation. Flag any missing parameter definitions or type information.",
+      "expected_output": "Clean semantic HTML5 reference topic with: <h1> title, <h3>Configuration Parameters section with structured list or table showing parameter names, types, defaults, and ranges (api-limit: integer, window: seconds), <h3>CLI Commands section with scanner-cli command signatures and return values (200 OK response), code blocks with proper formatting, YAML structure example, all grounded in source log. No invented parameters.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "eval_name": "concept-topic-feature-overview",
+      "prompt": "Convert `resources/v10_12_rate_limit_chat.txt` into a Concept topic HTML explaining how custom API rate limits work in the AppScan Enterprise system. Extract the design purpose, how it interacts with existing components (YAML config, daemon, CLI), and the prerequisite flow. Apply Microsoft Manual of Style validation. Flag missing conceptual elements or undefined technical terms.",
+      "expected_output": "Clean semantic HTML5 concept topic with: <h1> title explaining the feature, intro paragraph, <h3>How It Works section explaining the relationship between YAML config and daemon behavior, <h3>Components section explaining role of config file, daemon, and CLI, <h3>Prerequisites and Validation section, examples showing the successful 429 response behavior. All grounded in source log. May include validation flags if source lacks certain conceptual details.",
+      "files": []
+    }
+  ]
+}
