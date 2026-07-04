@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio</title>
+<meta name="description" content="Professional portfolio and résumé." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="nav">
+    <span class="nav-brand" id="nav-name"></span>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+  </div>
+</header>
+
+<header id="hero" class="hero"></header>
+
+<main id="main">
+  <section id="summary-section" class="section" aria-labelledby="summary-heading" hidden>
+    <h2 id="summary-heading">Summary</h2>
+    <p id="summary"></p>
+  </section>
+
+  <section id="skills-section" class="section" aria-labelledby="skills-heading" hidden>
+    <h2 id="skills-heading">Skills</h2>
+    <div id="skill-list" class="skills-grid"></div>
+  </section>
+
+  <section id="experience-section" class="section" aria-labelledby="experience-heading" hidden>
+    <h2 id="experience-heading">Career Timeline</h2>
+    <div id="work-list" class="timeline"></div>
+  </section>
+
+  <section id="projects-section" class="section" aria-labelledby="projects-heading" hidden>
+    <h2 id="projects-heading">Projects</h2>
+    <div id="project-list" class="cards-grid"></div>
+  </section>
+
+  <section id="education-section" class="section" aria-labelledby="education-heading" hidden>
+    <h2 id="education-heading">Education</h2>
+    <div id="edu-list"></div>
+  </section>
+
+  <section id="certificates-section" class="section" aria-labelledby="certificates-heading" hidden>
+    <h2 id="certificates-heading">Certificates</h2>
+    <div id="cert-list" class="skills-grid"></div>
+  </section>
+
+  <section id="languages-section" class="section" aria-labelledby="languages-heading" hidden>
+    <h2 id="languages-heading">Languages</h2>
+    <ul id="language-list" class="tag-list"></ul>
+  </section>
+
+  <section id="contact-section" class="section" aria-labelledby="contact-heading" hidden>
+    <h2 id="contact-heading">Get In Touch</h2>
+    <a id="contact-btn" class="btn">Email me</a>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p id="footer-text"></p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

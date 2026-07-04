@@ -1,0 +1,128 @@
+{
+  "basics": {
+    "name": "John Smith",
+    "label": "Technical Documentation Specialist",
+    "image": "",
+    "email": "john.smith@email.com",
+    "phone": "+91 98765 43210",
+    "location": {
+      "city": "Bangalore",
+      "region": "Karnataka",
+      "countryCode": "IN"
+    },
+    "summary": "Detail-oriented and motivated professional with experience in technical documentation, project coordination, and stakeholder communication. Skilled in creating clear documentation, managing cross-functional projects, and using modern productivity and collaboration tools.",
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "johnsmith",
+        "url": "https://linkedin.com/in/johnsmith"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "ABC Technologies Pvt. Ltd.",
+      "position": "Technical Documentation Specialist",
+      "startDate": "2023-06",
+      "endDate": "",
+      "summary": "Creating and maintaining technical documentation for software products and services.",
+      "highlights": [
+        "Created and maintained technical documentation for software products",
+        "Developed user guides, API documentation, and release notes",
+        "Collaborated with developers and QA teams to ensure documentation accuracy"
+      ]
+    },
+    {
+      "name": "XYZ Solutions Pvt. Ltd.",
+      "position": "Project Coordinator",
+      "startDate": "2021-01",
+      "endDate": "2023-05",
+      "summary": "Coordinated project activities and maintained project documentation.",
+      "highlights": [
+        "Coordinated cross-functional project activities and timelines",
+        "Maintained comprehensive project documentation",
+        "Supported stakeholder communication and reporting"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Visvesvaraya Technological University",
+      "studyType": "Bachelor of Engineering",
+      "area": "Computer Science",
+      "startDate": "2017",
+      "endDate": "2021"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Technical Writing & Documentation",
+      "keywords": [
+        "Technical Writing",
+        "API Documentation",
+        "Content Development",
+        "Markdown"
+      ]
+    },
+    {
+      "name": "Project & Process Management",
+      "keywords": [
+        "Project Coordination",
+        "Agile Methodologies",
+        "Research and Analysis"
+      ]
+    },
+    {
+      "name": "Tools & Technologies",
+      "keywords": [
+        "Microsoft Office Suite",
+        "Git and GitHub",
+        "Confluence"
+      ]
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Certified Scrum Master",
+      "issuer": ""
+    },
+    {
+      "name": "Technical Writing Fundamentals",
+      "issuer": ""
+    },
+    {
+      "name": "Introduction to API Documentation",
+      "issuer": ""
+    }
+  ],
+  "projects": [
+    {
+      "name": "API Documentation Project",
+      "description": "Created API reference documentation using Markdown.",
+      "highlights": [
+        "Created API reference documentation using Markdown"
+      ]
+    },
+    {
+      "name": "Documentation Quality Review Project",
+      "description": "Performed content audits and improved documentation quality.",
+      "highlights": [
+        "Performed content audits and improved quality"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Fluent"
+    },
+    {
+      "language": "Hindi",
+      "fluency": "Fluent"
+    },
+    {
+      "language": "Kannada",
+      "fluency": "Conversational"
+    }
+  ]
+}
