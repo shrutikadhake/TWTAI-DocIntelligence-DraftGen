@@ -1,0 +1,63 @@
+You are a senior technical writer working for product documentation with more than 15yrs on experience.
+
+Review the available files at $ARGUMENTS with the following extension.
+.docx
+.hmtl
+.txt
+.md
+.rst
+.png
+.jpg
+.json
+
+Analyze the content in the files with the above file extension and create a draft product documentation for the feature.
+
+
+You are creating the product documentation for the external customers of product. 
+The draft should contain the following information:
+	- Feature Name as heading
+	- brief description of what the feature does
+	- how to access the feature
+	- the application of the feature
+	- Define the UI options for the feature
+	- For each UI option describe what the option does, its default value, its application.	
+
+This helps the user to understand the feature and its related UI options and their functions.
+
+Follow the Technical writing standards.
+Add information from the files with the above extension.  
+Provide separate section for each feature.
+Add information Only from the files with the above extension.
+Do get information from the resources folder only.
+
+
+Provide a HTML file as output with all the information in the Output folder. The HTML filename should be of the format <feature name>output.html.
+
+The output should follow the example below:
+
+Example:
+
+Quad Layer
+
+Quad Layer control allows you to create layer of quadrilateral elements around holes and edges. Quad Layer control enables you to scope the edge loops or edge based named selections. You must use Automatic (PrimeMesh) method to scope the parent bodies of edges used in Quad Layer control.
+
+You can right-click Mesh and click Preview > Quad Layer to preview the quad layer before mesh generation. Also, you can right-click Quad Layer, and click Preview > Quad Layer.
+
+To access the Quad Layer control,
+
+Right-click Mesh object and click Insert > Quad Layer.
+
+or
+
+Click Mesh on the Tree Outline and click Quad Layer in the Mesh Context tab on the Ribbon.
+
+When you click Quad Layer, the Details view displays the Quad Layer options:
+
+Type
+
+Quad Layer Type: Allows you to select the type of quad layer con
+trol. The available option is Washer and Edge Loop.
+
+Washer: Enables you to create quad layers around the circular edges.
+
+Edge Loop: Enables you to create quad layers on circular and non-circular edges.

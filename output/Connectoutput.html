@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #333;
+      background-color: #fafafa;
+    }
+    h1 {
+      color: #2c3e50;
+      border-bottom: 3px solid #e74c3c;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #34495e;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      border-left: 4px solid #e74c3c;
+      padding-left: 15px;
+    }
+    h3 {
+      color: #555;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    p {
+      margin: 10px 0;
+      text-align: justify;
+    }
+    .section {
+      background-color: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .option-container {
+      background-color: #f8f9fa;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-left: 4px solid #27ae60;
+      border-radius: 3px;
+    }
+    .label {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    .warning {
+      background-color: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 3px;
+    }
+    ul {
+      margin: 10px 0;
+      padding-left: 25px;
+    }
+    li {
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Connect</h1>
+
+  <div class="section">
+    <p>The Connect feature allows you to create conformal mesh between the selected entities. This feature is designed to ensure proper mesh continuity and compatibility between adjacent bodies and surfaces in your model.</p>
+  </div>
+
+  <h2>How to Access</h2>
+  <div class="section">
+    <p>To access the Connect control:</p>
+    <ol>
+      <li>Right-click the Mesh object in the Tree Outline</li>
+      <li>Click <strong>Insert</strong> > <strong>Connect</strong></li>
+    </ol>
+  </div>
+
+  <h2>Applications</h2>
+  <div class="section">
+    <p>The Connect feature is used when you need to:</p>
+    <ul>
+      <li>Create conformal mesh connections between selected entities</li>
+      <li>Ensure mesh continuity between adjacent bodies and surfaces</li>
+      <li>Work with bodies scoped under the Automatic Prime method</li>
+      <li>Ensure all bodies scoped under Weld are meshed together</li>
+      <li>Define connection tolerance for mesh compatibility</li>
+    </ul>
+  </div>
+
+  <h2>UI Options</h2>
+
+  <div class="option-container">
+    <h3>Suppressed</h3>
+    <p><span class="label">Description:</span> Suppress the Connect control. When set to Yes, the Active field displays the status of the Connect control.</p>
+    <p><span class="label">Default Value:</span> No</p>
+  </div>
+
+  <div class="option-container">
+    <h3>Multiple Connection Steps</h3>
+    <p><span class="label">Description:</span> Enable multiple values for connection tolerance to be applied in sequential steps.</p>
+    <p><span class="label">Default Value:</span> No</p>
+    <p><span class="label">Application:</span> When enabled, allows you to provide multiple tolerance values for progressive connection refinement.</p>
+  </div>
+
+  <div class="option-container">
+    <h3>Connection Tolerance</h3>
+    <p><span class="label">Description:</span> Specify the tolerance value for connection. When Multiple Connection Steps is set to Yes, you can provide multiple connection tolerance values.</p>
+    <p><span class="label">Available Options:</span></p>
+    <ul>
+      <li><strong>Single Tolerance Value:</strong> Applies a single tolerance for all connection operations</li>
+      <li><strong>Connection Tolerance List:</strong> Specify any number of connection tolerance values separated by a space. The first value in the list performs face-to-face intersections, short edge removal, and thin face removal. From the second tolerance value onwards, only the unconnected (free) edges are considered for performing connections.</li>
+    </ul>
+  </div>
+
+  <div class="option-container">
+    <h3>Connection Size</h3>
+    <p><span class="label">Description:</span> Specify the size with which you discretize the edges before connecting them.</p>
+    <p><span class="label">Default Value:</span> Element Size</p>
+  </div>
+
+  <div class="option-container">
+    <h3>Connection Option</h3>
+    <p><span class="label">Description:</span> Select the connect option that best suits your meshing requirements.</p>
+    <p><span class="label">Available Options:</span></p>
+    <ul>
+      <li><strong>All to All:</strong> Connect all edges to all other edges within the tolerance</li>
+      <li><strong>Free to All:</strong> Connect only free (unconnected) edges to all other edges</li>
+      <li><strong>Free to Free:</strong> Connect only free edges to other free edges</li>
+    </ul>
+  </div>
+
+  <div class="warning">
+    <h3>Limitations</h3>
+    <p><strong>Important:</strong> Files having partially saved mesh may have the previously saved mesh cleared. You may need to regenerate the mesh for the entire model after using the Connect feature.</p>
+  </div>
+
+</body>
+</html>

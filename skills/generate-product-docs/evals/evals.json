@@ -1,0 +1,61 @@
+{
+  "skill_name": "generate-product-docs",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I have feature specifications in D:\\twtaiworkshop\\TWTAI-DocIntelligence-DraftGen\\resources folder. Please generate product documentation from these files and create HTML output in the output folder. Include all features found in the specification files.",
+      "expected_output": "HTML files generated for each feature (Weld Extension, and any other features), named with the format <Feature-Name>output.html, saved to the output folder. Documentation follows professional technical writing standards with sections for feature description, access instructions, applications, and UI options.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "html_files_created",
+          "description": "HTML output files are created for each feature found"
+        },
+        {
+          "name": "correct_file_naming",
+          "description": "HTML files follow the <Feature-Name>output.html naming convention"
+        },
+        {
+          "name": "contains_feature_name",
+          "description": "Each HTML contains the feature name as a heading"
+        },
+        {
+          "name": "contains_description",
+          "description": "Each HTML contains a brief description of what the feature does"
+        },
+        {
+          "name": "contains_access_instructions",
+          "description": "Each HTML contains 'How to Access' section with step-by-step instructions"
+        },
+        {
+          "name": "contains_ui_options",
+          "description": "Each HTML documents UI options with descriptions and defaults where applicable"
+        },
+        {
+          "name": "valid_html_structure",
+          "description": "Generated HTML is valid and well-formed"
+        },
+        {
+          "name": "docx_handling",
+          "description": "Any .docx files are skipped and user is informed"
+        },
+        {
+          "name": "professional_formatting",
+          "description": "Documentation follows technical writing standards with clear formatting and language"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Generate customer-facing documentation from the feature specs in the resources directory. Make sure each feature is in its own HTML file and follows the example format provided.",
+      "expected_output": "Multiple HTML files, one per feature, with proper formatting matching the example. Features like 'Weld Extension' should be documented with all available information from the specification files.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Create product documentation from specs in D:\\twtaiworkshop\\TWTAI-DocIntelligence-DraftGen\\resources. Skip any .docx files and let me know which ones were skipped. Include all the information from the other file types.",
+      "expected_output": "Documentation generated from supported file types (.md, .txt, etc.). User informed about any .docx files that were encountered and skipped. HTML output files created for each feature.",
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weld Extension Feature Documentation</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 0;
+        }
+        h2 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weld Extension</h1>
+
+    <p>Weld Extension control allows you to create weld body extensions and generate layers of quad elements on the weld extensions. Weld Extension control enables you to scope the bodies having weld features. The feature supports both planar welds and solid welds.</p>
+
+    <p>To access the Weld Extension control,</p>
+
+    <p>Right-click Mesh object and click Insert > Weld Extension.</p>
+
+    <p>When you click Weld Extension, the Details view displays the Weld Extension options:</p>
+
+    <h2>Scoping Method</h2>
+    <p>Scoping Method: Allows you to define the method for scoping the bodies that contain weld features. The default option is Geometry Selection.</p>
+    <p>Geometry Selection: Scope the geometry bodies to be extended as weld components.</p>
+    <p>Named Selection: Scope the geometry bodies to be suppressed in the named selection.</p>
+
+    <h2>Type</h2>
+    <p>Type: Allows you to select the type of weld extension control.</p>
+    <p>Continuous Weld: Enables you to perform continuous welding along the specified geometry.</p>
+    <p>Intermittent Weld: Enables you to perform discontinuous welding with gaps between weld segments. Source is a read only field.</p>
+
+    <h2>Source</h2>
+    <p>Source: Allows you to select where the weld faces are modeled. The default option is Geometry.</p>
+    <p>Geometry: Select this option when weld faces are created in CAD.</p>
+    <p>Mesh: Select this option when the weld entities are to be created during mesh generation.</p>
+
+</body>
+</html>
