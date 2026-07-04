@@ -142,6 +142,7 @@
 
         tbody tr:hover {
             background-color: #f9fafb;
+            transition: background-color 0.15s ease;
         }
 
         tbody tr:last-child td {
@@ -225,13 +226,13 @@
 
             <section>
                 <h2>Description</h2>
-                <p>Use this endpoint to create a new employee record in the HR system.</p>
+                <p>Create a new employee record in the HR system.</p>
             </section>
 
             <section>
                 <h2>Authentication</h2>
                 <div class="auth-info">
-                    Authenticate the request using a bearer token.
+                    You must authenticate using a Bearer token.
                 </div>
             </section>
 
@@ -241,31 +242,36 @@
                 <table class="api-parameters">
                     <thead>
                         <tr>
-                            <th scope="col">Parameter</th>
-                            <th scope="col">Required</th>
-                            <th scope="col">Description</th>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><code>first name</code></td>
-                            <td><span class="badge badge-required">Required</span></td>
-                            <td>The employee's first name.</td>
+                            <td><code>first_name</code></td>
+                            <td>string</td>
+                            <td><span class="badge badge-required">Yes</span></td>
+                            <td>Employee's first name</td>
                         </tr>
                         <tr>
-                            <td><code>last name</code></td>
-                            <td><span class="badge badge-required">Required</span></td>
-                            <td>The employee's last name.</td>
+                            <td><code>last_name</code></td>
+                            <td>string</td>
+                            <td><span class="badge badge-required">Yes</span></td>
+                            <td>Employee's last name</td>
                         </tr>
                         <tr>
                             <td><code>email</code></td>
-                            <td><span class="badge badge-required">Required</span></td>
-                            <td>The employee's email address.</td>
+                            <td>string</td>
+                            <td><span class="badge badge-required">Yes</span></td>
+                            <td>Employee's email address</td>
                         </tr>
                         <tr>
                             <td><code>department</code></td>
-                            <td><span class="badge badge-optional">Optional</span></td>
-                            <td>The employee's department.</td>
+                            <td>string</td>
+                            <td><span class="badge badge-optional">No</span></td>
+                            <td>Employee's department</td>
                         </tr>
                     </tbody>
                 </table>
@@ -273,18 +279,18 @@
 
             <section>
                 <h2>Success response</h2>
-                <p>A successful request returns the following status code and the created employee object.</p>
+                <p>The API returns a <span class="status-code">201</span> status code with the created employee object.</p>
                 <table class="api-success-responses">
                     <thead>
                         <tr>
-                            <th scope="col">Status code</th>
-                            <th scope="col">Description</th>
+                            <th>Status code</th>
+                            <th>Description</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><span class="status-code">201</span></td>
-                            <td>Created. The API returns the created employee object.</td>
+                            <td>Created. The employee record was created successfully.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -292,22 +298,22 @@
 
             <section>
                 <h2>Error responses</h2>
-                <p>The API can return the following error responses:</p>
+                <p>The API returns one of the following error responses:</p>
                 <table class="api-error-responses">
                     <thead>
                         <tr>
-                            <th scope="col">Status code</th>
-                            <th scope="col">Description</th>
+                            <th>Status code</th>
+                            <th>Description</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><span class="status-code">400</span></td>
-                            <td>Bad request. The request is invalid.</td>
+                            <td>Bad Request. The request is invalid.</td>
                         </tr>
                         <tr>
                             <td><span class="status-code">401</span></td>
-                            <td>Unauthorized. Authentication failed.</td>
+                            <td>Unauthorized. Authentication fails.</td>
                         </tr>
                         <tr>
                             <td><span class="status-code">409</span></td>
@@ -315,7 +321,7 @@
                         </tr>
                         <tr>
                             <td><span class="status-code">500</span></td>
-                            <td>Internal server error. The server encountered an error.</td>
+                            <td>Internal Server Error. Server error occurred.</td>
                         </tr>
                     </tbody>
                 </table>

@@ -77,14 +77,20 @@ Use semantic HTML5 elements and include basic CSS styling for readability.
 
 ### Step 3: Apply Microsoft Writing Style Guide
 
-Use the Microsoft Docs plugin to apply the Microsoft Writing Style Guide.
+Use the `microsoft-learn` MCP server to apply Microsoft documentation standards and writing guidelines.
 
-Apply Microsoft recommendations for:
-- voice and tone
-- terminology
-- active voice
-- sentence case
-- technical writing conventions
+Use Microsoft Learn guidance for:
+- Writing style and tone
+- Active voice
+- Terminology consistency
+- API documentation structure
+- Technical writing best practices
+
+Project-specific requirements:
+- Request parameters must always be rendered as HTML tables.
+- Success responses must always be rendered as HTML tables.
+- Error responses must always be rendered as HTML tables.
+- Never invent API details that are not present in the source notes.
 
 ### Step 4: Render and Save
 
@@ -97,6 +103,31 @@ Save the HTML to a file and ensure it is immediately viewable in a browser. The 
 - **Tables over prose.** Render parameters, responses, and errors as tables for clarity and scannability.
 - **One endpoint per document.** If notes describe multiple endpoints, generate separate HTML documents.
 - **Semantic HTML.** Use proper HTML5 semantics: `<table>`, `<thead>`, `<tbody>`, `<code>`, `<h1>`–`<h6>` for hierarchy.
+
+## STRICT DOCUMENTATION RULES
+
+You must document ONLY information explicitly present in the input file.
+
+DO NOT:
+- invent field validations
+- invent character limits
+- invent example values
+- invent response fields
+- invent timestamps
+- invent authentication formats
+- invent support emails
+- invent SDK examples
+- invent code samples
+- invent business rules
+- invent error resolutions
+
+If information is missing:
+- either omit the section entirely
+- or write "Not specified in the source documentation"
+
+Never assume API behavior.
+Never create placeholder data such as John Doe.
+Never create fields that are not present in the input.
 
 ## Example
 

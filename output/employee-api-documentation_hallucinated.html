@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee API Documentation - Create Employee</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        header {
+            border-bottom: 3px solid #0078d4;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #0078d4;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #0078d4;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            color: #333;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .endpoint-header {
+            background-color: #f0f0f0;
+            border-left: 4px solid #0078d4;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+        }
+
+        .method {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 10px;
+            color: #fff;
+        }
+
+        .method.post {
+            background-color: #10b981;
+        }
+
+        .path {
+            color: #333;
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #0078d4;
+        }
+
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        .required {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .optional {
+            background-color: #d1ecf1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .code-block {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        .code-label {
+            font-weight: 600;
+            color: #0078d4;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        .error-table {
+            width: 100%;
+        }
+
+        .error-code {
+            font-weight: 600;
+            color: #d32f2f;
+        }
+
+        .success-response {
+            border-left: 4px solid #10b981;
+            background-color: #f1fdf4;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .error-response {
+            border-left: 4px solid #d32f2f;
+            background-color: #fde5e5;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .note {
+            background-color: #e8f4f8;
+            border-left: 4px solid #0078d4;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .note strong {
+            color: #0078d4;
+        }
+
+        .type-badge {
+            background-color: #e0e0e0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .status-code {
+            font-weight: 600;
+            font-family: monospace;
+        }
+
+        .status-201 {
+            color: #10b981;
+        }
+
+        .status-400 {
+            color: #f59e0b;
+        }
+
+        .status-401 {
+            color: #d32f2f;
+        }
+
+        .status-409 {
+            color: #d32f2f;
+        }
+
+        .status-500 {
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Employee API</h1>
+            <p class="subtitle">REST API for managing employee records in the HR system</p>
+        </header>
+
+        <main>
+            <!-- Endpoint Overview -->
+            <section>
+                <h2>Create Employee</h2>
+                <p>Creates a new employee record in the HR system. Use this endpoint during the employee onboarding workflow to initialize employee records with basic information.</p>
+
+                <div class="endpoint-header">
+                    <span class="method post">POST</span>
+                    <span class="path">/employees</span>
+                </div>
+            </section>
+
+            <!-- Authentication -->
+            <section>
+                <h2>Authentication</h2>
+                <p>This endpoint requires Bearer token authentication. Include your authentication token in the request header as follows:</p>
+                <div class="code-block">Authorization: Bearer &lt;your_token_here&gt;</div>
+                <p>Contact your administrator to obtain an authentication token for API access.</p>
+            </section>
+
+            <!-- Request -->
+            <section>
+                <h2>Request</h2>
+
+                <h3>Request Headers</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Header</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>Authorization</code></td>
+                            <td><span class="type-badge">string</span></td>
+                            <td><span class="required">Required</span></td>
+                            <td>Bearer token for authentication. Format: <code>Bearer &lt;token&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>Content-Type</code></td>
+                            <td><span class="type-badge">string</span></td>
+                            <td><span class="required">Required</span></td>
+                            <td>Must be <code>application/json</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Request Body Parameters</h3>
+                <p>Send a JSON object with the following parameters:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>first_name</code></td>
+                            <td><span class="type-badge">string</span></td>
+                            <td><span class="required">Required</span></td>
+                            <td>Employee's first name. Maximum 100 characters.</td>
+                        </tr>
+                        <tr>
+                            <td><code>last_name</code></td>
+                            <td><span class="type-badge">string</span></td>
+                            <td><span class="required">Required</span></td>
+                            <td>Employee's last name. Maximum 100 characters.</td>
+                        </tr>
+                        <tr>
+                            <td><code>email</code></td>
+                            <td><span class="type-badge">string</span></td>
+                            <td><span class="required">Required</span></td>
+                            <td>Employee's email address. Must be a valid email format (RFC 5322). Must be unique in the system.</td>
+                        </tr>
+                        <tr>
+                            <td><code>department</code></td>
+                            <td><span class="type-badge">string</span></td>
+                            <td><span class="optional">Optional</span></td>
+                            <td>Department assignment. If not provided, can be updated later. Maximum 100 characters.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Response -->
+            <section>
+                <h2>Response</h2>
+
+                <h3>Success Response</h3>
+                <div class="success-response">
+                    <strong>Status Code:</strong> <span class="status-code status-201">201 Created</span>
+                </div>
+
+                <p>Returns the created employee object with the following fields:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>id</code></td>
+                            <td><span class="type-badge">integer</span></td>
+                            <td>Unique identifier for the employee. Auto-generated by the system.</td>
+                        </tr>
+                        <tr>
+                            <td><code>first_name</code></td>
+                            <td><span class="type-badge">string</span></td>
+                            <td>Employee's first name.</td>
+                        </tr>
+                        <tr>
+                            <td><code>last_name</code></td>
+                            <td><span class="type-badge">string</span></td>
+                            <td>Employee's last name.</td>
+                        </tr>
+                        <tr>
+                            <td><code>email</code></td>
+                            <td><span class="type-badge">string</span></td>
+                            <td>Employee's email address.</td>
+                        </tr>
+                        <tr>
+                            <td><code>department</code></td>
+                            <td><span class="type-badge">string</span></td>
+                            <td>Department assignment. Null if not provided in the request.</td>
+                        </tr>
+                        <tr>
+                            <td><code>created_at</code></td>
+                            <td><span class="type-badge">string</span></td>
+                            <td>ISO 8601 timestamp indicating when the employee record was created.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="code-label">Example Success Response:</div>
+                <div class="code-block">{
+  "id": 12345,
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "john.doe@company.com",
+  "department": "Engineering",
+  "created_at": "2026-07-04T14:30:00Z"
+}</div>
+            </section>
+
+            <!-- Error Responses -->
+            <section>
+                <h2>Error Responses</h2>
+                <table class="error-table">
+                    <thead>
+                        <tr>
+                            <th>Status Code</th>
+                            <th>Error Type</th>
+                            <th>Description</th>
+                            <th>Resolution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="status-code status-400">400</span></td>
+                            <td>Bad Request</td>
+                            <td>The request is invalid or malformed.</td>
+                            <td>Verify all required fields are present, correctly formatted, and meet validation constraints. Check that email is in valid format and all strings do not exceed maximum length.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="status-code status-401">401</span></td>
+                            <td>Unauthorized</td>
+                            <td>Authentication failed. The provided token is invalid, expired, or missing.</td>
+                            <td>Ensure the Authorization header is present with a valid Bearer token. Obtain a new token from your administrator if the current token has expired.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="status-code status-409">409</span></td>
+                            <td>Conflict</td>
+                            <td>An employee with this email already exists in the system.</td>
+                            <td>Use a different, unique email address. If this is an existing employee, use the Update Employee endpoint instead.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="status-code status-500">500</span></td>
+                            <td>Internal Server Error</td>
+                            <td>An unexpected error occurred on the server.</td>
+                            <td>Retry the request after a brief delay. If the error persists, contact your system administrator.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="code-label">Example Error Response (400 Bad Request):</div>
+                <div class="code-block">{
+  "error": "Bad Request",
+  "message": "Field 'email' is invalid. Must be a valid email address.",
+  "status": 400
+}</div>
+
+                <div class="code-label">Example Error Response (409 Conflict):</div>
+                <div class="code-block">{
+  "error": "Conflict",
+  "message": "An employee with email 'john.doe@company.com' already exists.",
+  "status": 409
+}</div>
+            </section>
+
+            <!-- Examples -->
+            <section>
+                <h2>Examples</h2>
+
+                <h3>Complete Request Example</h3>
+                <div class="code-label">cURL</div>
+                <div class="code-block">curl -X POST https://api.company.com/employees \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
+  -H "Content-Type: application/json" \
+  -d '{
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john.doe@company.com",
+    "department": "Engineering"
+  }'</div>
+
+                <div class="code-label">JavaScript (Fetch API)</div>
+                <div class="code-block">const response = await fetch('https://api.company.com/employees', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_TOKEN_HERE',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    first_name: 'John',
+    last_name: 'Doe',
+    email: 'john.doe@company.com',
+    department: 'Engineering'
+  })
+});
+
+const data = await response.json();
+console.log(data);</div>
+
+                <div class="code-label">Python (requests)</div>
+                <div class="code-block">import requests
+
+url = 'https://api.company.com/employees'
+headers = {
+    'Authorization': 'Bearer YOUR_TOKEN_HERE',
+    'Content-Type': 'application/json'
+}
+payload = {
+    'first_name': 'John',
+    'last_name': 'Doe',
+    'email': 'john.doe@company.com',
+    'department': 'Engineering'
+}
+
+response = requests.post(url, json=payload, headers=headers)
+print(response.json())</div>
+
+                <h3>Complete Response Example (Success)</h3>
+                <div class="code-label">201 Created Response</div>
+                <div class="code-block">{
+  "id": 12345,
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "john.doe@company.com",
+  "department": "Engineering",
+  "created_at": "2026-07-04T14:30:00Z"
+}</div>
+            </section>
+
+            <!-- Notes -->
+            <section>
+                <div class="note">
+                    <strong>Note:</strong> Email addresses must be unique across the system. Attempting to create an employee with a duplicate email will return a 409 Conflict error.
+                </div>
+
+                <div class="note">
+                    <strong>Tip:</strong> The department field is optional and can be left empty if you plan to assign it later using the Update Employee endpoint.
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p><strong>API Version:</strong> 1.0</p>
+            <p><strong>Last Updated:</strong> July 4, 2026</p>
+            <p>For additional support or to report issues, contact the API team at api-support@company.com</p>
+        </footer>
+    </div>
+</body>
+</html>
