@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Search API Reference</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #0078d4;
+            border-bottom: 2px solid #0078d4;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #106ebe;
+            margin-top: 20px;
+        }
+        h3 {
+            color: #326ce5;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #0078d4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        .code-block-container {
+            position: relative;
+            margin: 20px 0;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .code-block-header {
+            background-color: #252526;
+            color: #cccccc;
+            padding: 8px 15px;
+            font-size: 0.85em;
+            font-weight: 500;
+            border-bottom: 1px solid #3e3e42;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .code-block-copy {
+            background-color: #0078d4;
+            color: white;
+            padding: 4px 12px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: background-color 0.2s;
+        }
+        .code-block-copy:hover {
+            background-color: #106ebe;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            margin: 0;
+            border-radius: 0;
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 600px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.6em;
+            scrollbar-width: thin;
+            scrollbar-color: #555 #1e1e1e;
+        }
+        .json-key { color: #9cdcfe; }
+        .json-string { color: #4ec9b0; }
+        .json-number { color: #b5cea8; }
+        .json-boolean { color: #d7ba7d; }
+        a {
+            color: #0078d4;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advanced Search API Reference</h1>
+
+    <div class="section">
+        <h2>Overview</h2>
+        <p>The Advanced Search feature enables users to quickly find relevant documents using natural language queries combined with intelligent filtering. The feature leverages machine learning to understand search intent and deliver accurate, contextual results.</p>
+    </div>
+
+    <div class="section">
+        <h2>Parameters</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Default</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><code>query</code></td>
+                <td>string</td>
+                <td>Yes</td>
+                <td>—</td>
+                <td>Natural language search query</td>
+            </tr>
+            <tr>
+                <td><code>filters</code></td>
+                <td>array</td>
+                <td>No</td>
+                <td>[]</td>
+                <td>Optional faceted filters (type, date, author)</td>
+            </tr>
+            <tr>
+                <td><code>page</code></td>
+                <td>integer</td>
+                <td>No</td>
+                <td>1</td>
+                <td>Result page number (pagination)</td>
+            </tr>
+            <tr>
+                <td><code>limit</code></td>
+                <td>integer</td>
+                <td>No</td>
+                <td>10</td>
+                <td>Number of results per page</td>
+            </tr>
+            <tr>
+                <td><code>sort</code></td>
+                <td>string</td>
+                <td>No</td>
+                <td>relevance</td>
+                <td>Sort order: relevance, date, or popularity</td>
+            </tr>
+        </table>
+    </div>
+    <div class="section">
+        <h2>JSON Schema</h2>
+        <p>The following JSON schema defines the structure of this API specification:</p>
+        <div class="code-block-container">
+            <div class="code-block-header">
+                <span>JSON Schema</span>
+                <button class="code-block-copy" onclick="copyToClipboard(this)">Copy</button>
+            </div>
+            <pre><code>{
+  "type": "object",
+  "title": "Advanced Search Query",
+  "properties": {
+    "query": {
+      "type": "string",
+      "description": "Natural language search query"
+    },
+    "filters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Faceted filters for results"
+    },
+    "page": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Result page number"
+    },
+    "limit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "description": "Results per page"
+    },
+    "sort": {
+      "type": "string",
+      "enum": [
+        "relevance",
+        "date",
+        "popularity"
+      ],
+      "description": "Sort order for results"
+    }
+  },
+  "required": [
+    "query"
+  ]
+}</code></pre>
+        </div>
+    </div>
+    <script>
+        function copyToClipboard(button) {
+            const codeBlock = button.parentElement.nextElementSibling.querySelector('code');
+            const text = codeBlock.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+    </script>
+    <div class="section">
+        <h3>Common Error Responses</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>HTTP Code</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th>Example Response</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>400</strong></td>
+                    <td>Bad Request</td>
+                    <td>Invalid query syntax or missing required parameters</td>
+                    <td><code>{"error": "Missing required parameter: query"}</code></td>
+                </tr>
+                <tr>
+                    <td><strong>401</strong></td>
+                    <td>Unauthorized</td>
+                    <td>Missing or invalid API authentication credentials</td>
+                    <td><code>{"error": "Invalid API token"}</code></td>
+                </tr>
+                <tr>
+                    <td><strong>403</strong></td>
+                    <td>Forbidden</td>
+                    <td>User does not have permission to access this resource</td>
+                    <td><code>{"error": "User lacks search permissions"}</code></td>
+                </tr>
+                <tr>
+                    <td><strong>404</strong></td>
+                    <td>Not Found</td>
+                    <td>The requested document or resource was not found</td>
+                    <td><code>{"error": "Document with ID not found"}</code></td>
+                </tr>
+                <tr>
+                    <td><strong>429</strong></td>
+                    <td>Too Many Requests</td>
+                    <td>Rate limit exceeded - too many requests in short time period</td>
+                    <td><code>{"error": "Rate limit exceeded", "retry_after": 60}</code></td>
+                </tr>
+                <tr>
+                    <td><strong>500</strong></td>
+                    <td>Internal Server Error</td>
+                    <td>Server error - search service encountered an unexpected error</td>
+                    <td><code>{"error": "Internal server error"}</code></td>
+                </tr>
+                <tr>
+                    <td><strong>503</strong></td>
+                    <td>Service Unavailable</td>
+                    <td>Search service is temporarily unavailable or under maintenance</td>
+                    <td><code>{"error": "Service temporarily unavailable"}</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Related Topics</h2>
+        <ul>
+            <li><a href="/docs/advanced-search-concepts.html">Advanced Search Concepts</a></li>
+            <li><a href="/docs/advanced-search-setup.html">Setting Up Advanced Search</a></li>
+            <li><a href="/docs/api-authentication.html">API Authentication and Security</a></li>
+        </ul>
+    </div>
+</body>
+</html>

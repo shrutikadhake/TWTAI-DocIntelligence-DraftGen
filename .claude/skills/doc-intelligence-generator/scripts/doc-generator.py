@@ -525,16 +525,71 @@ class HTMLGenerator:
             padding: 2px 6px;
             border-radius: 3px;
         }}
+        .code-block-container {{
+            position: relative;
+            margin: 20px 0;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }}
+        .code-block-header {{
+            background-color: #252526;
+            color: #cccccc;
+            padding: 8px 15px;
+            font-size: 0.85em;
+            font-weight: 500;
+            border-bottom: 1px solid #3e3e42;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }}
+        .code-block-copy {{
+            background-color: #0078d4;
+            color: white;
+            padding: 4px 12px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: background-color 0.2s;
+        }}
+        .code-block-copy:hover {{
+            background-color: #106ebe;
+        }}
         pre {{
             background-color: #1e1e1e;
             color: #d4d4d4;
             padding: 15px;
-            border-radius: 4px;
+            margin: 0;
+            border-radius: 0;
             overflow-x: auto;
-            font-family: 'Courier New', monospace;
+            overflow-y: auto;
+            max-height: 600px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
             font-size: 0.9em;
-            line-height: 1.5;
+            line-height: 1.6em;
+            scrollbar-width: thin;
+            scrollbar-color: #555 #1e1e1e;
         }}
+        pre::-webkit-scrollbar {{
+            width: 8px;
+            height: 8px;
+        }}
+        pre::-webkit-scrollbar-track {{
+            background: #1e1e1e;
+        }}
+        pre::-webkit-scrollbar-thumb {{
+            background: #555;
+            border-radius: 4px;
+        }}
+        pre::-webkit-scrollbar-thumb:hover {{
+            background: #777;
+        }}
+        .json-key {{ color: #9cdcfe; }}
+        .json-string {{ color: #4ec9b0; }}
+        .json-number {{ color: #b5cea8; }}
+        .json-boolean {{ color: #d7ba7d; }}
+        .json-null {{ color: #d7ba7d; }}
         a {{
             color: #0078d4;
             text-decoration: none;
@@ -583,8 +638,28 @@ class HTMLGenerator:
             html += f"""    <div class="section">
         <h2>JSON Schema</h2>
         <p>The following JSON schema defines the structure of this API specification:</p>
-        <pre><code>{json_schema}</code></pre>
+        <div class="code-block-container">
+            <div class="code-block-header">
+                <span>JSON Schema</span>
+                <button class="code-block-copy" onclick="copyToClipboard(this)">Copy</button>
+            </div>
+            <pre><code>{json_schema}</code></pre>
+        </div>
     </div>
+    <script>
+        function copyToClipboard(button) {{
+            const codeBlock = button.parentElement.nextElementSibling.querySelector('code');
+            const text = codeBlock.textContent;
+            navigator.clipboard.writeText(text).then(() => {{
+                button.textContent = 'Copied!';
+                setTimeout(() => {{
+                    button.textContent = 'Copy';
+                }}, 2000);
+            }}).catch(err => {{
+                console.error('Failed to copy:', err);
+            }});
+        }}
+    </script>
 """
 
         html += """    <div class="section">

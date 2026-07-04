@@ -216,13 +216,18 @@ See `references/review-rules.json` for the complete ruleset.
 
 ### JSON Schema in Reference Topics
 - Automatically includes full JSON schema/specification in Reference documents
-- Displays JSON in professional code block with dark background (#1e1e1e)
+- Displays JSON in professional code block with enhanced styling:
+  - **Dark background** (#1e1e1e) with high-contrast syntax highlighting
+  - **Color-coded syntax**: Strings (green #4ec9b0), Keys (light blue #9cdcfe), Values (light purple #ce9178), Booleans/null (orange #d7ba7d)
+  - **Line numbers** for easy reference
+  - **Copy button** for quick code copying (top-right corner)
+  - **Proper indentation** with 2-space formatting for readability
+  - **Line height optimization** (1.6em) for scanning and reading
 - Makes documentation self-contained and complete
 - Easy for developers to copy and reference JSON directly
 - Positioned after parameters table for logical flow
 - Supports any valid JSON content (API schemas, configurations, definitions)
-- Monospace font with proper syntax highlighting readiness
-- Scroll support for large JSON files
+- Scroll support for large JSON files (max-height: 600px with overflow handling)
 
 ## Notes
 

@@ -1,0 +1,33 @@
+{
+  "title": "Advanced Search with AI-Powered Filters",
+  "source": "Confluence PRD (MFS/Advanced Search with AI-Powered Filters)",
+  "source_url": "https://twtaiyashwanth.atlassian.net/wiki/spaces/MFS/pages/2228246",
+  "generated_at": "2026-07-03T23:26:57.538467",
+  "documents": [
+    {
+      "type": "Concept",
+      "filename": "advanced-search-concept.html",
+      "compliance_score": 100,
+      "critical_issues": 0,
+      "warnings": 0,
+      "info": 0,
+      "checks_passed": 6
+    },
+    {
+      "type": "Reference",
+      "filename": "advanced-search-reference.html",
+      "compliance_score": 100,
+      "critical_issues": 0,
+      "warnings": 0,
+      "info": 0,
+      "checks_passed": 4
+    }
+  ],
+  "standards_applied": [
+    "Microsoft Writing Style Guide",
+    "IBM Documentation Standards",
+    "DITA Topic-Based Authoring",
+    "Technical Writing Best Practices"
+  ],
+  "notes": "This is a first-pass automated generation. Human review and SME verification are recommended before publication."
+}
