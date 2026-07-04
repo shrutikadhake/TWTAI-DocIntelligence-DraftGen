@@ -1,0 +1,408 @@
+{
+  "document": {
+    "title": "AI Model Deployment Platform",
+    "subtitle": "Administrator Guide",
+    "version": "3.2.0",
+    "status": "Released",
+    "metadata": {
+      "author": "Platform Engineering",
+      "lastUpdated": "2026-07-04",
+      "theme": {
+        "primary": "#2563eb",
+        "secondary": "#0f766e",
+        "font": "Segoe UI"
+      }
+    },
+    "navigation": [
+      "Executive Summary",
+      "Architecture",
+      "Features",
+      "Roles",
+      "Deployment Workflow",
+      "Environments",
+      "Configuration",
+      "API",
+      "Monitoring",
+      "Security",
+      "Troubleshooting",
+      "FAQ",
+      "Glossary"
+    ],
+    "sections": [
+      {
+        "component": "section",
+        "title": "Executive Summary",
+        "content": [
+          {
+            "component": "paragraph",
+            "text": "The AI Model Deployment Platform enables ML teams to package, validate, deploy, monitor and roll back machine learning models across environments."
+          },
+          {
+            "component": "callout",
+            "variant": "info",
+            "title": "Purpose",
+            "text": "Standardize model deployment with governance and observability."
+          },
+          {
+            "component": "list",
+            "style": "bullet",
+            "items": [
+              "Model Registry",
+              "CI/CD Integration",
+              "Blue-Green Deployment",
+              "Canary Releases",
+              "Monitoring",
+              "Audit Logs"
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Architecture",
+        "content": [
+          {
+            "component": "cards",
+            "items": [
+              {
+                "title": "Model Registry",
+                "text": "Stores versioned models."
+              },
+              {
+                "title": "Deployment Engine",
+                "text": "Deploys containers."
+              },
+              {
+                "title": "Inference Gateway",
+                "text": "Routes prediction requests."
+              },
+              {
+                "title": "Monitoring",
+                "text": "Collects metrics and alerts."
+              }
+            ]
+          },
+          {
+            "component": "image",
+            "caption": "High-level platform architecture",
+            "placeholder": "architecture.png"
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "User Roles",
+        "content": [
+          {
+            "component": "dataTable",
+            "caption": "Role Matrix",
+            "headers": [
+              "Role",
+              "Deploy",
+              "Approve",
+              "Monitor",
+              "Admin"
+            ],
+            "rows": [
+              [
+                "ML Engineer",
+                "Yes",
+                "No",
+                "Yes",
+                "No"
+              ],
+              [
+                "Reviewer",
+                "No",
+                "Yes",
+                "View",
+                "No"
+              ],
+              [
+                "Operator",
+                "No",
+                "No",
+                "Yes",
+                "Limited"
+              ],
+              [
+                "Administrator",
+                "Yes",
+                "Yes",
+                "Yes",
+                "Yes"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Deployment Workflow",
+        "content": [
+          {
+            "component": "procedure",
+            "title": "Deploy a Model",
+            "steps": [
+              "Register the model.",
+              "Upload artifacts.",
+              "Run validation.",
+              "Deploy to staging.",
+              "Execute health checks.",
+              "Promote to production.",
+              "Monitor KPIs."
+            ]
+          },
+          {
+            "component": "callout",
+            "variant": "warning",
+            "title": "Validation",
+            "text": "Deployment is blocked if mandatory health checks fail."
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Configuration",
+        "content": [
+          {
+            "component": "dataTable",
+            "caption": "Configuration Parameters",
+            "headers": [
+              "Parameter",
+              "Description",
+              "Default"
+            ],
+            "rows": [
+              [
+                "replicas",
+                "Model instances",
+                "2"
+              ],
+              [
+                "cpuLimit",
+                "CPU cores",
+                "2"
+              ],
+              [
+                "memory",
+                "RAM",
+                "4Gi"
+              ],
+              [
+                "gpuEnabled",
+                "Enable GPU",
+                "false"
+              ],
+              [
+                "timeout",
+                "Inference timeout",
+                "30s"
+              ],
+              [
+                "autoscaling",
+                "Horizontal scaling",
+                "Enabled"
+              ]
+            ]
+          },
+          {
+            "component": "code",
+            "language": "yaml",
+            "text": "deployment:\n  replicas: 2\n  gpuEnabled: false\n  timeout: 30s"
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "REST API",
+        "content": [
+          {
+            "component": "api",
+            "endpoint": "POST /api/v1/models/deploy",
+            "request": {
+              "model": "fraud-detector",
+              "version": "2.1.0",
+              "environment": "production"
+            },
+            "response": {
+              "deploymentId": "dep-10291",
+              "status": "Deploying"
+            }
+          },
+          {
+            "component": "code",
+            "language": "json",
+            "text": "{\n  \"model\": \"fraud-detector\",\n  \"version\": \"2.1.0\",\n  \"environment\": \"production\"\n}"
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Monitoring",
+        "content": [
+          {
+            "component": "dataTable",
+            "caption": "Operational Metrics",
+            "headers": [
+              "Metric",
+              "Target"
+            ],
+            "rows": [
+              [
+                "Latency",
+                "<200 ms"
+              ],
+              [
+                "Availability",
+                ">99.9%"
+              ],
+              [
+                "Error Rate",
+                "<1%"
+              ],
+              [
+                "CPU",
+                "<70%"
+              ],
+              [
+                "GPU",
+                "<80%"
+              ]
+            ]
+          },
+          {
+            "component": "callout",
+            "variant": "success",
+            "title": "Healthy Deployment",
+            "text": "All metrics within SLA."
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Security",
+        "content": [
+          {
+            "component": "list",
+            "style": "numbered",
+            "items": [
+              "SSO Authentication",
+              "Role-Based Access",
+              "Encrypted Secrets",
+              "Audit Logging",
+              "Image Scanning"
+            ]
+          },
+          {
+            "component": "callout",
+            "variant": "danger",
+            "title": "Critical",
+            "text": "Production deployment requires approval."
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Troubleshooting",
+        "content": [
+          {
+            "component": "accordion",
+            "items": [
+              {
+                "title": "Deployment Failed",
+                "body": "Check container logs and health probes."
+              },
+              {
+                "title": "High Latency",
+                "body": "Increase replicas or enable autoscaling."
+              },
+              {
+                "title": "Model Not Found",
+                "body": "Verify registry version."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "FAQ",
+        "content": [
+          {
+            "component": "faq",
+            "items": [
+              {
+                "q": "Can I roll back?",
+                "a": "Yes, to any approved version."
+              },
+              {
+                "q": "Is GPU mandatory?",
+                "a": "No."
+              },
+              {
+                "q": "Are deployments audited?",
+                "a": "Yes, all actions are logged."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Version History",
+        "content": [
+          {
+            "component": "dataTable",
+            "caption": "Revisions",
+            "headers": [
+              "Version",
+              "Date",
+              "Changes"
+            ],
+            "rows": [
+              [
+                "3.2.0",
+                "2026-07-04",
+                "Canary deployments"
+              ],
+              [
+                "3.1.0",
+                "2026-05-10",
+                "GPU scheduling"
+              ],
+              [
+                "3.0.0",
+                "2026-01-18",
+                "Initial release"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "title": "Glossary",
+        "content": [
+          {
+            "component": "definitions",
+            "items": [
+              {
+                "term": "Inference",
+                "definition": "Running predictions using a deployed model."
+              },
+              {
+                "term": "Canary",
+                "definition": "Gradual rollout strategy."
+              },
+              {
+                "term": "Model Registry",
+                "definition": "Repository of versioned models."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
