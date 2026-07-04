@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 480" font-family="-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4f46e5"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="1400" height="480" fill="#ffffff"/>
+
+  <!-- title -->
+  <text x="700" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#1c1c1e">Documentation Automation Pipeline</text>
+  <text x="700" y="56" text-anchor="middle" font-size="13" fill="#6b7280">Raw demo transcript to publication-ready HTML — four skills, zero manual formatting</text>
+
+  <!-- input artifact -->
+  <rect x="30" y="80" width="200" height="34" rx="17" fill="#eef0fd"/>
+  <text x="130" y="102" text-anchor="middle" font-size="12.5" font-weight="600" fill="#4f46e5">Raw Transcript (.vtt)</text>
+  <line x1="130" y1="114" x2="130" y2="140" stroke="#4f46e5" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Stage boxes -->
+  <!-- Box 1 -->
+  <g>
+    <rect x="30" y="140" width="290" height="180" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <circle cx="65" cy="175" r="16" fill="#4f46e5"/>
+    <text x="65" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">1</text>
+    <text x="90" y="180" font-size="15" font-weight="700" fill="#1c1c1e">transcript-normalizer</text>
+    <text x="90" y="198" font-size="12.5" fill="#6b7280">-custom</text>
+    <text x="55" y="228" font-size="12.5" fill="#1c1c1e">Strips timestamps, filler</text>
+    <text x="55" y="246" font-size="12.5" fill="#1c1c1e">words &amp; false starts</text>
+    <text x="55" y="264" font-size="12.5" fill="#1c1c1e">from the raw VTT</text>
+    <rect x="45" y="284" width="260" height="28" rx="14" fill="#eef0fd"/>
+    <text x="175" y="302" text-anchor="middle" font-size="12" font-weight="600" fill="#4f46e5">Output: Structured JSON</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <line x1="320" y1="230" x2="368" y2="230" stroke="#4f46e5" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Box 2 -->
+  <g>
+    <rect x="370" y="140" width="290" height="180" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <circle cx="405" cy="175" r="16" fill="#4f46e5"/>
+    <text x="405" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">2</text>
+    <text x="430" y="180" font-size="15" font-weight="700" fill="#1c1c1e">documentation-author</text>
+    <text x="430" y="198" font-size="12.5" fill="#6b7280">-custom</text>
+    <text x="395" y="228" font-size="12.5" fill="#1c1c1e">Writes a task-oriented</text>
+    <text x="395" y="246" font-size="12.5" fill="#1c1c1e">Markdown guide: intro,</text>
+    <text x="395" y="264" font-size="12.5" fill="#1c1c1e">steps, outcomes</text>
+    <rect x="385" y="284" width="260" height="28" rx="14" fill="#eef0fd"/>
+    <text x="515" y="302" text-anchor="middle" font-size="12" font-weight="600" fill="#4f46e5">Output: Draft Markdown</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <line x1="660" y1="230" x2="708" y2="230" stroke="#4f46e5" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Box 3 -->
+  <g>
+    <rect x="710" y="140" width="290" height="180" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <circle cx="745" cy="175" r="16" fill="#4f46e5"/>
+    <text x="745" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">3</text>
+    <text x="770" y="180" font-size="15" font-weight="700" fill="#1c1c1e">documentation-reviewer</text>
+    <text x="770" y="198" font-size="12.5" fill="#6b7280">-custom</text>
+    <text x="735" y="228" font-size="12.5" fill="#1c1c1e">Scores the draft against</text>
+    <text x="735" y="246" font-size="12.5" fill="#1c1c1e">8 writing standards +</text>
+    <text x="735" y="264" font-size="12.5" fill="#1c1c1e">Microsoft style guide</text>
+    <rect x="725" y="284" width="260" height="28" rx="14" fill="#eef0fd"/>
+    <text x="855" y="302" text-anchor="middle" font-size="12" font-weight="600" fill="#4f46e5">Output: QA Score 89.5 / 0 critical</text>
+  </g>
+
+  <!-- Arrow 3 -->
+  <line x1="1000" y1="230" x2="1048" y2="230" stroke="#4f46e5" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Box 4 -->
+  <g>
+    <rect x="1050" y="140" width="290" height="180" rx="14" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <circle cx="1085" cy="175" r="16" fill="#4f46e5"/>
+    <text x="1085" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">4</text>
+    <text x="1110" y="180" font-size="15" font-weight="700" fill="#1c1c1e">documentation-finalizer</text>
+    <text x="1110" y="198" font-size="12.5" fill="#6b7280">-custom</text>
+    <text x="1075" y="228" font-size="12.5" fill="#1c1c1e">Renders the reviewed</text>
+    <text x="1075" y="246" font-size="12.5" fill="#1c1c1e">Markdown into a clean,</text>
+    <text x="1075" y="264" font-size="12.5" fill="#1c1c1e">single-column HTML page</text>
+    <rect x="1065" y="284" width="260" height="28" rx="14" fill="#eef0fd"/>
+    <text x="1195" y="302" text-anchor="middle" font-size="12" font-weight="600" fill="#4f46e5">Output: Published HTML</text>
+  </g>
+
+  <!-- Final output artifact -->
+  <line x1="1195" y1="320" x2="1195" y2="352" stroke="#4f46e5" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="1045" y="356" width="300" height="40" rx="20" fill="#4f46e5"/>
+  <text x="1195" y="381" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">Publication-Ready HTML Guide</text>
+
+  <!-- footer -->
+  <text x="700" y="450" text-anchor="middle" font-size="12" fill="#6b7280">Same pipeline, reusable for every future demo transcript</text>
+</svg>
