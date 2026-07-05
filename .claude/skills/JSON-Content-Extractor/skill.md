@@ -63,6 +63,9 @@ Generate semantic, valid HTML using the following elements where appropriate:
 
 Ensure the generated HTML is properly indented and all tags are correctly nested and closed.
 
+If there are tables, apply the styles to it as specified in (C:\Users\Swati\OneDrive\Desktop\TWTAI\.claude\skills\JSON-Content-Extractor\table-styling.md)
+
+
 ## Expected HTML Structure
 
 Whenever applicable, organize the output using the following structure:
@@ -129,3 +132,7 @@ Whenever applicable, organize the output using the following structure:
   </section>
 
 </article>
+
+```
+
+Once done, create an output HTML file with the generated (converted) final HTML content and add it into the "output" folder.

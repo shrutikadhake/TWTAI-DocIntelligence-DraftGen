@@ -156,10 +156,5 @@ Return **only** the Quality Report in Markdown format.
 
 ### If corrections are requested
 
-Return:
 
-1. The Quality Report in Markdown format.
-2. The corrected HTML enclosed within a single `<article>` element.
-3. If a Filesystem MCP is available and the user requests file output, save the corrected HTML to the specified output location.
-
-Do not include explanations outside the requested outputs.
+Now generate the Quality Report in Markdown format and save it in a new file named Quality-report-<filename>.md in the output folder.

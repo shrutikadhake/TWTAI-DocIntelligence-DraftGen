@@ -1,10 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure Single Sign-On (SSO) - Enterprise Access Manager 3.2</title>
+</head>
+<body>
+
 <article>
 
   <h1>Configure Single Sign-On (SSO)</h1>
 
   <section>
     <h2>Overview</h2>
-    <p>Single Sign-On (SSO) enables users to authenticate once and securely access multiple applications without re-entering credentials. This guide covers configuring SSO in <strong>Enterprise Access Manager</strong> (version 3.2).</p>
+    <p>Single Sign-On (SSO) enables users to authenticate once and securely access multiple applications without re-entering credentials.</p>
   </section>
 
   <section>
@@ -36,7 +45,7 @@
   <section>
     <h2>Procedure</h2>
     <ol>
-      <li>Navigate to <strong>Administration</strong> > <strong>Security</strong> > <strong>Single Sign-On</strong>.</li>
+      <li>Navigate to <code>Administration > Security > Single Sign-On</code>.</li>
       <li>Select <strong>Enable SSO</strong>.</li>
       <li>Upload the Identity Provider metadata XML file.</li>
       <li>Verify the Entity ID and Assertion Consumer Service (ACS) URL.</li>
@@ -72,24 +81,14 @@
 
   <section>
     <h2>Troubleshooting</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Issue</th>
-          <th>Resolution</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Login fails after SSO is enabled.</td>
-          <td>Verify that the Entity ID and ACS URL match the values configured in the Identity Provider.</td>
-        </tr>
-        <tr>
-          <td>Certificate validation error.</td>
-          <td>Confirm that the signing certificate has not expired.</td>
-        </tr>
-      </tbody>
-    </table>
+    <section>
+      <h3>Login fails after SSO is enabled</h3>
+      <p><strong>Resolution:</strong> Verify that the Entity ID and ACS URL match the values configured in the Identity Provider.</p>
+    </section>
+    <section>
+      <h3>Certificate validation error</h3>
+      <p><strong>Resolution:</strong> Confirm that the signing certificate has not expired.</p>
+    </section>
   </section>
 
   <section>
@@ -102,3 +101,6 @@
   </section>
 
 </article>
+
+</body>
+</html>
