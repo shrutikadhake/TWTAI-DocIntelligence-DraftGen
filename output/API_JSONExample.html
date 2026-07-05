@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create User API - Enterprise User Management Service</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    article {
+      background-color: #fff;
+    }
+
+    h1 {
+      color: #2563eb;
+      border-bottom: 3px solid #2563eb;
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+
+    h1 .subtitle {
+      display: block;
+      font-size: 0.6em;
+      color: #666;
+      font-weight: normal;
+      margin-top: 5px;
+    }
+
+    h2 {
+      color: #2563eb;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      color: #0f766e;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    section {
+      margin-bottom: 30px;
+    }
+
+    p {
+      margin: 15px 0;
+    }
+
+    ul, ol {
+      margin: 15px 0;
+      padding-left: 30px;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    table th,
+    table td {
+      border: 1px solid #999;
+      padding: 12px;
+      text-align: left;
+    }
+
+    table th {
+      background-color: #f5f5f5;
+      font-weight: 600;
+    }
+
+    table tbody tr:nth-child(odd) {
+      background-color: #fafafa;
+    }
+
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: "Courier New", monospace;
+    }
+
+    pre {
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      border: 1px solid #ddd;
+    }
+
+    pre code {
+      background-color: transparent;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    .callout {
+      padding: 15px;
+      margin: 15px 0;
+      border-left: 4px solid #999;
+      background-color: #f9f9f9;
+    }
+
+    .callout.info {
+      border-left-color: #2563eb;
+      background-color: #e6f2ff;
+    }
+
+    .callout.note {
+      border-left-color: #0f766e;
+      background-color: #e6f5f3;
+    }
+
+    .callout.warning {
+      border-left-color: #f59e0b;
+      background-color: #fffbeb;
+    }
+
+    .callout.danger {
+      border-left-color: #ef4444;
+      background-color: #fef2f2;
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .metadata {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      font-size: 0.9em;
+    }
+
+    .metadata p {
+      margin: 5px 0;
+    }
+
+    .endpoint-label {
+      background-color: #2563eb;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 3px;
+      font-weight: 600;
+      font-family: monospace;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .status-201 {
+      color: #10b981;
+      font-weight: 600;
+    }
+
+    .status-error {
+      color: #ef4444;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <article>
+
+    <h1>Create User API<span class="subtitle">Enterprise User Management Service v2.1</span></h1>
+
+    <div class="metadata">
+      <p><strong>Product:</strong> Enterprise User Management Service</p>
+      <p><strong>Version:</strong> v2.1</p>
+      <p><strong>Base URL:</strong> <code>https://api.example.com</code></p>
+    </div>
+
+    <section>
+      <h2>Overview</h2>
+      <p>Creates a new user account in the Enterprise User Management Service. The API returns the created user details upon successful completion.</p>
+    </section>
+
+    <section>
+      <h2>Endpoint</h2>
+      <p><span class="endpoint-label">POST</span> <code>/v2/users</code></p>
+      <p><strong>Full URL:</strong> <code>https://api.example.com/v2/users</code></p>
+    </section>
+
+    <section>
+      <h2>Authentication</h2>
+      <p>This endpoint requires Bearer token authentication.</p>
+      <p><strong>Header:</strong> <code>Authorization: Bearer &lt;access_token&gt;</code></p>
+      <p><strong>Authentication Type:</strong> Bearer Token</p>
+    </section>
+
+    <section>
+      <h2>Permissions</h2>
+      <p>The authenticated user must have the following permission:</p>
+      <ul>
+        <li><code>User.Create</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Request</h2>
+
+      <h3>Headers</h3>
+      <p>Include the following headers in your request:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Header Name</th>
+            <th>Value</th>
+            <th>Required</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Authorization</code></td>
+            <td><code>Bearer &lt;access_token&gt;</code></td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td><code>Content-Type</code></td>
+            <td><code>application/json</code></td>
+            <td>Yes</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Body Parameters</h3>
+      <p>Send the following JSON object in the request body:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>firstName</code></td>
+            <td>string</td>
+            <td>The user's first name (required).</td>
+          </tr>
+          <tr>
+            <td><code>lastName</code></td>
+            <td>string</td>
+            <td>The user's last name (required).</td>
+          </tr>
+          <tr>
+            <td><code>email</code></td>
+            <td>string</td>
+            <td>The user's email address. Must be unique (required).</td>
+          </tr>
+          <tr>
+            <td><code>department</code></td>
+            <td>string</td>
+            <td>The user's department.</td>
+          </tr>
+          <tr>
+            <td><code>role</code></td>
+            <td>string</td>
+            <td>The user's role. Must exist in the system (required).</td>
+          </tr>
+          <tr>
+            <td><code>active</code></td>
+            <td>boolean</td>
+            <td>User account status. Default is <code>true</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Query Parameters</h3>
+      <p>Optionally include the following query parameters:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>sendWelcomeEmail</code></td>
+            <td>boolean</td>
+            <td>No</td>
+            <td>Sends a welcome email after the user account is created.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Example Request</h3>
+      <pre><code>POST https://api.example.com/v2/users?sendWelcomeEmail=true HTTP/1.1
+Authorization: Bearer YOUR_ACCESS_TOKEN
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "department": "Engineering",
+  "role": "Developer",
+  "active": true
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Response</h2>
+
+      <h3>Success Response</h3>
+      <p><span class="status-201">201 Created</span> — User created successfully.</p>
+      <pre><code>{
+  "userId": "USR-10245",
+  "status": "Created",
+  "createdDate": "2026-07-03T10:30:00Z"
+}</code></pre>
+
+      <h3>Error Responses</h3>
+      <p>The following error responses indicate a failed request:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Status Code</th>
+            <th>Error</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="status-error">400</span></td>
+            <td>Bad Request</td>
+            <td>One or more required fields are missing or invalid.</td>
+          </tr>
+          <tr>
+            <td><span class="status-error">401</span></td>
+            <td>Unauthorized</td>
+            <td>Authentication token is missing or invalid.</td>
+          </tr>
+          <tr>
+            <td><span class="status-error">403</span></td>
+            <td>Forbidden</td>
+            <td>The authenticated user does not have permission to create users.</td>
+          </tr>
+          <tr>
+            <td><span class="status-error">409</span></td>
+            <td>Conflict</td>
+            <td>A user with the specified email address already exists.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Validation Rules</h2>
+      <p>Your request must comply with the following validation rules:</p>
+      <ul>
+        <li>Email address must be unique.</li>
+        <li>First Name is required.</li>
+        <li>Last Name is required.</li>
+        <li>Role must exist in the system.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Rate Limiting</h2>
+      <p>API requests are subject to the following rate limit:</p>
+      <ul>
+        <li><strong>Limit:</strong> 100 requests per minute</li>
+        <li><strong>Retry After:</strong> 60 seconds</li>
+      </ul>
+      <p>If you exceed the rate limit, the API returns a 429 Too Many Requests response. Wait the specified time before retrying your request.</p>
+    </section>
+
+    <section>
+      <h2>Notes</h2>
+      <ul>
+        <li>User IDs are generated automatically.</li>
+        <li>Email addresses are stored in lowercase.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Warnings</h2>
+      <div class="callout warning">
+        <strong>Security Consideration</strong>
+        <p>Do not expose access tokens in client-side code.</p>
+      </div>
+      <div class="callout note">
+        <strong>Separate Operation</strong>
+        <p>Deleting a user is a separate operation. Use the Delete User API endpoint.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Related APIs</h2>
+      <p>You may also find the following APIs useful:</p>
+      <ul>
+        <li>Get User API</li>
+        <li>Update User API</li>
+        <li>Delete User API</li>
+      </ul>
+    </section>
+
+  </article>
+</body>
+</html>
