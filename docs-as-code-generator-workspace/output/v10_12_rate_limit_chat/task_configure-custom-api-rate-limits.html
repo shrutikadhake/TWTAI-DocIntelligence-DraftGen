@@ -1,28 +1,38 @@
 ﻿<h1>Configure custom API rate limits</h1>
 
-<p>Set up custom rate limits for your API by enabling the feature in the global configuration file and applying limits via the CLI.</p>
+<p>Use this procedure to configure custom rate limits for your scanner API. This enables you to enforce request limits on a per-window basis, rejecting requests that exceed your threshold.</p>
 
 <h3>Prerequisites</h3>
 <ul>
-<li>Root or administrator access to the host server</li>
-<li>Valid authentication token</li>
-<li>Latest build deployed to your staging or production environment</li>
+<li>Root access to the host server</li>
+<li>Valid admin authentication token</li>
+<li>Read and write access to <code>/etc/scanner/config.yml</code></li>
+<li>Ability to restart the <code>scanner-daemon</code> service</li>
 </ul>
 
 <h3>Steps</h3>
 <ol>
 <li>Log into the host server as root.</li>
 <li>Open <code>/etc/scanner/config.yml</code> in a text editor.</li>
-<li>Locate the <code>api_settings</code> block and set <code>custom_limits_enabled: true</code>, then save the file.</li>
-<li>Restart the scanner daemon to apply the configuration change: <code>sudo systemctl restart scanner-daemon</code></li>
-<li>Apply the custom rate limits using the CLI: <code>scanner-cli config update --api-limit &lt;number&gt; --window &lt;seconds&gt;</code></li>
+<li>Locate the <code>api_settings</code> block. If it does not exist, add it. Set <code>custom_limits_enabled: true</code> and save the file.
+<pre><code>api_settings:
+  timeout: 30
+  custom_limits_enabled: true
+  default_limit: 500</code></pre>
+</li>
+<li>Restart the daemon to reload the configuration:
+<pre><code>sudo systemctl restart scanner-daemon</code></pre>
+</li>
+<li>Apply the custom rate limits using the CLI:
+<pre><code>scanner-cli config update --api-limit &lt;number&gt; --window &lt;seconds&gt;</code></pre>
+Replace <code>&lt;number&gt;</code> with the maximum number of requests and <code>&lt;seconds&gt;</code> with the time window in seconds (for example, <code>--api-limit 1000 --window 60</code> allows 1000 requests per 60 seconds).</li>
 </ol>
 
 <h3>Expected results</h3>
-<p>The CLI command returns <code>200 OK: Rate limits updated.</code> When the rate limit is exceeded, the API responds with <code>429 Too Many Requests</code> on the next request.</p>
+<p>When the configuration is applied successfully, the CLI returns a <code>200 OK: Rate limits updated.</code> message. Test the rate limit by sending requests to the API endpoint. When you exceed the limit, the API returns a <code>429 Too Many Requests</code> response.</p>
 
 <h3>Troubleshooting</h3>
-<p><strong>Error: 403 Forbidden with message "Rate limit configuration is disabled globally"</strong></p>
-<p>You did not enable <code>custom_limits_enabled: true</code> in the <code>api_settings</code> block. Edit the configuration file and set this parameter to <code>true</code>, then restart the daemon.</p>
-<p><strong>Configuration changes not taking effect</strong></p>
-<p>The scanner daemon does not automatically reload configuration changes. You must restart it after editing <code>/etc/scanner/config.yml</code> using <code>sudo systemctl restart scanner-daemon</code></p>
+
+<p><strong>Problem:</strong> You receive a <code>403 Forbidden</code> error with the message <code>Error 403: Rate limit configuration is disabled globally.</code></p>
+
+<p><strong>Solution:</strong> Verify that you completed step 3 and set <code>custom_limits_enabled: true</code> in the <code>api_settings</code> block of <code>/etc/scanner/config.yml</code>. Ensure you saved the file and restarted the daemon in step 4 before running the CLI command.</p>

@@ -1,75 +1,109 @@
 ﻿<h1>API rate limit configuration reference</h1>
 
-<p>Reference for configuring API rate limits in the scanner service.</p>
+<p>Reference documentation for scanner API rate limit configuration parameters, CLI commands, and error codes.</p>
 
-<h3>Configuration file</h3>
-<p>File location: <code>/etc/scanner/config.yml</code></p>
-<p>Configuration section: <code>api_settings</code></p>
+<h3>Configuration file structure</h3>
 
-<h3>Configuration parameters</h3>
-<table>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-<tr>
-<td><code>custom_limits_enabled</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>Enables custom rate limit configuration. Must be set to <code>true</code> before CLI commands are accepted.</td>
-</tr>
-<tr>
-<td><code>timeout</code></td>
-<td>Integer (seconds)</td>
-<td>30</td>
-<td>Request timeout value.</td>
-</tr>
-<tr>
-<td><code>default_limit</code></td>
-<td>Integer (requests)</td>
-<td>500</td>
-<td>Default rate limit when custom limits are not applied.</td>
-</tr>
-</table>
+<p>Rate limit settings are stored in <code>/etc/scanner/config.yml</code> under the <code>api_settings</code> block:</p>
 
-<h3>Configuration example</h3>
 <pre><code>api_settings:
   timeout: 30
   custom_limits_enabled: true
   default_limit: 500</code></pre>
 
-<h3>CLI command</h3>
-<p>Apply custom rate limits using the <code>scanner-cli</code> command:</p>
-<p><code>scanner-cli config update --api-limit &lt;number&gt; --window &lt;seconds&gt;</code></p>
-<p>Where:</p>
-<ul>
-<li><code>&lt;number&gt;</code> is the maximum number of requests allowed</li>
-<li><code>&lt;seconds&gt;</code> is the time window in seconds</li>
-</ul>
-<p>Example: <code>scanner-cli config update --api-limit 1000 --window 60</code> limits requests to 1000 per 60-second window.</p>
+<h3>Configuration parameters</h3>
 
-<h3>Error codes</h3>
 <table>
 <tr>
-<th>Error code</th>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><code>custom_limits_enabled</code></td>
+<td>Boolean</td>
+<td>Enable or disable custom rate limit enforcement. Set to <code>true</code> to allow custom limit configuration. Set to <code>false</code> to disable custom limits globally.</td>
+</tr>
+<tr>
+<td><code>default_limit</code></td>
+<td>Integer</td>
+<td>The default maximum number of requests allowed within the specified window when no custom limit is set. Example: <code>500</code></td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Integer</td>
+<td>Request timeout in seconds. Example: <code>30</code></td>
+</tr>
+</table>
+
+<h3>CLI command reference</h3>
+
+<p><strong>Command:</strong> <code>scanner-cli config update</code></p>
+
+<p><strong>Description:</strong> Updates the current rate limit configuration.</p>
+
+<p><strong>Syntax:</strong></p>
+
+<pre><code>scanner-cli config update --api-limit &lt;number&gt; --window &lt;seconds&gt;</code></pre>
+
+<p><strong>Parameters:</strong></p>
+
+<table>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><code>--api-limit</code></td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Maximum number of requests allowed within the time window.</td>
+</tr>
+<tr>
+<td><code>--window</code></td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Time window in seconds within which the limit applies.</td>
+</tr>
+</table>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>scanner-cli config update --api-limit 1000 --window 60</code></pre>
+
+<p>This example sets a limit of 1000 requests per 60 seconds.</p>
+
+<h3>HTTP status codes and error responses</h3>
+
+<table>
+<tr>
+<th>Code</th>
 <th>Message</th>
-<th>Cause</th>
+<th>Description</th>
 </tr>
 <tr>
-<td>403</td>
-<td>Rate limit configuration is disabled globally.</td>
-<td><code>custom_limits_enabled</code> is set to <code>false</code> in <code>/etc/scanner/config.yml</code></td>
+<td><code>200 OK</code></td>
+<td><code>Rate limits updated.</code></td>
+<td>The rate limit configuration was successfully applied.</td>
 </tr>
 <tr>
-<td>429</td>
-<td>Too Many Requests</td>
-<td>The configured rate limit has been exceeded.</td>
+<td><code>403 Forbidden</code></td>
+<td><code>Rate limit configuration is disabled globally.</code></td>
+<td>Custom limits are disabled. Set <code>custom_limits_enabled: true</code> in <code>/etc/scanner/config.yml</code> and restart the daemon.</td>
+</tr>
+<tr>
+<td><code>429 Too Many Requests</code></td>
+<td>Request rate limit exceeded.</td>
+<td>The client has exceeded the configured rate limit and the request was rejected.</td>
 </tr>
 </table>
 
 <h3>Service management</h3>
-<p>Service name: <code>scanner-daemon</code></p>
-<p>Restart the service after modifying the configuration file: <code>sudo systemctl restart scanner-daemon</code></p>
-<p>Configuration changes do not hot-reload; the service must be restarted.</p>
+
+<p><strong>Restart the daemon:</strong></p>
+
+<pre><code>sudo systemctl restart scanner-daemon</code></pre>
+
+<p>Configuration changes require a daemon restart to take effect. The daemon does not support hot-reload.</p>
