@@ -19,6 +19,61 @@ class Severity:
     WARNING = "warning"
     INFO = "info"
 
+class JSONHighlighter:
+    """Syntax highlight JSON code with colorized output"""
+
+    @staticmethod
+    def highlight_json(json_string):
+        """Add HTML spans for JSON syntax highlighting"""
+        # Replace JSON special characters and keywords with colored spans
+        # First, escape HTML entities
+        json_string = (json_string
+                      .replace('&', '&amp;')
+                      .replace('<', '&lt;')
+                      .replace('>', '&gt;'))
+
+        # Color JSON keys (quoted strings followed by colon)
+        json_string = re.sub(
+            r'"([^"]+)"\s*:',
+            r'<span class="json-key">"\\1"</span>:',
+            json_string
+        )
+
+        # Color JSON string values (quoted strings not followed by colon)
+        json_string = re.sub(
+            r':\s*"([^"]*)"',
+            r': <span class="json-string">"\\1"</span>',
+            json_string
+        )
+        json_string = re.sub(
+            r'\[\s*"([^"]*)"',
+            r'[<span class="json-string">"\\1"</span>',
+            json_string
+        )
+
+        # Color numbers
+        json_string = re.sub(
+            r':\s*(\d+\.?\d*)',
+            r': <span class="json-number">\\1</span>',
+            json_string
+        )
+
+        # Color booleans
+        json_string = re.sub(
+            r'\b(true|false)\b',
+            r'<span class="json-boolean">\\1</span>',
+            json_string
+        )
+
+        # Color null
+        json_string = re.sub(
+            r'\bnull\b',
+            r'<span class="json-null">null</span>',
+            json_string
+        )
+
+        return json_string
+
 class HTMLGenerator:
     """Generates DITA-compliant HTML documentation"""
 
@@ -186,9 +241,15 @@ class HTMLGenerator:
             background-color: #f9f9f9;
         }}
         code {{
-            background-color: #f4f4f4;
+            background-color: transparent;
             padding: 2px 6px;
             border-radius: 3px;
+            color: inherit;
+        }}
+        table code {{
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 2px 6px;
         }}
         .code-block-container {{
             position: relative;
@@ -236,10 +297,37 @@ class HTMLGenerator:
             scrollbar-width: thin;
             scrollbar-color: #555 #1e1e1e;
         }}
+        pre code {{
+            background-color: transparent;
+            color: #d4d4d4;
+            padding: 0;
+            font-size: 1em;
+        }}
+        pre .json-key {{
+            color: #9cdcfe;
+            font-weight: normal;
+        }}
+        pre .json-string {{
+            color: #4ec9b0;
+            font-weight: normal;
+        }}
+        pre .json-number {{
+            color: #b5cea8;
+            font-weight: normal;
+        }}
+        pre .json-boolean {{
+            color: #d7ba7d;
+            font-weight: bold;
+        }}
+        pre .json-null {{
+            color: #d7ba7d;
+            font-weight: bold;
+        }}
         .json-key {{ color: #9cdcfe; }}
         .json-string {{ color: #4ec9b0; }}
         .json-number {{ color: #b5cea8; }}
         .json-boolean {{ color: #d7ba7d; }}
+        .json-null {{ color: #d7ba7d; }}
         a {{
             color: #0078d4;
             text-decoration: none;
@@ -285,6 +373,7 @@ class HTMLGenerator:
 
         # Add JSON Schema section if available
         if json_schema:
+            highlighted_json = JSONHighlighter.highlight_json(json_schema)
             html += f"""    <div class="section">
         <h2>JSON Schema</h2>
         <p>The following JSON schema defines the structure of this API specification:</p>
@@ -293,7 +382,7 @@ class HTMLGenerator:
                 <span>JSON Schema</span>
                 <button class="code-block-copy" onclick="copyToClipboard(this)">Copy</button>
             </div>
-            <pre><code>{json_schema}</code></pre>
+            <pre><code>{highlighted_json}</code></pre>
         </div>
     </div>
     <script>

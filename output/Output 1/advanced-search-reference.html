@@ -44,9 +44,15 @@
             background-color: #f9f9f9;
         }
         code {
-            background-color: #f4f4f4;
+            background-color: transparent;
             padding: 2px 6px;
             border-radius: 3px;
+            color: inherit;
+        }
+        table code {
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 2px 6px;
         }
         .code-block-container {
             position: relative;
@@ -94,10 +100,37 @@
             scrollbar-width: thin;
             scrollbar-color: #555 #1e1e1e;
         }
+        pre code {
+            background-color: transparent;
+            color: #d4d4d4;
+            padding: 0;
+            font-size: 1em;
+        }
+        pre .json-key {
+            color: #9cdcfe;
+            font-weight: normal;
+        }
+        pre .json-string {
+            color: #4ec9b0;
+            font-weight: normal;
+        }
+        pre .json-number {
+            color: #b5cea8;
+            font-weight: normal;
+        }
+        pre .json-boolean {
+            color: #d7ba7d;
+            font-weight: bold;
+        }
+        pre .json-null {
+            color: #d7ba7d;
+            font-weight: bold;
+        }
         .json-key { color: #9cdcfe; }
         .json-string { color: #4ec9b0; }
         .json-number { color: #b5cea8; }
         .json-boolean { color: #d7ba7d; }
+        .json-null { color: #d7ba7d; }
         a {
             color: #0078d4;
             text-decoration: none;
@@ -171,43 +204,41 @@
                 <button class="code-block-copy" onclick="copyToClipboard(this)">Copy</button>
             </div>
             <pre><code>{
-  "type": "object",
-  "title": "Advanced Search Query",
-  "properties": {
-    "query": {
-      "type": "string",
-      "description": "Natural language search query"
+  <span class="json-key">"\1"</span>: <span class="json-string">"\1"</span>,
+  <span class="json-key">"\1"</span>: <span class="json-string">"\1"</span>,
+  <span class="json-key">"\1"</span>: {
+    <span class="json-key">"\1"</span>: {
+      <span class="json-key">"\1"</span>: <span class="json-string">"\1"</span>,
+      <span class="json-key">"\1"</span>: <span class="json-string">"\1"</span>
     },
-    "filters": {
-      "type": "array",
-      "items": {
-        "type": "string"
+    <span class="json-key">"\1"</span>: {
+      <span class="json-key">"\1"</span>: <span class="json-string">"\1"</span>,
+      <span class="json-key">"\1"</span>: {
+        <span class="json-key">"\1"</span>: <span class="json-string">"\1"</span>
       },
-      "description": "Faceted filters for results"
+      <span class="json-key">"\1"</span>: <span class="json-string">"\1"</span>
     },
-    "page": {
-      "type": "integer",
-      "minimum": 1,
-      "description": "Result page number"
+    <span class="json-key">"\1"</span>: {
+      <span class="json-key">"\1"</span>: <span class="json-string">"\1"</span>,
+      <span class="json-key">"\1"</span>: <span class="json-number">\1</span>,
+      <span class="json-key">"\1"</span>: <span class="json-string">"\1"</span>
     },
-    "limit": {
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 100,
-      "description": "Results per page"
+    <span class="json-key">"\1"</span>: {
+      <span class="json-key">"\1"</span>: <span class="json-string">"\1"</span>,
+      <span class="json-key">"\1"</span>: <span class="json-number">\1</span>,
+      <span class="json-key">"\1"</span>: <span class="json-number">\1</span>,
+      <span class="json-key">"\1"</span>: <span class="json-string">"\1"</span>
     },
-    "sort": {
-      "type": "string",
-      "enum": [
-        "relevance",
+    <span class="json-key">"\1"</span>: {
+      <span class="json-key">"\1"</span>: <span class="json-string">"\1"</span>,
+      <span class="json-key">"\1"</span>: [<span class="json-string">"\1"</span>,
         "date",
         "popularity"
       ],
-      "description": "Sort order for results"
+      <span class="json-key">"\1"</span>: <span class="json-string">"\1"</span>
     }
   },
-  "required": [
-    "query"
+  <span class="json-key">"\1"</span>: [<span class="json-string">"\1"</span>
   ]
 }</code></pre>
         </div>
