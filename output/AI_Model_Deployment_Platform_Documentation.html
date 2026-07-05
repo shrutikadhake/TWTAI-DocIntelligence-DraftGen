@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Model Deployment Platform - Administrator Guide</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    article {
+      background-color: #fff;
+    }
+
+    h1 {
+      color: #2563eb;
+      border-bottom: 3px solid #2563eb;
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+
+    h1 .subtitle {
+      display: block;
+      font-size: 0.6em;
+      color: #666;
+      font-weight: normal;
+      margin-top: 5px;
+    }
+
+    h2 {
+      color: #2563eb;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      color: #0f766e;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    section {
+      margin-bottom: 30px;
+    }
+
+    p {
+      margin: 15px 0;
+    }
+
+    ul, ol {
+      margin: 15px 0;
+      padding-left: 30px;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    table th,
+    table td {
+      border: 1px solid #999;
+      padding: 12px;
+      text-align: left;
+    }
+
+    table th {
+      background-color: #f5f5f5;
+      font-weight: 600;
+    }
+
+    table tbody tr:nth-child(odd) {
+      background-color: #fafafa;
+    }
+
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: "Courier New", monospace;
+    }
+
+    pre {
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      border: 1px solid #ddd;
+    }
+
+    pre code {
+      background-color: transparent;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    .callout {
+      padding: 15px;
+      margin: 15px 0;
+      border-left: 4px solid #999;
+      background-color: #f9f9f9;
+    }
+
+    .callout.info {
+      border-left-color: #2563eb;
+      background-color: #e6f2ff;
+    }
+
+    .callout.warning {
+      border-left-color: #f59e0b;
+      background-color: #fffbeb;
+    }
+
+    .callout.success {
+      border-left-color: #10b981;
+      background-color: #ecfdf5;
+    }
+
+    .callout.danger {
+      border-left-color: #ef4444;
+      background-color: #fef2f2;
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .metadata {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      font-size: 0.9em;
+    }
+
+    .metadata p {
+      margin: 5px 0;
+    }
+
+    .toc {
+      background-color: #f9f9f9;
+      padding: 15px;
+      margin-bottom: 30px;
+      border-radius: 5px;
+    }
+
+    .toc h3 {
+      margin-top: 0;
+    }
+
+    .toc ul {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <article>
+
+    <h1>AI Model Deployment Platform<span class="subtitle">Administrator Guide</span></h1>
+
+    <div class="metadata">
+      <p><strong>Version:</strong> 3.2.0</p>
+      <p><strong>Status:</strong> Released</p>
+      <p><strong>Author:</strong> Platform Engineering</p>
+      <p><strong>Last Updated:</strong> 2026-07-04</p>
+    </div>
+
+    <section>
+      <h2>Executive Summary</h2>
+      <p>The AI Model Deployment Platform enables ML teams to package, validate, deploy, monitor, and roll back machine learning models across environments.</p>
+
+      <div class="callout info">
+        <strong>Purpose</strong>
+        <p>Standardize model deployment with governance and observability.</p>
+      </div>
+
+      <h3>Key Features</h3>
+      <ul>
+        <li>Model Registry</li>
+        <li>CI/CD Integration</li>
+        <li>Blue-Green Deployment</li>
+        <li>Canary Releases</li>
+        <li>Monitoring</li>
+        <li>Audit Logs</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Architecture</h2>
+
+      <h3>Core Components</h3>
+      <ul>
+        <li><strong>Model Registry:</strong> Stores versioned models.</li>
+        <li><strong>Deployment Engine:</strong> Deploys containers.</li>
+        <li><strong>Inference Gateway:</strong> Routes prediction requests.</li>
+        <li><strong>Monitoring:</strong> Collects metrics and alerts.</li>
+      </ul>
+
+      <p><em>Note: High-level platform architecture diagram available in architecture.png</em></p>
+    </section>
+
+    <section>
+      <h2>User Roles</h2>
+
+      <p>The platform supports role-based access control. The following table defines permissions for each role:</p>
+
+      <table>
+        <caption>Role Matrix</caption>
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Deploy</th>
+            <th>Approve</th>
+            <th>Monitor</th>
+            <th>Admin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ML Engineer</td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>Yes</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Reviewer</td>
+            <td>No</td>
+            <td>Yes</td>
+            <td>View</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Operator</td>
+            <td>No</td>
+            <td>No</td>
+            <td>Yes</td>
+            <td>Limited</td>
+          </tr>
+          <tr>
+            <td>Administrator</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Deployment Workflow</h2>
+
+      <h3>Deploy a Model</h3>
+      <p>Follow these steps to deploy a model to your environment:</p>
+
+      <ol>
+        <li>Register the model.</li>
+        <li>Upload artifacts.</li>
+        <li>Run validation.</li>
+        <li>Deploy to staging.</li>
+        <li>Execute health checks.</li>
+        <li>Promote to production.</li>
+        <li>Monitor KPIs.</li>
+      </ol>
+
+      <div class="callout warning">
+        <strong>Validation</strong>
+        <p>Deployment is blocked if mandatory health checks fail.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Configuration</h2>
+
+      <p>Configure the deployment settings using the following parameters:</p>
+
+      <table>
+        <caption>Configuration Parameters</caption>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Default</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>replicas</code></td>
+            <td>Model instances</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td><code>cpuLimit</code></td>
+            <td>CPU cores</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td><code>memory</code></td>
+            <td>RAM</td>
+            <td>4Gi</td>
+          </tr>
+          <tr>
+            <td><code>gpuEnabled</code></td>
+            <td>Enable GPU</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td><code>timeout</code></td>
+            <td>Inference timeout</td>
+            <td>30s</td>
+          </tr>
+          <tr>
+            <td><code>autoscaling</code></td>
+            <td>Horizontal scaling</td>
+            <td>Enabled</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Configuration Example</h3>
+      <pre><code>deployment:
+  replicas: 2
+  gpuEnabled: false
+  timeout: 30s</code></pre>
+    </section>
+
+    <section>
+      <h2>REST API</h2>
+
+      <h3>Deploy Model Endpoint</h3>
+
+      <p><strong>Endpoint:</strong> <code>POST /api/v1/models/deploy</code></p>
+
+      <p><strong>Request:</strong></p>
+      <pre><code>{
+  "model": "fraud-detector",
+  "version": "2.1.0",
+  "environment": "production"
+}</code></pre>
+
+      <p><strong>Response:</strong></p>
+      <pre><code>{
+  "deploymentId": "dep-10291",
+  "status": "Deploying"
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Monitoring</h2>
+
+      <p>Monitor your deployments using the following operational metrics:</p>
+
+      <table>
+        <caption>Operational Metrics</caption>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Target</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Latency</td>
+            <td>&lt;200 ms</td>
+          </tr>
+          <tr>
+            <td>Availability</td>
+            <td>&gt;99.9%</td>
+          </tr>
+          <tr>
+            <td>Error Rate</td>
+            <td>&lt;1%</td>
+          </tr>
+          <tr>
+            <td>CPU</td>
+            <td>&lt;70%</td>
+          </tr>
+          <tr>
+            <td>GPU</td>
+            <td>&lt;80%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout success">
+        <strong>Healthy Deployment</strong>
+        <p>All metrics within SLA.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Security</h2>
+
+      <p>The platform implements comprehensive security controls:</p>
+
+      <ol>
+        <li>SSO Authentication</li>
+        <li>Role-Based Access</li>
+        <li>Encrypted Secrets</li>
+        <li>Audit Logging</li>
+        <li>Image Scanning</li>
+      </ol>
+
+      <div class="callout danger">
+        <strong>Critical</strong>
+        <p>Production deployment requires approval.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Troubleshooting</h2>
+
+      <h3>Common Issues and Solutions</h3>
+
+      <h3>Deployment Failed</h3>
+      <p>Check container logs and health probes to identify the root cause of the deployment failure.</p>
+
+      <h3>High Latency</h3>
+      <p>Increase replicas or enable autoscaling to improve response times.</p>
+
+      <h3>Model Not Found</h3>
+      <p>Verify the registry version to ensure the correct model is available.</p>
+    </section>
+
+    <section>
+      <h2>Frequently Asked Questions</h2>
+
+      <h3>Can I roll back?</h3>
+      <p>Yes, you can roll back to any approved version.</p>
+
+      <h3>Is GPU mandatory?</h3>
+      <p>No, GPU is optional depending on your model requirements.</p>
+
+      <h3>Are deployments audited?</h3>
+      <p>Yes, all actions are logged for compliance and troubleshooting.</p>
+    </section>
+
+    <section>
+      <h2>Version History</h2>
+
+      <table>
+        <caption>Revisions</caption>
+        <thead>
+          <tr>
+            <th>Version</th>
+            <th>Date</th>
+            <th>Changes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3.2.0</td>
+            <td>2026-07-04</td>
+            <td>Canary deployments</td>
+          </tr>
+          <tr>
+            <td>3.1.0</td>
+            <td>2026-05-10</td>
+            <td>GPU scheduling</td>
+          </tr>
+          <tr>
+            <td>3.0.0</td>
+            <td>2026-01-18</td>
+            <td>Initial release</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Glossary</h2>
+
+      <dl>
+        <dt><strong>Inference</strong></dt>
+        <dd>Running predictions using a deployed model.</dd>
+
+        <dt><strong>Canary</strong></dt>
+        <dd>Gradual rollout strategy that deploys to a small percentage of users before full rollout.</dd>
+
+        <dt><strong>Model Registry</strong></dt>
+        <dd>Repository of versioned models used for deployment and version management.</dd>
+      </dl>
+    </section>
+
+  </article>
+</body>
+</html>

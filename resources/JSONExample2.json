@@ -1,0 +1,84 @@
+{
+    "title": "Conf1igure Single Sign-On (SSO)",
+    "product": "Enterprise Access Manager",
+    "version": "3.2",
+  
+    "overview": "Single Sign-On (SSO) enables users to authenticate once and securely access multiple applications without re-entering credentials.",
+  
+    "audience": [
+      "System Administrators",
+      "Identity Administrators"
+    ],
+  
+    "prerequisites": [
+      "Administrator privileges",
+      "Access to the Identity Provider (IdP)",
+      "Metadata XML file from the IdP",
+      "HTTPS enabled for the application"
+    ],
+  
+    "permissions": [
+      "Manage Authentication",
+      "Configure Security Settings"
+    ],
+  
+    "procedure": [
+      {
+        "step": 1,
+        "instruction": "Navigate to Administration > Security > Single Sign-On."
+      },
+      {
+        "step": 2,
+        "instruction": "Select Enable SSO."
+      },
+      {
+        "step": 3,
+        "instruction": "Upload the Identity Provider metadata XML file."
+      },
+      {
+        "step": 4,
+        "instruction": "Verify the Entity ID and Assertion Consumer Service (ACS) URL."
+      },
+      {
+        "step": 5,
+        "instruction": "Save the configuration."
+      },
+      {
+        "step": 6,
+        "instruction": "Perform a test login using an SSO-enabled user account."
+      }
+    ],
+  
+    "validation": [
+      "Users can authenticate through the Identity Provider.",
+      "Application dashboard loads successfully after login.",
+      "No authentication errors are displayed."
+    ],
+  
+    "notes": [
+      "Configuration changes may take up to five minutes to propagate.",
+      "Keep a backup of the previous authentication configuration."
+    ],
+  
+    "warnings": [
+      "Incorrect IdP metadata can prevent all users from logging in.",
+      "Test the configuration before enabling SSO for all users."
+    ],
+  
+    "troubleshooting": [
+      {
+        "issue": "Login fails after SSO is enabled.",
+        "resolution": "Verify that the Entity ID and ACS URL match the values configured in the Identity Provider."
+      },
+      {
+        "issue": "Certificate validation error.",
+        "resolution": "Confirm that the signing certificate has not expired."
+      }
+    ],
+  
+    "relatedInformation": [
+      "Reset User Passwords",
+      "Configure Multi-Factor Authentication",
+      "Identity Provider Integration Guide"
+    ]
+  }

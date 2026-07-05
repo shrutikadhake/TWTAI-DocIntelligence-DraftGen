@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure Single Sign-On (SSO) - Enterprise Access Manager 3.2</title>
+</head>
+<body>
+
+<article>
+
+  <h1>Configure Single Sign-On (SSO)</h1>
+
+  <section>
+    <h2>Overview</h2>
+    <p>Single Sign-On (SSO) enables users to authenticate once and securely access multiple applications without re-entering credentials.</p>
+  </section>
+
+  <section>
+    <h2>Audience</h2>
+    <ul>
+      <li>System Administrators</li>
+      <li>Identity Administrators</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Prerequisites</h2>
+    <ul>
+      <li>Administrator privileges</li>
+      <li>Access to the Identity Provider (IdP)</li>
+      <li>Metadata XML file from the IdP</li>
+      <li>HTTPS enabled for the application</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Permissions</h2>
+    <ul>
+      <li>Manage Authentication</li>
+      <li>Configure Security Settings</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Procedure</h2>
+    <ol>
+      <li>Navigate to <code>Administration > Security > Single Sign-On</code>.</li>
+      <li>Select <strong>Enable SSO</strong>.</li>
+      <li>Upload the Identity Provider metadata XML file.</li>
+      <li>Verify the Entity ID and Assertion Consumer Service (ACS) URL.</li>
+      <li>Save the configuration.</li>
+      <li>Perform a test login using an SSO-enabled user account.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Validation</h2>
+    <ul>
+      <li>Users can authenticate through the Identity Provider.</li>
+      <li>Application dashboard loads successfully after login.</li>
+      <li>No authentication errors are displayed.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Notes</h2>
+    <ul>
+      <li>Configuration changes may take up to five minutes to propagate.</li>
+      <li>Keep a backup of the previous authentication configuration.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Warnings</h2>
+    <ul>
+      <li>Incorrect IdP metadata can prevent all users from logging in.</li>
+      <li>Test the configuration before enabling SSO for all users.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Troubleshooting</h2>
+    <section>
+      <h3>Login fails after SSO is enabled</h3>
+      <p><strong>Resolution:</strong> Verify that the Entity ID and ACS URL match the values configured in the Identity Provider.</p>
+    </section>
+    <section>
+      <h3>Certificate validation error</h3>
+      <p><strong>Resolution:</strong> Confirm that the signing certificate has not expired.</p>
+    </section>
+  </section>
+
+  <section>
+    <h2>Related Information</h2>
+    <ul>
+      <li>Reset User Passwords</li>
+      <li>Configure Multi-Factor Authentication</li>
+      <li>Identity Provider Integration Guide</li>
+    </ul>
+  </section>
+
+</article>
+
+</body>
+</html>
