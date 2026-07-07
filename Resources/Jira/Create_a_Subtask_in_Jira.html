@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Subtask in Jira</title>
+    <style>
+        body {
+            font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #003366;
+            border-bottom: 3px solid #0078d4;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        h2 {
+            color: #003366;
+            margin-top: 30px;
+            border-left: 4px solid #0078d4;
+            padding-left: 15px;
+        }
+        p {
+            margin: 12px 0;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        strong {
+            color: #003366;
+            font-weight: 600;
+        }
+        figure {
+            margin: 25px 0;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        figcaption {
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+            font-size: 0.95em;
+        }
+        .note {
+            background-color: #e7f3ff;
+            border-left: 4px solid #0078d4;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 2px;
+        }
+        .method-header {
+            font-weight: 600;
+            color: #003366;
+            margin-top: 20px;
+            font-size: 1.05em;
+        }
+        .separator {
+            border-top: 1px solid #ddd;
+            margin: 25px 0;
+            padding-top: 20px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Create a subtask in Jira</h1>
+
+<p>Create a subtask under an existing issue to break down work into smaller, manageable pieces. You can create a new subtask or link an existing work item.</p>
+
+<h2>Prerequisites</h2>
+<ul>
+    <li>You have write access to the issue</li>
+    <li>You are in an open Jira issue</li>
+</ul>
+
+<h2>Create a subtask</h2>
+
+<ol>
+    <li>Navigate to the issue where you want to add a subtask.
+        <p>Jira displays the issue details page with the Description, Subtasks, and other sections visible.</p>
+        <figure>
+            <img src="1.png" alt="The Draft Generator issue page with Subtasks section">
+            <figcaption>Figure 1: Draft Generator issue page with Subtasks section</figcaption>
+        </figure>
+    </li>
+
+    <li>In the Subtasks section, select the <strong>+</strong> button next to the section title.
+        <p>A menu opens displaying options including <strong>Create subtask</strong>, <strong>Link work item</strong>, <strong>Add attachment</strong>, and other actions.</p>
+        <figure>
+            <img src="2A.png" alt="Menu showing Create subtask option among other menu items">
+            <figcaption>Figure 2: Menu showing Create subtask option</figcaption>
+        </figure>
+    </li>
+
+    <li>Select <strong>Create subtask</strong> from the menu.
+        <p>The Subtasks section expands and displays options for adding a subtask.</p>
+        <figure>
+            <img src="3A.png" alt="Subtasks section expanded showing form options and input fields">
+            <figcaption>Figure 3: Subtasks section expanded showing form options</figcaption>
+        </figure>
+    </li>
+
+    <li>(Optional) Review the AI-generated work item suggestions.
+        <p>If enabled, Jira displays a <strong>Create suggested work items</strong> section with recommended subtasks based on your issue context. You can select any suggestion or create a custom subtask instead.</p>
+        <figure>
+            <img src="5B.png" alt="AI suggestions loaded showing recommended subtasks in a table, including Test the draft generator skill">
+            <figcaption>Figure 4: AI suggestions loaded with recommendations</figcaption>
+        </figure>
+    </li>
+
+    <li>Choose your method for adding a subtask.
+        <p></p>
+        <div class="method-header">Method 1: Create a new subtask</div>
+        <p>In the <strong>Name this subtask</strong> field, enter a name for your new subtask. For example, enter <code>Track the tokens used</code>.</p>
+        <figure>
+            <img src="4A.png" alt="The Name this subtask field and Choose existing option, ready for user input">
+            <figcaption>Figure 5A: Name this subtask field ready for input</figcaption>
+        </figure>
+        <p>Select the <strong>Create</strong> button to create the subtask.</p>
+        <figure>
+            <img src="6B.png" alt="Name field populated with Track the tokens used; Create button is visible and ready">
+            <figcaption>Figure 5B: Name field populated; Create button visible</figcaption>
+        </figure>
+
+        <div class="separator"></div>
+
+        <div class="method-header">Method 2: Link an existing work item as a subtask</div>
+        <p>Select <strong>Choose existing</strong> to link an existing work item to this issue as a subtask instead of creating a new one. This option is useful when you have related work already in progress that should be tracked as part of this issue.</p>
+        <figure>
+            <img src="4B.png" alt="The subtask creation form with Choose existing link highlighted below the Name field">
+            <figcaption>Figure 6: Choose existing option visible below the Name field</figcaption>
+        </figure>
+    </li>
+
+    <li>Confirm the subtask creation.
+        <p>Jira creates the subtask and displays a success notification. The new subtask appears in the Subtasks table with its issue key, priority, assignee, and status. The notification confirms the action, for example: <strong>You've created 'KAN-5' work item</strong>.</p>
+        <figure>
+            <img src="7A.png" alt="Success notification showing You've created KAN-5 work item, with the new subtask visible in the Subtasks table below">
+            <figcaption>Figure 7: Success notification with new subtask in the Subtasks table</figcaption>
+        </figure>
+    </li>
+</ol>
+
+<h2>Result</h2>
+<p>The subtask has been created and is now visible in the Subtasks section of the parent issue. The new work item has its own issue key and can be tracked independently. You can assign it to team members, set priority and due dates, and link it to other work items.</p>
+
+<h2>Additional information</h2>
+<p><strong>AI suggestions:</strong> Jira's draft generator feature uses AI to suggest subtasks based on your issue description and context. Review these suggestions to identify related work that should be tracked.</p>
+
+<p><strong>Linking existing work items:</strong> Use the <strong>Choose existing</strong> option to connect related work already in progress without creating duplicate tasks.</p>
+
+<p><strong>Edit subtask details:</strong> After creation, edit the subtask's assignee, priority, due date, labels, and other properties from the subtask's detail page.</p>
+
+<p><strong>Alternative method:</strong> You can also select <strong>Add subtask</strong> (text link) in the Subtasks section instead of using the <strong>+</strong> button. Both methods access the same create subtask form.</p>
+
+</body>
+</html>
