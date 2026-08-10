@@ -2,267 +2,321 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>QA Review: Learning Basic HTML with Microsoft 365 Copilot Chat</title>
+<title>QA Review — Learning Basic HTML with Microsoft 365 Copilot Chat</title>
 <style>
   :root {
     --accent: #2563eb;
     --critical: #dc2626;
     --warning: #d97706;
-    --info: #0891b2;
-    --pass: #16a34a;
-    --bg: #f8fafc;
+    --info: #2563eb;
+    --bg: #f5f6f8;
     --card: #ffffff;
-    --border: #e2e8f0;
-    --text: #1e293b;
-    --muted: #64748b;
+    --text: #1f2430;
+    --muted: #6b7280;
+    --border: #e2e5ea;
   }
   * { box-sizing: border-box; }
   body {
-    font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
     background: var(--bg);
     color: var(--text);
-    margin: 0;
-    padding: 0 0 60px;
+    line-height: 1.5;
   }
-  header {
+  .wrap { max-width: 980px; margin: 0 auto; padding: 32px 24px 64px; }
+  header.report-header {
     background: var(--card);
-    border-bottom: 1px solid var(--border);
-    padding: 32px 40px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
   }
-  header h1 { margin: 0 0 6px; font-size: 22px; }
-  header .meta { color: var(--muted); font-size: 14px; }
-  .container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+  header.report-header h1 { margin: 0 0 6px; font-size: 22px; }
+  header.report-header .meta { color: var(--muted); font-size: 14px; }
   .score-panel {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 28px;
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px;
-    margin-top: 28px;
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
   }
-  .score-number { font-size: 56px; font-weight: 700; color: var(--accent); }
-  .score-bar-wrap { flex: 1; }
-  .score-bar-track { background: var(--border); border-radius: 8px; height: 14px; overflow: hidden; }
-  .score-bar-fill { background: var(--accent); height: 100%; border-radius: 8px; }
+  .score-number { font-size: 48px; font-weight: 700; color: var(--accent); min-width: 110px; }
+  .score-bar-wrap { flex: 1; min-width: 220px; }
+  .score-bar-track { background: #e5e7eb; border-radius: 6px; height: 12px; overflow: hidden; }
+  .score-bar-fill { background: linear-gradient(90deg, var(--accent), #60a5fa); height: 100%; }
   .badge {
     display: inline-block;
     padding: 6px 14px;
     border-radius: 999px;
     font-size: 13px;
     font-weight: 600;
-    margin-top: 10px;
+    white-space: nowrap;
   }
-  .badge.ready { background: #dcfce7; color: var(--pass); }
-  .badge.not-ready { background: #fee2e2; color: var(--critical); }
-  h2.section-title { font-size: 16px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 40px 0 16px; }
+  .badge.ready { background: #dcfce7; color: #166534; }
+  .badge.not-ready { background: #fee2e2; color: #991b1b; }
+  .badge.pass { background: #dcfce7; color: #166534; }
+  .badge.fail { background: #fee2e2; color: #991b1b; }
+  h2.section-title { font-size: 16px; margin: 32px 0 12px; color: var(--text); }
   .category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 14px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
   }
   .category-card {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 18px;
+    border-radius: 8px;
+    padding: 14px 16px;
   }
-  .category-card .name { font-size: 13px; color: var(--muted); text-transform: capitalize; margin-bottom: 6px; }
-  .category-card .score { font-size: 26px; font-weight: 700; }
-  .pill { float: right; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
-  .pill.pass { background: #dcfce7; color: var(--pass); }
-  .pill.fail { background: #fef3c7; color: var(--warning); }
-  .severity-summary { display: flex; gap: 14px; }
-  .severity-summary .chip {
+  .category-card .cat-name { font-size: 13px; color: var(--muted); text-transform: capitalize; margin-bottom: 6px; }
+  .category-card .cat-score { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+  .severity-summary {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .severity-pill {
     flex: 1;
+    min-width: 140px;
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 16px;
     text-align: center;
   }
-  .severity-summary .chip .num { font-size: 30px; font-weight: 700; }
-  .severity-summary .chip.critical .num { color: var(--critical); }
-  .severity-summary .chip.warning .num { color: var(--warning); }
-  .severity-summary .chip.info .num { color: var(--info); }
+  .severity-pill .count { font-size: 30px; font-weight: 700; }
+  .severity-pill.critical .count { color: var(--critical); }
+  .severity-pill.warning .count { color: var(--warning); }
+  .severity-pill.info .count { color: var(--info); }
+  .severity-pill .label { color: var(--muted); font-size: 13px; margin-top: 4px; }
   .finding {
     background: var(--card);
     border: 1px solid var(--border);
-    border-left: 4px solid var(--border);
+    border-left: 4px solid var(--info);
     border-radius: 8px;
-    padding: 18px 20px;
-    margin-bottom: 14px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
   }
-  .finding.critical { border-left-color: var(--critical); }
-  .finding.warning { border-left-color: var(--warning); }
-  .finding.info { border-left-color: var(--info); }
-  .finding-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .finding.severity-critical { border-left-color: var(--critical); }
+  .finding.severity-warning { border-left-color: var(--warning); }
+  .finding.severity-info { border-left-color: var(--info); }
+  .finding-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
   .finding-id { font-family: Consolas, monospace; font-size: 12px; color: var(--muted); }
-  .sev-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; text-transform: uppercase; }
+  .sev-badge {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
   .sev-badge.critical { background: #fee2e2; color: var(--critical); }
   .sev-badge.warning { background: #fef3c7; color: var(--warning); }
-  .sev-badge.info { background: #cffafe; color: var(--info); }
-  .finding p { margin: 6px 0; font-size: 14px; line-height: 1.5; }
-  .finding .label { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .03em; }
-  .finding pre {
-    background: #0f172a;
-    color: #e2e8f0;
-    padding: 10px 14px;
+  .sev-badge.info { background: #dbeafe; color: var(--info); }
+  .cat-tag { font-size: 12px; color: var(--muted); }
+  .finding-line { font-size: 12px; color: var(--muted); }
+  .finding p { margin: 6px 0; font-size: 14px; }
+  .finding .context, .finding .fix {
+    background: #f8fafc;
+    border: 1px solid var(--border);
     border-radius: 6px;
-    font-size: 13px;
-    overflow-x: auto;
+    padding: 8px 10px;
+    font-family: Consolas, monospace;
+    font-size: 12.5px;
     white-space: pre-wrap;
+    margin: 6px 0;
   }
-  .strengths-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  ul.plain { margin: 0; padding-left: 20px; }
-  ul.plain li { margin-bottom: 8px; font-size: 14px; line-height: 1.5; }
-  .next-steps { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; }
-  footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 50px; }
-  footer a { color: var(--accent); }
+  .label-inline { font-weight: 600; font-size: 13px; }
+  ul.plain { padding-left: 20px; margin: 8px 0; }
+  ul.plain li { margin-bottom: 4px; font-size: 14px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+  footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12.5px;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<header>
-  <h1>QA Review Report</h1>
-  <div class="meta">Reviewed document: <strong>M365CopilotDemoTranscript.md</strong> — "Learning Basic HTML with Microsoft 365 Copilot Chat"</div>
-  <div class="meta">Reviewed on 2026-07-05</div>
-</header>
-
-<div class="container">
+  <header class="report-header">
+    <h1>Documentation QA Review</h1>
+    <div class="meta">
+      Document reviewed: <strong>Learning Basic HTML with Microsoft 365 Copilot Chat</strong>
+      (<code>M365CopilotDemoTranscript.md</code>) &nbsp;·&nbsp; Review date: 2026-07-05
+    </div>
+  </header>
 
   <div class="score-panel">
-    <div class="score-number">89.5</div>
+    <div class="score-number">88.1</div>
     <div class="score-bar-wrap">
       <div class="score-bar-track">
-        <div class="score-bar-fill" style="width: 89.5%;"></div>
+        <div class="score-bar-fill" style="width: 88.1%;"></div>
       </div>
-      <span class="badge ready">✅ READY TO PUBLISH — minor suggestions</span>
+      <div style="margin-top:6px; font-size:13px; color:var(--muted);">Overall score (0–100)</div>
     </div>
+    <span class="badge ready">READY TO PUBLISH</span>
   </div>
 
   <h2 class="section-title">Category Scores</h2>
   <div class="category-grid">
-    <div class="category-card"><span class="pill pass">PASS</span><div class="name">Clarity</div><div class="score">95</div></div>
-    <div class="category-card"><span class="pill fail">FAIL</span><div class="name">Conciseness</div><div class="score">78</div></div>
-    <div class="category-card"><span class="pill pass">PASS</span><div class="name">Active Voice</div><div class="score">96</div></div>
-    <div class="category-card"><span class="pill pass">PASS</span><div class="name">Accessibility</div><div class="score">90</div></div>
-    <div class="category-card"><span class="pill pass">PASS</span><div class="name">Heading Hierarchy</div><div class="score">100</div></div>
-    <div class="category-card"><span class="pill pass">PASS</span><div class="name">Task Orientation</div><div class="score">90</div></div>
-    <div class="category-card"><span class="pill fail">FAIL</span><div class="name">Terminology Consistency</div><div class="score">75</div></div>
-    <div class="category-card"><span class="pill pass">PASS</span><div class="name">Microsoft Compliance</div><div class="score">92</div></div>
+    <div class="category-card"><div class="cat-name">Clarity</div><div class="cat-score">90</div><span class="badge pass">PASS</span></div>
+    <div class="category-card"><div class="cat-name">Conciseness</div><div class="cat-score">92</div><span class="badge pass">PASS</span></div>
+    <div class="category-card"><div class="cat-name">Active Voice</div><div class="cat-score">88</div><span class="badge pass">PASS</span></div>
+    <div class="category-card"><div class="cat-name">Accessibility</div><div class="cat-score">90</div><span class="badge pass">PASS</span></div>
+    <div class="category-card"><div class="cat-name">Heading Hierarchy</div><div class="cat-score">100</div><span class="badge pass">PASS</span></div>
+    <div class="category-card"><div class="cat-name">Task Orientation</div><div class="cat-score">82</div><span class="badge pass">PASS</span></div>
+    <div class="category-card"><div class="cat-name">Terminology Consistency</div><div class="cat-score">75</div><span class="badge fail">FAIL</span></div>
+    <div class="category-card"><div class="cat-name">Microsoft Compliance</div><div class="cat-score">88</div><span class="badge pass">PASS</span></div>
   </div>
 
   <h2 class="section-title">Severity Summary</h2>
   <div class="severity-summary">
-    <div class="chip critical"><div class="num">0</div>Critical</div>
-    <div class="chip warning"><div class="num">3</div>Warning</div>
-    <div class="chip info"><div class="num">2</div>Info</div>
+    <div class="severity-pill critical"><div class="count">0</div><div class="label">Critical</div></div>
+    <div class="severity-pill warning"><div class="count">4</div><div class="label">Warning</div></div>
+    <div class="severity-pill info"><div class="count">3</div><div class="label">Info</div></div>
   </div>
 
   <h2 class="section-title">Detailed Findings</h2>
 
-  <div class="finding warning">
+  <div class="finding severity-warning">
     <div class="finding-head">
-      <span class="finding-id">TERM-001 · terminology_consistency · line 124</span>
+      <span class="finding-id">CLR-001</span>
       <span class="sev-badge warning">Warning</span>
+      <span class="cat-tag">clarity</span>
+      <span class="finding-line">Line 60</span>
     </div>
-    <p><span class="label">Issue:</span> Document mixes "element" and "tag" for the same HTML concept. h1/h2 are consistently called "elements" (lines 34, 67, 74, 76, 78, 85, 87, 118), but html/head/body are called "tags" here.</p>
-    <p><span class="label">Context</span></p>
-    <pre>Copilot generated a valid HTML page structure with `&lt;html&gt;`, `&lt;head&gt;`, and `&lt;body&gt;` tags</pre>
-    <p><span class="label">Recommendation:</span> Pick one term ("element" is used more often and matches the JSON source facts) and use it consistently throughout.</p>
-    <p><span class="label">Suggested fix:</span></p>
-    <pre>Copilot generated a valid HTML page structure with `&lt;html&gt;`, `&lt;head&gt;`, and `&lt;body&gt;` elements</pre>
+    <p><span class="label-inline">Issue:</span> Step instruction is grammatically incomplete — "Ask Copilot the difference between h1 and h2" omits the preposition needed for the sentence to parse naturally.</p>
+    <div class="context">Ask Copilot the difference between `h1` and `h2`.</div>
+    <p><span class="label-inline">Recommendation:</span> Add a preposition or verb so the instruction reads naturally.</p>
+    <div class="fix">"Ask Copilot the difference between `h1` and `h2`." → "Ask Copilot about the difference between `h1` and `h2`."</div>
   </div>
 
-  <div class="finding warning">
+  <div class="finding severity-warning">
     <div class="finding-head">
-      <span class="finding-id">CON-001 · conciseness · line 74</span>
+      <span class="finding-id">ACT-001</span>
       <span class="sev-badge warning">Warning</span>
+      <span class="cat-tag">active_voice</span>
+      <span class="finding-line">Line 14</span>
     </div>
-    <p><span class="label">Issue:</span> The "Note" callout restates the exact fact given one line later in "Expected result," creating redundant back-to-back repetition of the same sentence.</p>
-    <p><span class="label">Context</span></p>
-    <pre>&gt; **Note:** The h1 element defines the primary heading on a web page.
-
-Expected result: Copilot responds with: "The h1 element defines the primary heading on a web page."</pre>
-    <p><span class="label">Recommendation:</span> Remove the standalone Note callout and let the Expected result convey the fact, or fold the fact into the step instruction instead of duplicating it immediately before the outcome.</p>
-    <p><span class="label">Suggested fix:</span> Delete the "&gt; **Note:**" line at 74 and keep only the Expected result on line 76.</p>
+    <p><span class="label-inline">Issue:</span> Passive construction obscures who needs the knowledge.</p>
+    <div class="context">**Basic familiarity with chat interfaces** — no HTML knowledge is required going in.</div>
+    <p><span class="label-inline">Recommendation:</span> Rewrite in active voice with "you" as the subject.</p>
+    <div class="fix">"no HTML knowledge is required going in." → "you don't need any HTML knowledge going in."</div>
   </div>
 
-  <div class="finding warning">
+  <div class="finding severity-warning">
     <div class="finding-head">
-      <span class="finding-id">CON-002 · conciseness · line 85</span>
+      <span class="finding-id">TRM-001</span>
       <span class="sev-badge warning">Warning</span>
+      <span class="cat-tag">terminology_consistency</span>
+      <span class="finding-line">Line 34</span>
     </div>
-    <p><span class="label">Issue:</span> Same redundancy pattern as CON-001: the Note callout duplicates the Expected result text that immediately follows it.</p>
-    <p><span class="label">Context</span></p>
-    <pre>&gt; **Note:** h1 represents the primary page heading, while h2 elements create subsection headings.
-
-Expected result: Copilot responds with: "The h1 element represents the primary page heading. h2 elements create subsection headings."</pre>
-    <p><span class="label">Recommendation:</span> Remove the Note callout and rely on the Expected result line, consistent with the fix for CON-001.</p>
-    <p><span class="label">Suggested fix:</span> Delete the "&gt; **Note:**" line at 85 and keep only the Expected result on line 87.</p>
+    <p><span class="label-inline">Issue:</span> The artifact Copilot generates is referred to by three different names across the document — "HTML page structure" (line 34), "sample web page" (line 69), and "HTML page example" (line 71) — which can make readers unsure if these are the same thing.</p>
+    <div class="context">Line 34: "Copilot generates a complete HTML page structure..." / Line 69: "...generate a complete sample web page..." / Line 71: "...generates a fuller HTML page example..."</div>
+    <p><span class="label-inline">Recommendation:</span> Pick one term (e.g., "HTML page example") and use it consistently across Tasks 2 and 4.</p>
+    <div class="fix">"complete sample web page" (line 69) → "complete HTML page example"</div>
   </div>
 
-  <div class="finding info">
+  <div class="finding severity-warning">
     <div class="finding-head">
-      <span class="finding-id">CON-003 · conciseness · line 34</span>
+      <span class="finding-id">TSK-001</span>
+      <span class="sev-badge warning">Warning</span>
+      <span class="cat-tag">task_orientation</span>
+      <span class="finding-line">Line 69</span>
+    </div>
+    <p><span class="label-inline">Issue:</span> Steps in Task 1, Task 2, and Task 3 Step 1 give the reader the exact text to type (in backticks), but Task 3 Step 2 (line 60) and Task 4's steps (lines 69, 74) only describe the request in general terms, forcing the reader to guess the exact phrasing.</p>
+    <div class="context">Line 69: "Ask Copilot to generate a complete sample web page using headings and paragraphs." / Line 74: "Ask Copilot to explain why the generated code works."</div>
+    <p><span class="label-inline">Recommendation:</span> Provide a literal example prompt in backticks for consistency with the other steps.</p>
+    <div class="fix">"Ask Copilot to generate a complete sample web page using headings and paragraphs." → "Type `Generate a complete sample web page using headings and paragraphs.`"</div>
+  </div>
+
+  <div class="finding severity-info">
+    <div class="finding-head">
+      <span class="finding-id">ACC-001</span>
       <span class="sev-badge info">Info</span>
+      <span class="cat-tag">accessibility</span>
+      <span class="finding-line">Line 22</span>
     </div>
-    <p><span class="label">Issue:</span> The "Technical detail" callout restates the HTML definition already given in the Introduction (line 5), adding no new information.</p>
-    <p><span class="label">Context</span></p>
-    <pre>&gt; **Technical detail:** HTML stands for HyperText Markup Language — it's the standard language used to build web pages.</pre>
-    <p><span class="label">Recommendation:</span> Remove this callout since the Introduction already covers the definition, or replace it with a detail not yet mentioned.</p>
-    <p><span class="label">Suggested fix:</span> Delete line 34, or replace with a fact not already stated (e.g., a note about HTML versions or file extensions).</p>
+    <p><span class="label-inline">Issue:</span> Step labels ("Step 1: Ask for a definition") are implemented as bold text rather than semantic headings, so screen reader users navigating by heading outline won't see step boundaries as landmarks.</p>
+    <div class="context">**Step 1: Ask for a definition**</div>
+    <p><span class="label-inline">Recommendation:</span> Consider using a heading level (e.g., #### Step 1: ...) for steps, or confirm this bold-text pattern is an accepted exception in the design standards.</p>
+    <div class="fix">"**Step 1: Ask for a definition**" → "#### Step 1: Ask for a definition"</div>
   </div>
 
-  <div class="finding info">
+  <div class="finding severity-info">
     <div class="finding-head">
-      <span class="finding-id">ACC-001 · accessibility · line 22</span>
+      <span class="finding-id">TRM-002</span>
       <span class="sev-badge info">Info</span>
+      <span class="cat-tag">terminology_consistency</span>
+      <span class="finding-line">Line 13</span>
     </div>
-    <p><span class="label">Issue:</span> Steps are formatted as bold inline text ("**Step 1: ...**") rather than a semantic ordered list, which reduces the ability of screen readers to announce step count and navigate between steps.</p>
-    <p><span class="label">Context</span></p>
-    <pre>**Step 1: Open the Copilot chat box**</pre>
-    <p><span class="label">Recommendation:</span> Consider using a numbered (ordered) list for steps within each task, or confirm this bold-heading pattern matches the site's established accessible template.</p>
-    <p><span class="label">Suggested fix:</span></p>
-    <pre>1. Open the Copilot chat box
-   Go to the Copilot home page and locate the chat box.</pre>
+    <p><span class="label-inline">Issue:</span> The product name shifts between the full form "Microsoft 365 Copilot Chat" (title, line 5, line 13) and the shortened "Copilot" used everywhere else without an explicit shorthand cue.</p>
+    <div class="context">Line 13: "Access to Microsoft 365 Copilot Chat" / Line 18: "Ask Copilot what HTML is"</div>
+    <p><span class="label-inline">Recommendation:</span> This shortening is a common and acceptable pattern, but consider a brief parenthetical on first mention, e.g., "Microsoft 365 Copilot Chat (Copilot)", to make the shorthand explicit.</p>
+    <div class="fix">No required text change — optional clarity enhancement only.</div>
   </div>
 
-  <h2 class="section-title">Quality Assessment</h2>
-  <div class="strengths-grid">
+  <div class="finding severity-info">
+    <div class="finding-head">
+      <span class="finding-id">CNC-001</span>
+      <span class="sev-badge info">Info</span>
+      <span class="cat-tag">conciseness</span>
+      <span class="finding-line">Line 25</span>
+    </div>
+    <p><span class="label-inline">Issue:</span> The expected outcome restates the HTML definition from the introduction (line 5) nearly verbatim.</p>
+    <div class="context">Line 5: "HTML ... is the standard language used to build web pages." / Line 25: "HTML stands for HyperText Markup Language and is the standard language used to build web pages."</div>
+    <p><span class="label-inline">Recommendation:</span> Shorten the expected outcome to avoid repeating the full definition just introduced.</p>
+    <div class="fix">"Expected result: Copilot responds that HTML stands for HyperText Markup Language and is the standard language used to build web pages." → "Expected result: Copilot returns the HTML definition from the introduction."</div>
+  </div>
+
+  <h2 class="section-title">Strengths &amp; Areas for Improvement</h2>
+  <div class="two-col">
     <div>
-      <p class="label">Strengths</p>
+      <div class="label-inline">Strengths</div>
       <ul class="plain">
         <li>Clean, consistent heading hierarchy (H1 → H2 → H3) with no skipped levels</li>
-        <li>Every step states a clear expected outcome, and the guide is organized entirely around user tasks and goals</li>
-        <li>Direct "you" address and active voice used throughout, consistent with Microsoft writing style</li>
-        <li>Validation checklist and troubleshooting section give readers concrete ways to confirm success and recover from common issues</li>
+        <li>Every step states a concrete, verifiable expected outcome</li>
+        <li>Direct "you" address and imperative step actions throughout, matching Microsoft writing style</li>
+        <li>Clear task-oriented structure with prerequisites, validation checklist, and troubleshooting section</li>
+        <li>Technical terms (HTML, h1, h2) are defined on first mention</li>
       </ul>
     </div>
     <div>
-      <p class="label">Areas for Improvement</p>
+      <div class="label-inline">Areas for Improvement</div>
       <ul class="plain">
-        <li>Standardize on "element" vs. "tag" terminology for HTML components</li>
-        <li>Remove redundant Note/Technical detail callouts that duplicate the Expected result or Introduction text nearby</li>
-        <li>Consider semantic ordered lists for steps to strengthen accessibility</li>
+        <li>Standardize the name used for the Copilot-generated example (HTML page structure / sample web page / HTML page example)</li>
+        <li>Add literal example prompts (in backticks) for Task 3 Step 2 and both Task 4 steps</li>
+        <li>Fix the incomplete phrasing in Task 3 Step 2 (line 60)</li>
+        <li>Replace the passive construction in the Prerequisites section (line 14)</li>
       </ul>
     </div>
   </div>
 
   <h2 class="section-title">Next Steps</h2>
-  <div class="next-steps">
-    <ul class="plain">
-      <li>Fix 3 warnings before publishing: TERM-001 (terminology), CON-001 and CON-002 (redundant callouts)</li>
-      <li>Optionally address 2 info-level suggestions: CON-003 (redundant intro fact) and ACC-001 (step list semantics)</li>
-      <li>No critical issues — document can be published once warnings are addressed</li>
-    </ul>
-  </div>
+  <ul class="plain">
+    <li>Fix the 4 warning-level findings (CLR-001, ACT-001, TRM-001, TSK-001) before publishing.</li>
+    <li>Address the 3 info-level suggestions at your discretion — none block publication.</li>
+    <li>Re-run this review after edits to confirm terminology_consistency clears the 80-point pass threshold.</li>
+  </ul>
 
   <footer>
-    Report generated 2026-07-05T00:00:00Z &middot;
-    <a href="./M365CopilotDemoTranscript-review.json">View raw review.json</a>
+    Generated 2026-07-05 by documentation-reviewer-custom &nbsp;·&nbsp;
+    Full findings data: <a href="./M365CopilotDemoTranscript-review.json">M365CopilotDemoTranscript-review.json</a>
   </footer>
 
 </div>

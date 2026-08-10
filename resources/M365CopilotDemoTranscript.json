@@ -1,80 +1,74 @@
 {
   "topic_title": "Learning Basic HTML with Microsoft 365 Copilot Chat",
-  "goal": "Learn how to use Microsoft 365 Copilot Chat to understand HTML basics and generate working page examples",
+  "goal": "Use Microsoft 365 Copilot Chat to learn HTML basics, generate a working page example, and understand individual HTML elements.",
   "prerequisites": [
     "Access to Microsoft 365 Copilot Chat",
     "Basic familiarity with chat interfaces"
   ],
   "technical_facts": [
-    "HTML stands for HyperText Markup Language",
-    "HTML is the standard language used to build web pages",
-    "The h1 element defines the primary heading on a web page",
-    "The h2 element creates subsection headings"
+    "HTML stands for HyperText Markup Language and is the standard language used to build web pages.",
+    "Copilot can generate a complete HTML page structure, including the html, head, title, body, h1, and p elements.",
+    "The h1 element defines the primary heading on a web page.",
+    "The h2 element creates subsection headings."
   ],
   "tasks": [
     {
-      "task_name": "Get a definition of HTML",
-      "description": "Start from the Copilot home page and ask a foundational question to learn what HTML is",
+      "task_name": "Ask Copilot what HTML is",
+      "description": "Starting point for anyone new to HTML — asking Copilot for a definition.",
       "steps": [
         {
           "step_number": 1,
-          "action": "Open the Copilot chat box from the Copilot home page",
-          "details": "This is the starting point for the demo",
-          "expected_outcome": "The chat box is ready to accept a question"
-        },
-        {
-          "step_number": 2,
-          "action": "Type \"What is HTML?\" into the chat box",
-          "details": "This is usually the first question to ask if you're completely new to HTML",
-          "expected_outcome": "Copilot responds: \"HTML stands for HyperText Markup Language. It is the standard language used to build web pages.\""
+          "action": "From the Copilot home page, type \"What is HTML?\" into the chat box.",
+          "details": "This is usually the first question someone new to HTML would ask.",
+          "expected_outcome": "Copilot responds that HTML stands for HyperText Markup Language and is the standard language used to build web pages."
         }
       ]
     },
     {
-      "task_name": "Generate a simple HTML example",
-      "description": "Ask Copilot to produce a working HTML example after learning the definition",
+      "task_name": "Ask Copilot for a simple HTML example",
+      "description": "Request a working example to see HTML structure in practice.",
       "steps": [
         {
           "step_number": 1,
-          "action": "Type \"Show me a simple HTML example.\" into the chat box",
-          "details": "Copilot can provide example code in addition to explanations",
-          "expected_outcome": "Copilot generates a complete basic HTML page structure:\n<html>\n<head>\n<title>My First Page</title>\n</head>\n<body>\n<h1>Hello World</h1>\n<p>This is my first webpage.</p>\n</body>\n</html>"
+          "action": "Type \"Show me a simple HTML example.\"",
+          "details": "Copilot can provide examples in addition to definitions.",
+          "expected_outcome": "Copilot generates a basic HTML page example with the full page structure:\n<html>\n<head>\n<title>My First Page</title>\n</head>\n<body>\n<h1>Hello World</h1>\n<p>This is my first webpage.</p>\n</body>\n</html>"
         }
       ]
     },
     {
-      "task_name": "Explain individual HTML elements",
-      "description": "Dig deeper into the generated example by asking Copilot to explain specific elements",
+      "task_name": "Explore individual HTML elements",
+      "description": "Dig deeper into specific elements from the generated example, such as h1 and h2.",
       "steps": [
         {
           "step_number": 1,
-          "action": "Type \"Explain the h1 element.\" into the chat box",
-          "details": "Used to understand the purpose of a specific tag from the generated example",
-          "expected_outcome": "Copilot responds: \"The h1 element defines the primary heading on a web page.\""
+          "action": "Type \"Explain the h1 element.\"",
+          "details": null,
+          "expected_outcome": "Copilot explains that the h1 element defines the primary heading on a web page."
         },
         {
           "step_number": 2,
-          "action": "Ask about the difference between h1 and h2 elements",
-          "details": "A commonly asked follow-up question once the basics are understood",
-          "expected_outcome": "Copilot responds: \"The h1 element represents the primary page heading. h2 elements create subsection headings.\""
+          "action": "Ask Copilot the difference between h1 and h2.",
+          "details": "A common question people ask once they understand the h1 element.",
+          "expected_outcome": "Copilot explains that the h1 element represents the primary page heading, while h2 elements create subsection headings."
         }
       ]
     },
     {
       "task_name": "Continue learning with follow-up questions",
-      "description": "Build on the basics to generate more complete examples and understand how the code works",
+      "description": "Once the basics are understood, use follow-up questions to build more complete pages and understand why the generated code works.",
       "steps": [
         {
           "step_number": 1,
-          "action": "Ask Copilot to generate a complete sample web page using headings and paragraphs",
-          "details": "Applies the headings and paragraph concepts covered earlier",
-          "expected_outcome": "Copilot generates a fuller HTML page example combining headings and paragraphs"
+          "action": "Ask Copilot to generate a complete sample web page using headings and paragraphs.",
+          "details": "Builds on the basic example by combining multiple elements.",
+          "expected_outcome": "Copilot generates a fuller HTML page example using headings and paragraphs."
         },
         {
           "step_number": 2,
-          "action": "Ask Copilot to explain why the generated code works",
-          "details": "You can continue asking follow-up questions until you understand each element",
-          "expected_outcome": "Copilot provides an explanation of the code's structure and behavior"
+          "action": "Ask Copilot to explain why the generated code works.",
+          "details": "You can continue asking follow-up questions until you understand each element.",
+          "expected_outcome": "Copilot explains the purpose and behavior of each element in the generated code."
         }
       ]
     }

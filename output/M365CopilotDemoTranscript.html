@@ -1,338 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Basic HTML with Microsoft 365 Copilot Chat</title>
-    <style>
-        * { box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Basic HTML with Microsoft 365 Copilot Chat</title>
+<style>
+* { box-sizing: border-box; }
 
-        :root {
-            --ink: #1c1c1e;
-            --muted: #6b7280;
-            --line: #e5e7eb;
-            --accent: #4f46e5;
-            --accent-soft: #eef0fd;
-            --code-bg: #1c1c1e;
-            --code-fg: #e5e7eb;
-        }
+:root {
+    --ink: #1c1c1e;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --accent: #4f46e5;
+    --accent-soft: #eef0fd;
+    --code-bg: #1c1c1e;
+    --code-fg: #e5e7eb;
+}
 
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            color: var(--ink);
-            line-height: 1.7;
-            background: #fff;
-            -webkit-font-smoothing: antialiased;
-        }
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    line-height: 1.7;
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+}
 
-        .page {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 44px 24px 56px;
-        }
+.page {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 44px 24px 56px;
+}
 
-        .eyebrow {
-            color: var(--accent);
-            font-size: 0.82em;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
+.eyebrow {
+    color: var(--accent);
+    font-size: 0.82em;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
 
-        h1 {
-            font-size: 2.1em;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            line-height: 1.25;
-            margin: 0 0 12px;
-        }
+h1 {
+    font-size: 2.1em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin: 0 0 12px;
+}
 
-        .intro {
-            font-size: 1.08em;
-            color: var(--muted);
-            margin: 0 0 8px;
-        }
+.intro {
+    font-size: 1.08em;
+    color: var(--muted);
+    margin: 0 0 8px;
+}
 
-        .meta {
-            display: flex;
-            gap: 18px;
-            flex-wrap: wrap;
-            font-size: 0.86em;
-            color: var(--muted);
-            margin: 16px 0 0;
-            padding-top: 12px;
-            border-top: 1px solid var(--line);
-        }
+.meta {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 0.86em;
+    color: var(--muted);
+    margin: 16px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+}
 
-        .meta strong { color: var(--ink); }
+.meta strong { color: var(--ink); }
 
-        .contents {
-            margin: 22px 0 28px;
-            padding: 14px 20px;
-            background: var(--accent-soft);
-            border-radius: 10px;
-        }
+.contents {
+    margin: 22px 0 28px;
+    padding: 14px 20px;
+    background: var(--accent-soft);
+    border-radius: 10px;
+}
 
-        .contents p {
-            margin: 0 0 8px;
-            font-size: 0.82em;
-            font-weight: 600;
-            color: var(--accent);
-            letter-spacing: 0.03em;
-            text-transform: uppercase;
-        }
+.contents p {
+    margin: 0 0 8px;
+    font-size: 0.82em;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
 
-        .contents ol {
-            margin: 0;
-            padding-left: 20px;
-            columns: 2;
-            font-size: 0.94em;
-        }
+.contents ol {
+    margin: 0;
+    padding-left: 20px;
+    columns: 2;
+    font-size: 0.94em;
+}
 
-        .contents a {
-            color: var(--ink);
-            text-decoration: none;
-        }
+.contents a {
+    color: var(--ink);
+    text-decoration: none;
+}
 
-        .contents a:hover { color: var(--accent); }
+.contents a:hover { color: var(--accent); }
 
-        h2 {
-            font-size: 1.5em;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-            margin: 32px 0 6px;
-        }
+h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 32px 0 6px;
+}
 
-        .section-lede {
-            color: var(--muted);
-            margin: 0 0 14px;
-        }
+.section-lede {
+    color: var(--muted);
+    margin: 0 0 14px;
+}
 
-        h3 {
-            font-size: 1.1em;
-            font-weight: 700;
-            margin: 18px 0 4px;
-        }
+h3 {
+    font-size: 1.1em;
+    font-weight: 700;
+    margin: 18px 0 4px;
+}
 
-        ol.steps {
-            list-style: none;
-            counter-reset: step;
-            margin: 0;
-            padding: 0;
-        }
+ol.steps {
+    list-style: none;
+    counter-reset: step;
+    margin: 0;
+    padding: 0;
+}
 
-        ol.steps > li {
-            counter-increment: step;
-            position: relative;
-            padding: 2px 0 12px 38px;
-            border-left: 2px solid var(--line);
-            margin-left: 12px;
-        }
+ol.steps > li {
+    counter-increment: step;
+    position: relative;
+    padding: 2px 0 12px 38px;
+    border-left: 2px solid var(--line);
+    margin-left: 12px;
+}
 
-        ol.steps > li:last-child {
-            border-left-color: transparent;
-            padding-bottom: 0;
-        }
+ol.steps > li:last-child {
+    border-left-color: transparent;
+    padding-bottom: 0;
+}
 
-        ol.steps > li::before {
-            content: counter(step);
-            position: absolute;
-            left: -13px;
-            top: 0;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--accent);
-            color: white;
-            font-size: 0.75em;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+ol.steps > li::before {
+    content: counter(step);
+    position: absolute;
+    left: -13px;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    font-size: 0.75em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        /* Single-step tasks: no number, no connecting line, no indent */
-        ol.steps.single > li {
-            padding: 0;
-            margin-left: 0;
-            border-left: none;
-        }
+/* Single-step tasks: no number, no connecting line, no indent */
+ol.steps.single > li {
+    padding: 0;
+    margin-left: 0;
+    border-left: none;
+}
 
-        ol.steps.single > li::before {
-            content: none;
-        }
+ol.steps.single > li::before {
+    content: none;
+}
 
-        .action { font-weight: 600; margin: 0 0 4px; }
+.action { font-weight: 600; margin: 0 0 4px; }
 
-        .detail { color: var(--muted); font-size: 0.94em; margin: 0 0 6px; }
+.detail { color: var(--muted); font-size: 0.94em; margin: 0 0 6px; }
 
-        .result {
-            font-size: 0.94em;
-            margin: 0;
-        }
+.result {
+    font-size: 0.94em;
+    margin: 0;
+}
 
-        .result::before {
-            content: "Result — ";
-            font-weight: 600;
-            color: var(--accent);
-        }
+.result::before {
+    content: "Result — ";
+    font-weight: 600;
+    color: var(--accent);
+}
 
-        p code, li code, .result code {
-            background: var(--accent-soft);
-            color: var(--accent);
-            padding: 1px 6px;
-            border-radius: 4px;
-            font-size: 0.92em;
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
-        }
+p code, li code, .result code {
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.92em;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+}
 
-        pre {
-            background: var(--code-bg);
-            color: var(--code-fg);
-            padding: 18px 20px;
-            border-radius: 8px;
-            overflow-x: auto;
-            font-size: 0.88em;
-            line-height: 1.6;
-            margin: 10px 0 8px;
-        }
+pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 18px 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.88em;
+    line-height: 1.6;
+    margin: 10px 0 8px;
+}
 
-        pre code {
-            background: none;
-            color: inherit;
-            padding: 0;
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
-        }
+pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+}
 
-        ul.plain, ol.plain {
-            padding-left: 20px;
-            margin: 8px 0;
-        }
+ul.plain, ol.plain {
+    padding-left: 20px;
+    margin: 8px 0;
+}
 
-        ul.plain li, ol.plain li { margin: 6px 0; }
+ul.plain li, ol.plain li { margin: 6px 0; }
 
-        ul.checklist {
-            list-style: none;
-            padding: 0;
-            margin: 8px 0;
-        }
+ul.checklist {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0;
+}
 
-        ul.checklist li {
-            padding: 7px 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            font-size: 0.96em;
-        }
+ul.checklist li {
+    padding: 7px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.96em;
+}
 
-        ul.checklist input {
-            margin-top: 5px;
-            accent-color: var(--accent);
-        }
+ul.checklist input {
+    margin-top: 5px;
+    accent-color: var(--accent);
+}
 
-        dl.trouble dt {
-            font-weight: 600;
-            margin: 14px 0 4px;
-        }
+dl.trouble dt {
+    font-weight: 600;
+    margin: 14px 0 4px;
+}
 
-        dl.trouble dd {
-            margin: 0 0 4px;
-            color: var(--muted);
-            font-size: 0.95em;
-        }
+dl.trouble dd {
+    margin: 0 0 4px;
+    color: var(--muted);
+    font-size: 0.95em;
+}
 
-        dl.trouble ul {
-            margin: 4px 0 0;
-            padding-left: 18px;
-            color: var(--muted);
-            font-size: 0.95em;
-        }
+dl.trouble ul {
+    margin: 4px 0 0;
+    padding-left: 18px;
+    color: var(--muted);
+    font-size: 0.95em;
+}
 
-        .callout {
-            border-left: 3px solid var(--accent);
-            padding: 2px 0 2px 16px;
-            color: var(--muted);
-            font-size: 0.95em;
-            margin: 16px 0;
-        }
+.callout {
+    border-left: 3px solid var(--accent);
+    padding: 2px 0 2px 16px;
+    color: var(--muted);
+    font-size: 0.95em;
+    margin: 16px 0;
+}
 
-        footer {
-            max-width: 700px;
-            margin: 36px auto 0;
-            padding: 18px 24px 32px;
-            border-top: 1px solid var(--line);
-            color: var(--muted);
-            font-size: 0.85em;
-        }
+footer {
+    max-width: 700px;
+    margin: 36px auto 0;
+    padding: 18px 24px 32px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.85em;
+}
 
-        a { color: var(--accent); }
+a { color: var(--accent); }
 
-        @media (max-width: 640px) {
-            .page { padding: 40px 18px 60px; }
-            h1 { font-size: 1.6em; }
-            .contents ol { columns: 1; }
-        }
+@media (max-width: 640px) {
+    .page { padding: 40px 18px 60px; }
+    h1 { font-size: 1.6em; }
+    .contents ol { columns: 1; }
+}
 
-        @media print {
-            .contents { display: none; }
-        }
-    </style>
+@media print {
+    .contents { display: none; }
+}
+</style>
 </head>
 <body>
 <div class="page">
 
     <div class="eyebrow">Tutorial</div>
     <h1>Learning Basic HTML with Microsoft 365 Copilot Chat</h1>
-    <p class="intro">Learn how to use Microsoft 365 Copilot Chat to understand HTML basics and generate working page examples.</p>
+    <p class="intro">Use Microsoft 365 Copilot Chat to learn HTML basics, generate a working page example, and understand individual HTML elements.</p>
 
     <div class="meta">
-        <span><strong>Audience:</strong> New to HTML or web development</span>
+        <span><strong>Audience:</strong> Anyone new to HTML</span>
         <span><strong>Requires:</strong> Access to Microsoft 365 Copilot Chat</span>
-        <span><strong>Time:</strong> About 10 minutes</span>
+        <span><strong>Time:</strong> ~10 minutes</span>
     </div>
 
     <div class="contents">
         <p>On this page</p>
         <ol>
-            <li><a href="#task-1">Get a Definition of HTML</a></li>
-            <li><a href="#task-2">Generate a Simple HTML Example</a></li>
-            <li><a href="#task-3">Explain Individual HTML Elements</a></li>
-            <li><a href="#task-4">Continue Learning with Follow-up Questions</a></li>
+            <li><a href="#task-1">Ask Copilot what HTML is</a></li>
+            <li><a href="#task-2">Ask Copilot for a simple HTML example</a></li>
+            <li><a href="#task-3">Explore individual HTML elements</a></li>
+            <li><a href="#task-4">Continue learning with follow-up questions</a></li>
             <li><a href="#results">Expected results</a></li>
         </ol>
     </div>
 
-    <p class="callout">This guide assumes no prior HTML knowledge — you just need access to Microsoft 365 Copilot Chat and basic familiarity with a chat interface.</p>
+    <p class="callout">This guide assumes no prior HTML knowledge — you'll pick up what you need directly from Copilot's answers.</p>
 
     <section id="task-1">
-        <h2>Get a Definition of HTML</h2>
-        <p class="section-lede">Start from the Copilot home page and ask a foundational question to learn what HTML is before going any further.</p>
+        <h2>Ask Copilot what HTML is</h2>
+        <p class="section-lede">Start with the question anyone new to HTML would ask first — what HTML actually is.</p>
 
-        <ol class="steps">
+        <ol class="steps single">
             <li>
-                <p class="action">Open the Copilot chat box</p>
-                <p class="detail">Go to the Copilot home page and locate the chat box.</p>
-                <p class="result">The chat box is open and ready to accept a question.</p>
-            </li>
-            <li>
-                <p class="action">Ask what HTML is</p>
-                <p class="detail">Type <code>What is HTML?</code> into the chat box. HTML stands for HyperText Markup Language — the standard language used to build web pages.</p>
-                <p class="result">Copilot responds with an explanation similar to: "HTML stands for HyperText Markup Language. It is the standard language used to build web pages."</p>
+                <p class="action">Ask for a definition</p>
+                <p class="detail">From the Copilot home page, type <code>What is HTML?</code> into the chat box.</p>
+                <p class="result">Copilot returns the HTML definition from the introduction.</p>
             </li>
         </ol>
     </section>
 
     <section id="task-2">
-        <h2>Generate a Simple HTML Example</h2>
-        <p class="section-lede">Once you understand what HTML is, ask Copilot to show you a working example so you can see the concept in practice.</p>
+        <h2>Ask Copilot for a simple HTML example</h2>
+        <p class="section-lede">A definition is useful, but seeing HTML in action makes it click faster.</p>
 
         <ol class="steps single">
             <li>
-                <p class="action">Ask for a simple HTML example</p>
-                <p class="detail">Type <code>Show me a simple HTML example.</code> into the chat box.</p>
-                <p class="result">Copilot generates a complete basic HTML page structure:</p>
+                <p class="action">Request an example</p>
+                <p class="detail">Type <code>Show me a simple HTML example.</code></p>
+                <p class="result">Copilot generates a complete HTML page example, including the <code>html</code>, <code>head</code>, <code>title</code>, <code>body</code>, <code>h1</code>, and <code>p</code> elements:</p>
                 <pre><code>&lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;My First Page&lt;/title&gt;
@@ -342,77 +337,82 @@
 &lt;p&gt;This is my first webpage.&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
+                <p class="callout">Copilot returns the entire page structure, not just a snippet — this gives you a working example you can reference for future pages.</p>
             </li>
         </ol>
     </section>
 
     <section id="task-3">
-        <h2>Explain Individual HTML Elements</h2>
-        <p class="section-lede">Dig deeper into the example Copilot generated by asking it to explain specific elements, one at a time.</p>
+        <h2>Explore individual HTML elements</h2>
+        <p class="section-lede">Once you have a working example, dig into what each element actually does.</p>
 
         <ol class="steps">
             <li>
-                <p class="action">Ask Copilot to explain the h1 element</p>
-                <p class="detail">Type <code>Explain the h1 element.</code> into the chat box.</p>
-                <p class="result">Copilot responds with: "The h1 element defines the primary heading on a web page."</p>
+                <p class="action">Ask about a specific element</p>
+                <p class="detail">Type <code>Explain the h1 element.</code></p>
+                <p class="result">Copilot explains that the <code>h1</code> element defines the primary heading on a web page.</p>
             </li>
             <li>
-                <p class="action">Ask about the difference between h1 and h2</p>
-                <p class="detail">A common follow-up question once you understand the basics. Type <code>What's the difference between h1 and h2?</code></p>
-                <p class="result">Copilot responds with: "The h1 element represents the primary page heading. h2 elements create subsection headings."</p>
+                <p class="action">Compare related elements</p>
+                <p class="detail">Type <code>What's the difference between h1 and h2?</code></p>
+                <p class="result">Copilot explains that <code>h1</code> represents the primary page heading, while <code>h2</code> elements create subsection headings.</p>
             </li>
         </ol>
     </section>
 
     <section id="task-4">
-        <h2>Continue Learning with Follow-up Questions</h2>
-        <p class="section-lede">Build on what you've learned to generate more complete examples and understand why the code works the way it does.</p>
+        <h2>Continue learning with follow-up questions</h2>
+        <p class="section-lede">Once you understand the basics, use follow-up questions to build more complete pages and understand why the code works the way it does.</p>
 
         <ol class="steps">
             <li>
-                <p class="action">Ask for a complete sample page using headings and paragraphs</p>
-                <p class="detail">Type <code>Generate a complete sample web page using headings and paragraphs.</code></p>
-                <p class="result">Copilot generates a fuller HTML page example that combines headings and paragraphs into one page.</p>
+                <p class="action">Generate a fuller example</p>
+                <p class="detail">Type <code>Generate a complete HTML page example using headings and paragraphs.</code></p>
+                <p class="result">Copilot generates a fuller HTML page example combining multiple heading and paragraph elements.</p>
             </li>
             <li>
-                <p class="action">Ask Copilot to explain why the code works</p>
+                <p class="action">Ask Copilot to explain the code</p>
                 <p class="detail">Type <code>Explain why this code works.</code></p>
-                <p class="result">Copilot explains the structure and behavior of the generated code. You can keep asking follow-up questions until you understand each element.</p>
+                <p class="result">Copilot explains the purpose and behavior of each element in the generated code, so you understand it rather than just copying it.</p>
             </li>
         </ol>
     </section>
 
     <section id="results">
         <h2>Expected results</h2>
-        <p class="section-lede">By completing this guide, you'll have:</p>
+
+        <h3>What you'll have</h3>
         <ul class="plain">
-            <li>A clear definition of what HTML is and what it's used for</li>
-            <li>A working HTML example generated by Copilot</li>
-            <li>An understanding of the h1 and h2 heading elements and how they differ</li>
-            <li>The ability to generate and understand a complete sample web page using Copilot</li>
+            <li>A clear definition of HTML and what it's used for</li>
+            <li>A working HTML page example generated by Copilot</li>
+            <li>An understanding of the <code>h1</code> and <code>h2</code> elements and how they differ</li>
+            <li>The ability to keep using follow-up questions to learn new HTML elements on your own</li>
         </ul>
 
         <h3>Validation</h3>
         <ul class="checklist">
-            <li><input type="checkbox" id="v1"><label for="v1">Copilot correctly defined HTML as HyperText Markup Language</label></li>
-            <li><input type="checkbox" id="v2"><label for="v2">Copilot generated a valid HTML page structure with <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code> elements</label></li>
-            <li><input type="checkbox" id="v3"><label for="v3">Copilot explained the difference between the h1 and h2 elements</label></li>
-            <li><input type="checkbox" id="v4"><label for="v4">You generated a sample page combining headings and paragraphs</label></li>
+            <li><input type="checkbox"> Copilot returned a definition of HTML</li>
+            <li><input type="checkbox"> Copilot generated a complete HTML page example</li>
+            <li><input type="checkbox"> You can explain the difference between <code>h1</code> and <code>h2</code></li>
+            <li><input type="checkbox"> You know how to ask Copilot follow-up questions about any HTML element</li>
         </ul>
 
         <h3>Troubleshooting</h3>
         <dl class="trouble">
-            <dt>Copilot's response doesn't include code formatting</dt>
-            <dd>This can happen if the question is phrased ambiguously.</dd>
-            <ul>
-                <li>Ask explicitly, e.g., "Show me the HTML code for a simple page," so Copilot recognizes you want a code example.</li>
-            </ul>
-
-            <dt>You don't understand an element Copilot used</dt>
-            <dd>This is expected as you're just getting started with HTML.</dd>
-            <ul>
-                <li>Ask a direct follow-up question, such as "Explain the <code>&lt;p&gt;</code> element," and continue until each part of the example is clear.</li>
-            </ul>
+            <dt>Copilot's answer feels too high-level or vague</dt>
+            <dd>
+                <ul>
+                    <li>Ask a more specific follow-up question, such as <code>Explain the h1 element</code> rather than <code>Explain HTML elements</code>.</li>
+                    <li>Request an example directly: <code>Show me a simple HTML example.</code></li>
+                </ul>
+            </dd>
+            <dt>You don't understand why the generated code works</dt>
+            <dd>
+                <ul>
+                    <li>Ask Copilot directly: <code>Explain why this code works.</code></li>
+                    <li>Keep asking follow-up questions about individual elements until each one makes sense.</li>
+                </ul>
+            </dd>
         </dl>
     </section>
 

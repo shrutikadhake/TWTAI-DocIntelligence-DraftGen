@@ -4,20 +4,22 @@
     "file_path": "c:\\GitHub\\TWTAI-DocIntelligence-DraftGen\\resources\\M365CopilotDemoTranscript.md",
     "review_timestamp": "2026-07-05T00:00:00Z"
   },
-  "overall_score": 89.5,
+  "overall_score": 88.1,
   "category_results": {
     "clarity": {
       "passed": true,
-      "score": 95
+      "score": 90,
+      "issues": 1
     },
     "conciseness": {
-      "passed": false,
-      "score": 78,
-      "issues": 3
+      "passed": true,
+      "score": 92,
+      "issues": 1
     },
     "active_voice": {
       "passed": true,
-      "score": 96
+      "score": 88,
+      "issues": 1
     },
     "accessibility": {
       "passed": true,
@@ -26,91 +28,116 @@
     },
     "heading_hierarchy": {
       "passed": true,
-      "score": 100
+      "score": 100,
+      "issues": 0
     },
     "task_orientation": {
       "passed": true,
-      "score": 90
+      "score": 82,
+      "issues": 1
     },
     "terminology_consistency": {
       "passed": false,
       "score": 75,
-      "issues": 1
+      "issues": 2
     },
     "microsoft_compliance": {
       "passed": true,
-      "score": 92
+      "score": 88,
+      "issues": 0
     }
   },
   "findings": [
     {
-      "id": "TERM-001",
+      "id": "CLR-001",
+      "category": "clarity",
+      "severity": "warning",
+      "line_number": 60,
+      "issue": "Step instruction is grammatically incomplete — 'Ask Copilot the difference between h1 and h2' omits the preposition needed for the sentence to parse naturally.",
+      "context": "Ask Copilot the difference between `h1` and `h2`.",
+      "recommendation": "Add a preposition or verb so the instruction reads naturally.",
+      "suggested_fix": "\"Ask Copilot the difference between `h1` and `h2`.\" → \"Ask Copilot about the difference between `h1` and `h2`.\""
+    },
+    {
+      "id": "ACT-001",
+      "category": "active_voice",
+      "severity": "warning",
+      "line_number": 14,
+      "issue": "Passive construction obscures who needs the knowledge.",
+      "context": "**Basic familiarity with chat interfaces** — no HTML knowledge is required going in.",
+      "recommendation": "Rewrite in active voice with 'you' as the subject.",
+      "suggested_fix": "\"no HTML knowledge is required going in.\" → \"you don't need any HTML knowledge going in.\""
+    },
+    {
+      "id": "TRM-001",
       "category": "terminology_consistency",
       "severity": "warning",
-      "line_number": 124,
-      "issue": "Document mixes 'element' and 'tag' to refer to the same HTML concept. h1/h2 are consistently called 'elements' (lines 34, 67, 74, 76, 78, 85, 87, 118), but html/head/body are called 'tags' here.",
-      "context": "Copilot generated a valid HTML page structure with `<html>`, `<head>`, and `<body>` tags",
-      "recommendation": "Pick one term ('element' is used more often and matches the JSON source facts) and use it consistently throughout.",
-      "suggested_fix": "Copilot generated a valid HTML page structure with `<html>`, `<head>`, and `<body>` elements"
-    },
-    {
-      "id": "CON-001",
-      "category": "conciseness",
-      "severity": "warning",
-      "line_number": 74,
-      "issue": "The 'Note' callout restates the exact fact given one line later in 'Expected result,' creating redundant back-to-back repetition of the same sentence.",
-      "context": "> **Note:** The h1 element defines the primary heading on a web page.\n\nExpected result: Copilot responds with: \"The h1 element defines the primary heading on a web page.\"",
-      "recommendation": "Remove the standalone Note callout and let the Expected result convey the fact, or fold the fact into the step instruction instead of duplicating it immediately before the outcome.",
-      "suggested_fix": "Delete the '> **Note:**' line at 74 and keep only the Expected result on line 76."
-    },
-    {
-      "id": "CON-002",
-      "category": "conciseness",
-      "severity": "warning",
-      "line_number": 85,
-      "issue": "Same redundancy pattern as CON-001: the Note callout duplicates the Expected result text that immediately follows it.",
-      "context": "> **Note:** h1 represents the primary page heading, while h2 elements create subsection headings.\n\nExpected result: Copilot responds with: \"The h1 element represents the primary page heading. h2 elements create subsection headings.\"",
-      "recommendation": "Remove the Note callout and rely on the Expected result line, consistent with the fix for CON-001.",
-      "suggested_fix": "Delete the '> **Note:**' line at 85 and keep only the Expected result on line 87."
-    },
-    {
-      "id": "CON-003",
-      "category": "conciseness",
-      "severity": "info",
       "line_number": 34,
-      "issue": "The 'Technical detail' callout restates the HTML definition already given in the Introduction (line 5), adding no new information.",
-      "context": "> **Technical detail:** HTML stands for HyperText Markup Language — it's the standard language used to build web pages.",
-      "recommendation": "Remove this callout since the Introduction already covers the definition, or replace it with a detail not yet mentioned.",
-      "suggested_fix": "Delete line 34, or replace with a fact not already stated (e.g., a note about HTML versions or file extensions)."
+      "issue": "The artifact Copilot generates is referred to by three different names across the document — 'HTML page structure' (line 34), 'sample web page' (line 69), and 'HTML page example' (line 71) — which can make readers unsure if these are the same thing.",
+      "context": "Line 34: 'Copilot generates a complete HTML page structure...' / Line 69: '...generate a complete sample web page...' / Line 71: '...generates a fuller HTML page example...'",
+      "recommendation": "Pick one term (e.g., 'HTML page example') and use it consistently across Tasks 2 and 4.",
+      "suggested_fix": "\"complete sample web page\" (line 69) → \"complete HTML page example\""
+    },
+    {
+      "id": "TSK-001",
+      "category": "task_orientation",
+      "severity": "warning",
+      "line_number": 69,
+      "issue": "Steps in Task 1, Task 2, and Task 3 Step 1 give the reader the exact text to type (in backticks), but Task 3 Step 2 (line 60) and Task 4's steps (lines 69, 74) only describe the request in general terms, forcing the reader to guess the exact phrasing.",
+      "context": "Line 69: 'Ask Copilot to generate a complete sample web page using headings and paragraphs.' / Line 74: 'Ask Copilot to explain why the generated code works.'",
+      "recommendation": "Provide a literal example prompt in backticks for consistency with the other steps.",
+      "suggested_fix": "\"Ask Copilot to generate a complete sample web page using headings and paragraphs.\" → \"Type `Generate a complete sample web page using headings and paragraphs.`\""
     },
     {
       "id": "ACC-001",
       "category": "accessibility",
       "severity": "info",
       "line_number": 22,
-      "issue": "Steps are formatted as bold inline text ('**Step 1: ...**') rather than a semantic ordered list, which reduces the ability of screen readers to announce step count and navigate between steps.",
-      "context": "**Step 1: Open the Copilot chat box**",
-      "recommendation": "Consider using a numbered (ordered) list for steps within each task, or confirm this bold-heading pattern matches the site's established accessible template.",
-      "suggested_fix": "1. Open the Copilot chat box\n   Go to the Copilot home page and locate the chat box."
+      "issue": "Step labels ('Step 1: Ask for a definition') are implemented as bold text rather than semantic headings, so screen reader users navigating by heading outline won't see step boundaries as landmarks.",
+      "context": "**Step 1: Ask for a definition**",
+      "recommendation": "Consider using a heading level (e.g., #### Step 1: ...) for steps, or confirm this bold-text pattern is an accepted exception in the design standards.",
+      "suggested_fix": "\"**Step 1: Ask for a definition**\" → \"#### Step 1: Ask for a definition\""
+    },
+    {
+      "id": "TRM-002",
+      "category": "terminology_consistency",
+      "severity": "info",
+      "line_number": 13,
+      "issue": "The product name shifts between the full form 'Microsoft 365 Copilot Chat' (title, line 5, line 13) and the shortened 'Copilot' used everywhere else without an explicit shorthand cue.",
+      "context": "Line 13: 'Access to Microsoft 365 Copilot Chat' / Line 18: 'Ask Copilot what HTML is'",
+      "recommendation": "This shortening is a common and acceptable pattern, but consider a brief parenthetical on first mention, e.g., 'Microsoft 365 Copilot Chat (Copilot)', to make the shorthand explicit.",
+      "suggested_fix": "No required text change — optional clarity enhancement only."
+    },
+    {
+      "id": "CNC-001",
+      "category": "conciseness",
+      "severity": "info",
+      "line_number": 25,
+      "issue": "The expected outcome restates the HTML definition from the introduction (line 5) nearly verbatim.",
+      "context": "Line 5: 'HTML ... is the standard language used to build web pages.' / Line 25: 'HTML stands for HyperText Markup Language and is the standard language used to build web pages.'",
+      "recommendation": "Shorten the expected outcome to avoid repeating the full definition just introduced.",
+      "suggested_fix": "\"Expected result: Copilot responds that HTML stands for HyperText Markup Language and is the standard language used to build web pages.\" → \"Expected result: Copilot returns the HTML definition from the introduction.\""
     }
   ],
   "severity_summary": {
     "critical": 0,
-    "warning": 3,
-    "info": 2
+    "warning": 4,
+    "info": 3
   },
   "quality_assessment": {
     "strengths": [
       "Clean, consistent heading hierarchy (H1 → H2 → H3) with no skipped levels",
-      "Every step states a clear expected outcome, and the guide is organized entirely around user tasks and goals",
-      "Direct 'you' address and active voice used throughout, consistent with Microsoft writing style",
-      "Validation checklist and troubleshooting section give readers concrete ways to confirm success and recover from common issues"
+      "Every step states a concrete, verifiable expected outcome",
+      "Direct 'you' address and imperative step actions throughout, matching Microsoft writing style",
+      "Clear task-oriented structure with prerequisites, validation checklist, and troubleshooting section",
+      "Technical terms (HTML, h1, h2) are defined on first mention"
     ],
     "areas_for_improvement": [
-      "Standardize on 'element' vs. 'tag' terminology for HTML components",
-      "Remove redundant Note/Technical detail callouts that duplicate the Expected result or Introduction text immediately nearby",
-      "Consider semantic ordered lists for steps to strengthen accessibility"
+      "Standardize the name used for the Copilot-generated example (HTML page structure / sample web page / HTML page example)",
+      "Add literal example prompts (in backticks) for Task 3 Step 2 and both Task 4 steps to match the rest of the guide",
+      "Fix the incomplete phrasing in Task 3 Step 2 (line 60)",
+      "Replace the passive construction in the Prerequisites section (line 14)"
     ],
-    "publication_readiness": "READY TO PUBLISH — meets standards with minor suggestions"
+    "publication_readiness": "READY TO PUBLISH — meets standards; recommended to tighten terminology consistency and step phrasing before external distribution"
   }
 }
